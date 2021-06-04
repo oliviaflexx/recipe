@@ -1,5 +1,6 @@
 import sqlite3
 
+# Tables creating for jessica
 try:
     sqliteConnection = sqlite3.connect('recipe.db')
     sqlite_create_table_query = '''CREATE TABLE recipe_ingredients(

@@ -5,6 +5,9 @@ from time import sleep
 from random import randint
 import sqlite3
 
+### Puts the jessica recipes into the database
+
+# Clean up the links
 links = []
 f = open("links.txt", "r")
 links = f.readline()
@@ -12,12 +15,11 @@ new_links = links.replace('[', '')
 new_links = new_links.replace(']', '')
 final_links = new_links.split(', ')
 
-final_links = list(dict.fromkeys(final_links))
-print(len(final_links))
 counter = 0
 images = []
 
-def insertVaribleIntoTable(name, time, url, image):
+# Put the recipe data into the table
+def insertVariableIntoTable(name, time, url, image):
     try:
         sqliteConnection = sqlite3.connect('recipe.db')
         cursor = sqliteConnection.cursor()
@@ -40,6 +42,7 @@ def insertVaribleIntoTable(name, time, url, image):
             sqliteConnection.close()
             print("The SQLite connection is closed")
     
+# Put the ingredient data into the table
 def insertFoodIntoTable(food):
     try:
         sqliteConnection = sqlite3.connect('recipe.db')
@@ -73,6 +76,7 @@ def insertFoodIntoTable(food):
             sqliteConnection.close()
             print("The SQLite connection is closed")
 
+# Link the two tables with the association table
 def selectFood(food):
     try:
         sqliteConnection = sqlite3.connect('recipe.db')
@@ -133,6 +137,8 @@ for link in final_links:
     new_link = link.strip('\'')
     html_text = requests.get(new_link).text
     soup = BeautifulSoup(html_text, 'html.parser')
+
+    # Not a recipe
     if not soup.find('div', class_ = 'post-recipe section'):
         recipe_image = None
         recipe_name = None
@@ -140,20 +146,26 @@ for link in final_links:
         link = None
     else:
         recipe = soup.find('div', class_ = 'post-recipe section')
+
+        # no name
         if not recipe.find('h2', class_ = 'wprm-recipe-name wprm-block-text-bold'):
             recipe_name = None
         else: 
             recipe_name = recipe.find('h2', class_ = 'wprm-recipe-name wprm-block-text-bold').text
+            # No image
             if images[counter] == 0:
                 recipe_image = None
             else:
                 recipe_image = images[counter]
+        # No time
         if not recipe.find('span', class_ = 'wprm-recipe-details wprm-recipe-details-minutes wprm-recipe-total_time wprm-recipe-total_time-minutes'):
             recipe_time = None
         else:
             recipe_time = recipe.find('span', class_ = 'wprm-recipe-details wprm-recipe-details-minutes wprm-recipe-total_time wprm-recipe-total_time-minutes').text
-        insertVaribleIntoTable(recipe_name, recipe_time, link, recipe_image)
+        
+        insertVariableIntoTable(recipe_name, recipe_time, link, recipe_image)
 
+        # Find ingredients
         recipe_ingredient = recipe.find_all('span', class_ = 'wprm-recipe-ingredient-name')
         for ingredient in recipe_ingredient:
             food = ingredient.text

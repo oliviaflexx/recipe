@@ -3,7 +3,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import sys
 
-##### Web scrapper for infinite scrolling page #####
+##### Web scrapper for jessica infinite scrolling page, returns the html #####
 driver = webdriver.Chrome('/Users/oliviafelix/Desktop/testing/chromedriver')
 driver.get("https://jessicainthekitchen.com/recipes/")
 time.sleep(2)  # Allow 2 seconds for the web page to open
@@ -22,9 +22,18 @@ while True:
     if (screen_height) * i > scroll_height:
         break 
 
-##### Extract the whole page to pretty.html #####
-soup = BeautifulSoup(driver.page_source, 'html.parser')
-sys.stdout = open("pretty.html", "w")
-soup0 = soup.prettify()
-print(soup0)
+# Get HTML 
+soup0 = BeautifulSoup(driver.page_source, 'html.parser')
+soup = soup0.prettify()
+
+# From each post get a url
+posts = soup.find_all('div', class_ = 'catpost')
+urls = []
+for post in posts:
+    links = post.a['href']
+    urls.append(links)
+
+# Write the urls to the links.txt
+sys.stdout = open("links.txt", "w")
+print(urls)
 sys.stdout.close()
