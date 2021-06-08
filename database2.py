@@ -173,8 +173,9 @@ for link in final_links:
             unit = None
 
         food = ingredient.find('span', class_ = 'wprm-recipe-ingredient-name').text
-        insertFoodIntoIngredients(food)
-        selectFood(food, amount, unit)
+        result = clean(food, amount, unit)
+        insertFoodIntoIngredients(result[0])
+        selectFood(result[0], result[1], result[2])
 
     counter = counter + 1
     sleep(randint(2,10))
