@@ -1,5 +1,2 @@
 -- SQLite
-SELECT id, ingredient
-FROM ingredients2
-WHERE ingredient LIKE '%oz%'
-ORDER BY ingredient asc;
+SELECT * from recipes3 WHERE name LIKE '%chicken%";

@@ -1,0 +1,965 @@
+garlic,"{'clove': 933.0, 'tablespoon': 9.0, 'teaspoon': 8.25, 'bulb': 0.5}"
+olive oil,"{'tablespoon': 573.5, 'cup': 14.72, 'teaspoon': 3.0}"
+ground beef,{'pound': 24.0}
+riced cauliflower,{'cup': 6.5}
+tomato with green chiles,{'ounce': 140.0}
+black bean,"{'ounce': 1245.0, 'pound': 1.0, 'cup': 4.0}"
+chili powder,"{'tablespoon': 61.0, 'teaspoon': 16.5}"
+smoked paprika,"{'teaspoon': 61.37, 'tablespoon': 12.5}"
+ground cumin,"{'teaspoon': 58.12, 'tablespoon': 5.0}"
+dried oregano,"{'teaspoon': 76.12, 'tablespoon': 7.0}"
+pepper,"{'teaspoon': 3.4600000000000004, 'pinch': 1.0}"
+cheddar cheese,"{'ounce': 28.0, 'cup': 11.0, 'tablespoon': 2.0}"
+avocado,{'avocado': 35.5}
+tomato,"{'tomato': 14.0, 'ounce': 799.0, 'cup': 2.0, 'pound': 4.75}"
+red onion,"{'cup': 5.16, 'red onion': 34.0, 'pound': 0.5}"
+cilantro,"{'handful': 18.0, 'bunch': 15.75, 'cup': 8.5, 'tablespoon': 7.0, 'cilantro': 6.5}"
+yellow onion,"{'yellow onion': 179.5, 'pound': 3.0}"
+all purpose flour,"{'tablespoon': 88.0, 'cup': 1285.57}"
+tomato sauce,{'ounce': 360.0}
+beef broth,{'cup': 37.0}
+pasta shell,"{'pound': 0.5, 'ounce': 8.0}"
+hot dog relish,{'tablespoon': 2.0}
+eggplant,"{'eggplant': 8.0, 'cup': 6.0, 'pound': 3.0}"
+italian seasoning,"{'teaspoon': 2.0, 'tablespoon': 7.5}"
+marinara sauce,"{'cup': 5.5, 'ounce': 50.0}"
+roll,{'roll': 4.0}
+butter,"{'tablespoon': 505.5, 'cup': 6.25, 'teaspoon': 7.0}"
+garlic powder,"{'teaspoon': 48.10999999999997, 'tablespoon': 0.5}"
+mozzarella,"{'ounce': 54.0, 'cup': 36.5}"
+red wine vinegar,"{'cup': 2.08, 'tablespoon': 34.0, 'teaspoon': 2.0}"
+dijon mustard,"{'tablespoon': 32.5, 'teaspoon': 14.25, 'cup': 0.5}"
+bowtie pasta,{'ounce': 64.0}
+roma tomato,"{'roma tomato': 51.0, 'pound': 2.75}"
+yellow squash,"{'yellow squash': 9.0, 'pound': 0.5}"
+zucchini,"{'zucchini': 36.0, 'pound': 11.27}"
+broccoli,"{'broccoli': 3.0, 'pound': 12.25, 'cup': 9.0}"
+red pepper,"{'ounce': 88.0, 'cup': 1.0}"
+parsley,"{'cup': 9.0, 'tablespoon': 13.0, 'bunch': 8.08, 'parsley': 6.83, 'handful': 11.0}"
+mushroom,"{'ounce': 164.0, 'pound': 3.0, 'handful': 1.0, 'can': 1.0}"
+worcestershire sauce,"{'tablespoon': 13.5, 'teaspoon': 5.0, 'cup': 0.25}"
+wide egg noodle,{'ounce': 46.0}
+sour cream,"{'cup': 12.16, 'tablespoon': 16.0, 'ounce': 64.0}"
+red bell pepper,{'red bell pepper': 24.25}
+boneless skinless chicken breast,"{'pound': 47.02000000000002, 'boneless skinless chicken breast': 4.0}"
+cooking oil,"{'tablespoon': 175.5, 'cup': 2.41, 'teaspoon': 6.0}"
+frozen green bean,"{'cup': 3.0, 'ounce': 32.0, 'pound': 0.5}"
+pesto,"{'cup': 1.58, 'tablespoon': 4.0, 'ounce': 8.0}"
+parmesan,"{'tablespoon': 37.5, 'cup': 19.15, 'ounce': 11.0, 'teaspoon': 2.0}"
+pizza dough,"{'pizza dough': 9.0, 'ounce': 14.0, 'pound': 1.0}"
+cream cheese,{'ounce': 148.0}
+milk,"{'cup': 87.42, 'tablespoon': 25.0, 'teaspoon': 0.5, 'ounce': 8.0}"
+onion powder,{'teaspoon': 12.719999999999999}
+dried basil,"{'teaspoon': 39.0, 'tablespoon': 6.0}"
+frozen broccoli,"{'ounce': 48.0, 'pound': 14.75, 'cup': 0.5, 'frozen broccoli': 4.0}"
+graham cracker crumb,{'cup': 1.0}
+peanut butter,"{'cup': 1.5, 'tablespoon': 4.0}"
+powdered sugar,"{'cup': 17.25, 'tablespoon': 2.0}"
+chocolate chip,{'cup': 3.5}
+mini pretzel,{'mini pretzel': 25.0}
+egg,{'egg': 433.0}
+coconut milk,"{'cup': 1.75, 'ounce': 272.5}"
+panko bread crumb,{'cup': 7.0}
+sweetened flaked coconut,{'cup': 1.0}
+sweet chili sauce,"{'cup': 2.5, 'ounce': 3.0}"
+flour tortilla,"{'ounce': 86.0, 'flour tortilla': 62.0}"
+green chile,"{'tablespoon': 2.0, 'ounce': 64.0}"
+salsa,"{'tablespoon': 6.0, 'cup': 10.08, 'ounce': 96.0}"
+green onion,"{'green onion': 372.5, 'bunch': 8.0, 'cup': 0.5}"
+oat,"{'cup': 15.16, 'tablespoon': 6.0}"
+cinnamon,"{'teaspoon': 51.839999999999996, 'pinch': 1.0, 'tablespoon': 8.0, 'dash': 1.0}"
+brown sugar,"{'tablespoon': 147.5, 'cup': 20.560000000000002, 'teaspoon': 18.0}"
+pecan,"{'tablespoon': 2.0, 'cup': 3.92}"
+long grain brown rice,{'cup': 4.0}
+cauliflower,"{'head': 8.0, 'cauliflower': 3.0, 'bunch': 1.0}"
+carrot,"{'carrot': 131.0, 'pound': 23.75, 'cup': 3.5}"
+frozen pea,"{'cup': 14.5, 'pound': 1.5}"
+curry powder,"{'tablespoon': 24.0, 'teaspoon': 1.0}"
+tahini,"{'cup': 5.23, 'tablespoon': 4.5}"
+lemon juice,"{'cup': 4.83, 'tablespoon': 67.25, 'teaspoon': 10.5, 'lemon juice': 1.5}"
+cayenne,"{'teaspoon': 3.2300000000000004, 'pinch': 1.0}"
+cayenne pepper,"{'teaspoon': 1430.7999999999977, 'pinch': 1.0, 'tablespoon': 0.5}"
+macaroni,{'cup': 2.0}
+whole milk,"{'cup': 33.25, 'tablespoon': 3.0}"
+basil pesto,{'cup': 2.41}
+frozen spinach,"{'pound': 13.0, 'cup': 1.5, 'ounce': 88.0}"
+jalapeño,{'jalapeño': 30.0}
+frozen corn,"{'ounce': 20.0, 'cup': 10.5, 'pound': 0.5}"
+mayonnaise,"{'tablespoon': 36.0, 'cup': 15.38}"
+hot sauce,"{'teaspoon': 2.12, 'tablespoon': 3.0, 'dash': 2.0}"
+pepper jack cheese,"{'cup': 2.0, 'ounce': 28.0}"
+tomato paste,"{'tablespoon': 46.0, 'ounce': 129.0, 'cup': 1.25}"
+sugar,"{'teaspoon': 27.5, 'cup': 12.24, 'tablespoon': 45.0}"
+rotini pasta,{'pound': 2.0}
+unsalted sunflower seed,{'cup': 0.25}
+feta,"{'ounce': 65.0, 'cup': 0.25, 'tablespoon': 1.0}"
+pasta sauce,{'ounce': 216.0}
+spaghetti,"{'ounce': 56.0, 'pound': 1.0}"
+asparagus,{'pound': 4.0}
+lemon,"{'lemon': 54.0, 'tablespoon': 1.5}"
+frozen riced cauliflower,{'cup': 0.5}
+frozen banana,{'frozen banana': 1.0}
+frozen sweet cherry,{'cup': 0.5}
+almond butter,{'tablespoon': 3.0}
+almond milk,{'cup': 1.0}
+plain greek yogurt,"{'cup': 1.75, 'ounce': 12.0}"
+dried dill,{'teaspoon': 3.12}
+ground turkey,"{'ounce': 114.0, 'pound': 6.0}"
+sun dried tomato,"{'cup': 3.3200000000000003, 'sun dried tomato': 2.0}"
+hamburger bun,{'hamburger bun': 22.0}
+cucumber,"{'cucumber': 25.5, 'cup': 4.0, 'slice': 6.0}"
+cauliflower rice,{'cup': 4.0}
+extra firm tofu,{'ounce': 91.0}
+cornstarch,"{'tablespoon': 47.0, 'teaspoon': 7.5}"
+natural peanut butter,"{'tablespoon': 16.5, 'cup': 5.0}"
+ginger,"{'teaspoon': 30.25, 'tablespoon': 25.5, 'inch': 55.0}"
+lime juice,"{'tablespoon': 17.5, 'lime juice': 2.0, 'cup': 0.25}"
+soy sauce,"{'teaspoon': 33.0, 'tablespoon': 108.5, 'cup': 7.66, 'soy sauce': 0.25}"
+neutral oil,"{'cup': 1.25, 'tablespoon': 12.0}"
+rice noodle,{'ounce': 16.0}
+peanut,{'cup': 4.66}
+baking powder,"{'tablespoon': 9.0, 'teaspoon': 97.37}"
+baking soda,"{'teaspoon': 16.0, 'cup': 0.25}"
+vinegar,{'tablespoon': 2.0}
+raw shrimp,"{'ounce': 12.0, 'pound': 0.5}"
+tajín clásico seasoning,{'tablespoon': 0.5}
+red cabbage,"{'cup': 18.0, 'pound': 4.0, 'red cabbage': 0.25}"
+corn tortilla,"{'corn tortilla': 128.0, 'ounce': 282.0}"
+kale,"{'pound': 2.25, 'cup': 32.0, 'ounce': 40.0, 'kale': 3.0, 'bunch': 3.0}"
+cannellini bean,{'ounce': 330.0}
+walnut,"{'cup': 11.65, 'tablespoon': 5.0, 'walnut': 0.33}"
+lemon pepper seasoning,"{'tablespoon': 2.0, 'teaspoon': 5.0}"
+chicken broth,{'cup': 198.75}
+thin spaghetti,{'ounce': 16.0}
+kidney bean,{'ounce': 210.0}
+chickpea,{'ounce': 638.0}
+vegetable broth,{'cup': 211.75}
+heavy whipping cream,"{'pint': 5.0, 'cup': 10.0}"
+chicken wings or drumette,{'pound': 4.0}
+honey,"{'cup': 2.24, 'tablespoon': 61.5, 'teaspoon': 6.0}"
+chili garlic sauce,"{'tablespoon': 9.0, 'cup': 0.25}"
+toasted sesame oil,"{'tablespoon': 16.0, 'teaspoon': 18.25}"
+rice vinegar,"{'tablespoon': 28.5, 'cup': 2.33}"
+bread crumb,"{'cup': 8.5, 'tablespoon': 2.0}"
+bbq sauce,"{'tablespoon': 12.0, 'cup': 5.33}"
+pineapple,"{'ounce': 75.0, 'cup': 4.33}"
+long grain white rice,{'cup': 40.5}
+puff pastry,{'sheet': 1.0}
+cottage cheese,{'cup': 7.0}
+nutmeg,{'teaspoon': 4.96}
+seasoning salt,{'teaspoon': 1.81}
+salmon,"{'pound': 2.3, 'ounce': 6.0}"
+green bean,{'pound': 5.42}
+sesame seed,"{'teaspoon': 4.0, 'tablespoon': 17.0}"
+firm or extra firm tofu,{'ounce': 56.0}
+frozen onions and pepper,{'cup': 1.0}
+nutritional yeast,{'tablespoon': 3.5}
+green cabbage,"{'cup': 19.0, 'green cabbage': 3.5, 'head': 0.5}"
+andouille sausage,{'ounce': 42.0}
+bell pepper,"{'bell pepper': 46.0, 'cup': 0.5}"
+celery,"{'rib': 132.5, 'cup': 1.0}"
+dried thyme,{'teaspoon': 34.11}
+boneless pork butt or shoulder,{'pound': 3.0}
+english cucumber,{'english cucumber': 1.5}
+grape tomato,"{'pint': 29.0, 'cup': 3.5, 'grape tomato': 12.0, 'ounce': 8.0}"
+can chunk light tuna,{'ounce': 12.0}
+italian sausage,"{'pound': 7.0, 'ounce': 47.5, 'link': 2.0}"
+crushed tomato,{'ounce': 734.0}
+italian seasoning blend,"{'teaspoon': 6.75, 'tablespoon': 4.5}"
+pasta,"{'pound': 10.25, 'ounce': 196.0}"
+heavy cream,"{'cup': 6.07, 'pint': 1.0}"
+spinach,"{'ounce': 84.0, 'cup': 45.5, 'handful': 2.0, 'pound': 1.0}"
+instant raman,"{'ounce': 3.0, 'package': 2.0}"
+rice,"{'cup': 142.5, 'ounce': 8.0}"
+plain yogurt,{'cup': 14.08}
+ground nutmeg,{'teaspoon': 6.3500000000000005}
+ground clove,{'teaspoon': 7.6499999999999995}
+taco seasoning,"{'tablespoon': 2.0, 'batch': 1.0, 'packet': 1.0, 'recipe': 1.0, 'taco seasoning': 1.0}"
+romaine lettuce,"{'head': 1.5, 'romaine lettuce': 1.0}"
+cheddar,"{'ounce': 113.0, 'cup': 13.25}"
+gochujang,{'tablespoon': 4.0}
+chunk light tuna in water,{'ounce': 61.0}
+yellow mustard,"{'tablespoon': 2.5, 'teaspoon': 1.0}"
+apple cider vinegar,"{'teaspoon': 12.0, 'tablespoon': 31.0, 'cup': 1.33}"
+paprika,"{'teaspoon': 5.040000000000001, 'tablespoon': 1.0}"
+onion,"{'onion': 41.0, 'cup': 1.75}"
+black eyed pea,"{'ounce': 60.0, 'pound': 1.0}"
+balsamic vinegar,"{'tablespoon': 36.5, 'cup': 2.0}"
+pork loin,{'pound': 8.0}
+russet potato,{'pound': 44.0}
+stewed tomato,{'ounce': 90.0}
+brown lentil,{'cup': 15.0}
+black olive,{'ounce': 10.75}
+banana pepper ring,"{'ounce': 12.0, 'cup': 0.5}"
+dried parsley,"{'teaspoon': 8.5, 'tablespoon': 3.5}"
+brussels sprout,"{'pound': 3.0, 'ounce': 10.0}"
+sweet potato,"{'pound': 1166.0, 'cup': 2.0, 'sweet potato': 7.0}"
+dried sage,{'teaspoon': 11.5}
+cranberry sauce,{'cup': 0.5}
+country sausage,{'ounce': 8.0}
+flour,"{'tablespoon': 25.0, 'cup': 22.33, 'teaspoon': 1.0}"
+bay leaf,{'bay leaf': 35.0}
+french bread,"{'slice': 5.0, 'loaf': 8.0, 'ounce': 16.0}"
+swiss or gruyere,{'cup': 1.0}
+apple cider,"{'ounce': 4.0, 'cup': 0.5}"
+sparkling wine,{'ounce': 4.0}
+appleton farms hickory bacon,{'ounce': 4.0}
+countryside creamery salted butter,{'tablespoon': 7.0}
+baker's corner all purpose flour,{'tablespoon': 3.0}
+simply nature organic whole milk,{'cup': 2.0}
+simply nature organic garlic powder,{'teaspoon': 0.25}
+emporium selection vintage cheddar,{'ounce': 6.0}
+happy farms cheddar,{'ounce': 2.0}
+chef's board french fried onion,{'cup': 0.25}
+acorn squash,{'pound': 4.5}
+wild rice blend,{'cup': 5.5}
+apple,"{'apple': 34.75, 'pound': 2.25}"
+dried cranberry,"{'cup': 5.800000000000001, 'tablespoon': 2.0, 'teaspoon': 2.0}"
+coleslaw mix,"{'pound': 0.5, 'ounce': 36.0, 'bag': 0.5, 'cup': 3.0}"
+yellow cornmeal,{'cup': 7.33}
+maple syrup,"{'tablespoon': 6.0, 'cup': 0.5, 'teaspoon': 5.0}"
+pepita,"{'cup': 1.25, 'tablespoon': 4.0}"
+pumpkin seed,"{'cup': 2.5, 'tablespoon': 3.0}"
+tony cachere's cajun seasoning,{'teaspoon': 1.0}
+potato,"{'pound': 23.25, 'cup': 10.0, 'potato': 4.0}"
+bone in pork chops one inch thick,{'pound': 2.5}
+petite red potato,{'ounce': 24.0}
+kielbasa,"{'ounce': 26.0, 'pound': 0.5}"
+steak seasoning,"{'tablespoon': 1.0, 'teaspoon': 1.0}"
+dried rosemary,"{'teaspoon': 14.37, 'tablespoon': 1.0}"
+crushed red pepper,"{'pinch': 18.0, 'teaspoon': 6.23, 'crushed red pepper': 1.0}"
+old fashioned oat,{'cup': 67.16}
+pumpkin pie spice,"{'teaspoon': 4.75, 'tablespoon': 1.5}"
+pumpkin puree,"{'cup': 3.33, 'ounce': 135.0}"
+sweet italian sausage,{'ounce': 16.0}
+baby bella mushroom,"{'ounce': 36.0, 'pound': 1.0}"
+crispy fried onion,{'cup': 0.25}
+penne,{'pound': 2.0}
+ricotta,"{'ounce': 75.0, 'cup': 0.5}"
+italian cheese blend,{'cup': 4.0}
+sharp cheddar,"{'ounce': 26.0, 'cup': 4.5}"
+fire roasted tomato,{'ounce': 253.0}
+banana,"{'cup': 9.75, 'banana': 11.75}"
+vanilla extract,"{'teaspoon': 40.370000000000005, 'tablespoon': 0.5}"
+unsweetened cocoa powder,"{'cup': 2.4000000000000004, 'teaspoon': 3.0, 'tablespoon': 10.0}"
+shrimp,"{'pound': 3.5, 'ounce': 12.0}"
+angel hair pasta,"{'ounce': 16.0, 'pound': 0.5}"
+kirkwood chicken breast,{'pound': 1.0}
+carlini extra virgin olive oil,{'tablespoon': 2.0}
+stonemill dried oregano,{'teaspoon': 1.0}
+tuscan garden quartered artichoke heart,{'ounce': 12.0}
+earthly grains long grain white rice,{'cup': 1.0}
+chef's board chicken broth,{'cup': 1.5}
+emporium selection feta cheese crumble,{'ounce': 1.0}
+butter bean,{'ounce': 60.0}
+feta cheese,"{'ounce': 29.0, 'cup': 0.25}"
+tortilla chip,"{'ounce': 4.0, 'cup': 2.0}"
+cheese,"{'ounce': 26.0, 'cup': 16.0, 'slice': 12.0, 'tablespoon': 2.0}"
+salami,"{'ounce': 4.0, 'slice': 3.0, 'pound': 0.33}"
+cracker,"{'cracker': 20.0, 'box': 1.0}"
+dried apricot,"{'dried apricot': 23.0, 'cup': 0.8300000000000001}"
+bow tie pasta,"{'ounce': 28.0, 'pound': 1.0}"
+pita bread,{'pita bread': 2.0}
+hummus,"{'cup': 4.0, 'tablespoon': 2.0, 'hummus': 0.5}"
+kalamata olive,"{'ounce': 9.166666666666666, 'cup': 3.33}"
+siracha,"{'tablespoon': 55.5, 'teaspoon': 3.5, 'cup': 0.8300000000000001}"
+plain bread crumb,{'cup': 6.25}
+tortilla,"{'tortilla': 25.0, 'ounce': 56.0}"
+provolone cheese,{'slice': 14.0}
+pepperoni,"{'slice': 84.0, 'ounce': 15.25, 'pepperoni': 30.0}"
+pizza sauce,"{'cup': 4.25, 'batch': 0.5}"
+green bell pepper,{'green bell pepper': 26.0}
+purple cabbage,"{'cup': 8.0, 'pound': 2.0, 'head': 1.0}"
+neutral salad oil,"{'cup': 0.5, 'tablespoon': 2.0}"
+boneless skinless chicken thigh,"{'pound': 26.200000000000003, 'boneless skinless chicken thigh': 21.0}"
+ranch dressing,"{'cup': 0.8300000000000001, 'tablespoon': 4.0}"
+bun,{'bun': 18.0}
+sweet corn,{'cob': 5.0}
+granulated sugar,"{'tablespoon': 13.0, 'cup': 13.42, 'teaspoon': 1.0}"
+jerk seasoning,"{'teaspoon': 4.0, 'tablespoon': 2.0}"
+orange juice,"{'cup': 0.5, 'orange juice': 1.0}"
+collard green,"{'pound': 3.0, 'cup': 6.5}"
+boneless skinless chicken,{'pound': 1.0}
+vidalia onion,"{'cup': 1.0, 'vidalia onion': 4.0}"
+lime,"{'lime': 45.5, 'tablespoon': 9.0}"
+monterey jack cheese,"{'ounce': 38.0, 'cup': 3.5}"
+yeast,{'teaspoon': 10.25}
+quartered artichoke heart in water,{'ounce': 18.0}
+focaccia,{'focaccia': 2.0}
+ketchup,"{'tablespoon': 8.0, 'cup': 2.0}"
+imitation crab,{'cup': 0.33}
+ething bagel seasoning,{'teaspoon': 0.25}
+instant yeast,"{'teaspoon': 2.3600000000000003, 'ounce': 0.25, 'tablespoon': 1.5}"
+cornmeal,"{'tablespoon': 14.5, 'cup': 4.0}"
+portobello mushroom,"{'portobello mushroom': 12.0, 'pound': 1.5}"
+penne pasta,"{'pound': 3.5, 'ounce': 24.0}"
+vanilla,{'teaspoon': 9.370000000000001}
+fettuccine,"{'ounce': 60.0, 'pound': 1.5}"
+ground chicken,{'pound': 1.0}
+cocoa powder,{'cup': 0.25}
+chicken,"{'cup': 16.0, 'pound': 3134.0}"
+ham,"{'pound': 2.0, 'ounce': 8.0, 'slice': 2.0}"
+anchovy filet,{'anchovy filet': 7.0}
+er,{'tablespoon': 3.0}
+cilantro or green onion,"{'handful': 1.0, 'bunch': 0.75}"
+marinara,{'cup': 2.0}
+dry red bean,{'pound': 3.0}
+cilantro and green onion,{}
+frozen peas and carrot,"{'pound': 1.5, 'cup': 2.0}"
+salsa verde,{'ounce': 32.0}
+pinto bean,"{'ounce': 60.0, 'cup': 2.0}"
+strawberry,"{'pound': 1.5, 'strawberry': 2.0}"
+graham cracker,{'graham cracker': 7.0}
+long grain jasmine rice,{'cup': 6.0}
+ramen noodle,"{'ounce': 21.0, 'package': 1.0}"
+wheat penne pasta,{'ounce': 8.0}
+full fat coconut milk,{'ounce': 53.5}
+garam masala,"{'teaspoon': 1.0, 'tablespoon': 5.5}"
+turmeric,"{'teaspoon': 9.75, 'tablespoon': 1.5}"
+thick cut bacon,{'ounce': 12.0}
+split chicken breast,{'pound': 10.0}
+creole seasoning or spicy seasoning salt,{'teaspoon': 1.0}
+swiss cheese,"{'ounce': 20.5, 'slice': 4.0}"
+coarse deli mustard,{'teaspoon': 1.0}
+smoked sausage,"{'ounce': 57.0, 'pound': 1.5}"
+2% cottage cheese,{'cup': 0.5}
+jam,"{'tablespoon': 6.0, 'cup': 0.25}"
+frozen blueberry,"{'cup': 0.75, 'tablespoon': 1.0, 'ounce': 8.0}"
+almond,"{'tablespoon': 6.0, 'cup': 6.98}"
+frozen pineapple tidbit,{'cup': 0.5}
+shredded coconut,"{'tablespoon': 5.0, 'cup': 2.91}"
+granola,{'cup': 0.25}
+artichoke heart,{'ounce': 47.5}
+rubbed sage,{'teaspoon': 1.75}
+extra virgin olive oil,{'cup': 0.75}
+bean,{'ounce': 45.0}
+pearled barley,{'cup': 2.0}
+ground pork,{'pound': 4.5}
+corn starch,"{'tablespoon': 9.0, 'teaspoon': 1.0}"
+jasmine rice,{'cup': 55.5}
+cabbage,"{'cup': 31.0, 'pound': 4.25, 'cabbage': 0.5}"
+smoked paprika or chipotle powder,{'teaspoon': 0.5}
+cranberry,"{'ounce': 78.0, 'cup': 5.25}"
+baker's corner brown sugar,{'tablespoon': 2.0}
+chef's board cornbread stuffing mix,{'ounce': 12.0}
+southern grove pecan,{'cup': 0.5}
+whole milk ricotta,"{'cup': 3.0, 'ounce': 8.0}"
+oyster sauce,{'tablespoon': 6.0}
+crushed red pepper flake,"{'pinch': 2.0, 'teaspoon': 0.25}"
+heavy cream or heavy whipping cream,{'cup': 1.0}
+quinoa,{'cup': 13.5}
+butternut squash,{'pound': 7.0}
+chipotle powder,{'teaspoon': 3.25}
+stuffing mix,{'ounce': 18.0}
+ground ginger,{'teaspoon': 10.370000000000001}
+evaporated milk,"{'cup': 4.25, 'ounce': 24.0}"
+unbaked 9 inch deep dish pie crust,{'unbaked 9 inch deep dish pie crust': 1.0}
+pork tenderloin,{'pound': 2.66}
+parsnip,{'pound': 0.5}
+radish,"{'bunch': 1.0, 'radish': 3.0}"
+ziti,{'pound': 1.0}
+butter frozen,{'tablespoon': 8.0}
+kale leaf,{'cup': 22.0}
+blue cheese,{'tablespoon': 2.0}
+cod,{'ounce': 4.0}
+bread,"{'slice': 4.0, 'cup': 1.0}"
+hearty bread,"{'slice': 6.0, 'pound': 1.0}"
+blueberry,"{'cup': 3.0, 'pound': 0.5}"
+lemon curd,"{'cup': 0.75, 'tablespoon': 1.0}"
+jalapenño,{'jalapenño': 1.0}
+oregano,"{'teaspoon': 13.75, 'tablespoon': 1.0}"
+cumin,"{'tablespoon': 3.0, 'teaspoon': 32.75}"
+baby potato,{'pound': 2.5}
+slivered almond,{'cup': 1.25}
+tortilla strip,{'cup': 7.0}
+aquafaba,{'cup': 0.5}
+cream of tartar,{'teaspoon': 0.36}
+oat bran,{'cup': 2.75}
+ground flaxseed,"{'cup': 1.5, 'tablespoon': 6.0}"
+boneless center cut pork chops 1 inch thick,{'pound': 1.5}
+frozen stir fry vegetable,"{'ounce': 24.0, 'pound': 2.0}"
+peach,"{'cup': 2.0, 'pound': 5.0, 'peach': 6.0}"
+sweetened condensed milk,{'ounce': 28.0}
+tuna,{'ounce': 10.0}
+quartered artichoke heart,{'ounce': 111.5}
+baby spinach,"{'cup': 17.0, 'ounce': 8.0, 'pound': 0.25, 'handful': 1.0}"
+high heat oil,{'tablespoon': 2.0}
+mango,{'mango': 7.0}
+white sugar,"{'tablespoon': 11.5, 'cup': 4.91}"
+red pepper flake,{'teaspoon': 2.49}
+molasses,"{'tablespoon': 4.0, 'cup': 2.08}"
+dijon,{'tablespoon': 0.5}
+cabbage slaw mix,"{'cup': 3.0, 'pound': 0.5}"
+plain whole milk yogurt,{'cup': 0.33}
+italian parsley,"{'cup': 4.0, 'italian parsley': 1.25, 'bunch': 0.25}"
+button mushroom,"{'ounce': 112.0, 'pound': 1.0}"
+wheat spaghetti,{'ounce': 16.0}
+yogurt,{'cup': 1.83}
+chia seed,{'tablespoon': 9.5}
+frozen pineapple chunk,{'cup': 0.5}
+orecchiette,{'ounce': 8.0}
+chicken sausage,{'ounce': 12.0}
+lean ground beef,{'pound': 4.25}
+taco shell,{'box': 1.0}
+greek yogurt,"{'cup': 0.8300000000000001, 'ounce': 12.0}"
+spring mix,"{'cup': 2.0, 'pound': 0.25}"
+tempeh,{'ounce': 32.0}
+frozen corn kernel,"{'cup': 30.0, 'pound': 2.0}"
+flat leaf italian parsley,{'cup': 3.0}
+frozen shelled edamame,{'cup': 2.0}
+guacamole,"{'ounce': 16.0, 'cup': 0.25}"
+brown rice,{'cup': 16.5}
+8 inch flour tortilla,{'8 inch flour tortilla': 27.0}
+scallion,"{'cup': 0.25, 'scallion': 5.0}"
+white fish,{'pound': 1.0}
+pickled red onion,{'cup': 0.5800000000000001}
+cojita or feta cheese,{'ounce': 1.0}
+oil,"{'tablespoon': 3.0, 'teaspoon': 1.0}"
+vegetarian italian sausage,{'ounce': 12.0}
+canned salmon,{'ounce': 6.0}
+coarse ground mustard,{'teaspoon': 0.5}
+thyme,"{'teaspoon': 7.25, 'sprig': 3.0}"
+skinless chicken breast,{'pound': 0.75}
+sesame oil,"{'tablespoon': 1.0, 'teaspoon': 6.25}"
+olive,{'ounce': 2.25}
+italian dressing,{'cup': 0.33}
+high heat cooking oil,{'tablespoon': 7.0}
+popcorn kernel,{'cup': 1.6600000000000001}
+frozen cauliflower,"{'ounce': 12.0, 'pound': 1.5}"
+sun dried tomato in oil,{'ounce': 3.5}
+seasoning,{'tablespoon': 0.5}
+almond extract,{'teaspoon': 4.0}
+orange,{'orange': 10.0}
+mixed vegetable,{'cup': 4.0}
+whole wheat pita,{'whole wheat pita': 1.0}
+golden raisin,{'cup': 0.66}
+champagne vinaigrette,{'cup': 0.5800000000000001}
+noodle,{'ounce': 6.0}
+mixed salad bar vegetable,{'cup': 3.0}
+split turkey breast,{'pound': 2.5}
+salted butter,"{'tablespoon': 28.0, 'cup': 0.5}"
+dark chocolate,"{'gram': 75.0, 'ounce': 2.0}"
+red wine,{'cup': 1.0}
+elbow macaroni,"{'cup': 6.0, 'ounce': 12.0}"
+ground turmeric,"{'teaspoon': 1.25, 'tablespoon': 1.5}"
+baby green,"{'cup': 4.0, 'ounce': 4.0}"
+granny smith apple,{'granny smith apple': 4.0}
+dry macaroni,{'pound': 1.0}
+mexican chorizo,"{'pound': 2.75, 'ounce': 18.0}"
+petite tomato,{'ounce': 103.0}
+ravioli,{'ounce': 9.0}
+pineapple tidbit,"{'ounce': 16.0, 'cup': 2.0}"
+sambal oelek,{'tablespoon': 1.0}
+hoagie roll,{'hoagie roll': 2.0}
+great northern bean,{'ounce': 45.0}
+half and half,{'cup': 5.5}
+red potato,{'pound': 8.5}
+cayenne powder,{'teaspoon': 0.75}
+macaroni noodle,{'cup': 3.0}
+caesar dressing,{'cup': 0.75}
+topping,{}
+orzo,"{'cup': 8.0, 'pound': 0.5}"
+couscous,{'cup': 2.0}
+ground cinnamon,{'tablespoon': 4.0}
+ground allspice,{'teaspoon': 3.0}
+hoisin sauce,{'cup': 2.41}
+lettuce,"{'head': 1.0, 'lettuce': 1.0}"
+lean ground turkey,"{'pound': 1.0, 'ounce': 19.0}"
+coconut oil,"{'tablespoon': 7.0, 'teaspoon': 0.25}"
+stone ground or grain mustard,{'tablespoon': 6.0}
+box frozen spinach,{'ounce': 10.0}
+queso fresco,{'ounce': 4.0}
+can pineapple,{'ounce': 20.0}
+teriyaki sauce,"{'tablespoon': 6.0, 'cup': 1.0}"
+onion roll,{'onion roll': 4.0}
+tostada,{'tostada': 6.0}
+extra sharp white cheddar,{'ounce': 8.0}
+bulgur,{'cup': 3.0}
+flat leaf parsley,"{'flat leaf parsley': 2.0, 'bunch': 1.25}"
+vegetable or canola oil,{'tablespoon': 8.0}
+bacon,"{'slice': 11.0, 'ounce': 44.0}"
+spring mix or baby romaine,{'ounce': 2.0}
+salad dressing,{'cup': 0.5}
+pineapple chunk,"{'ounce': 168.5, 'cup': 0.5}"
+skinless chicken thigh,{'skinless chicken thigh': 5.0}
+taco sauce,{'cup': 0.75}
+clove,"{'pinch': 1.0, 'teaspoon': 0.24, 'clove': 20.0, 'tablespoon': 1.0}"
+black beans well,{'ounce': 15.0}
+solid albicore tuna,{'ounce': 12.0}
+chicken breast,"{'chicken breast': 7.0, 'pound': 16.0}"
+rotel,{'ounce': 10.0}
+fusili pasta,{'pound': 0.5}
+basil,{'cup': 1.0}
+creamy natural peanut butter,{'cup': 0.5}
+chocolate graham cracker,{'chocolate graham cracker': 4.0}
+butter or coconut oil,{'tablespoon': 2.0}
+red thai curry paste,{'tablespoon': 6.0}
+bone in skin on chicken thighs,"{'pound': 2.0, 'bone in skin on chicken thighs': 4.0}"
+vegetable oil,"{'tablespoon': 84.0, 'teaspoon': 4.0, 'cup': 3.0}"
+8 inch tortilla,{'8 inch tortilla': 17.0}
+ground turkey or beef,{'pound': 1.0}
+raisin,{'cup': 7.83}
+english muffin,{'english muffin': 14.0}
+monterey jack or cheddar cheese,{'ounce': 4.0}
+bean soup mix,{'pound': 1.0}
+linguine or fettuccine,{'ounce': 8.0}
+grape or cherry tomato,{'pint': 2.0}
+italian seasoning herb blend,{'tablespoon': 0.5}
+mozzarella d,{'ounce': 4.0}
+italian or caesar dressing,{'ounce': 6.0}
+active dry or instant yeast,"{'teaspoon': 5.0, 'ounce': 0.25, 'tablespoon': 0.75}"
+can black bean,{'ounce': 30.0}
+sunflower seed,{'cup': 0.5800000000000001}
+spinach artichoke dip,{'cup': 0.33}
+rotisserie chicken,{'cup': 2.33}
+unsalted peanut,{'cup': 1.25}
+flatbread,{'flatbread': 6.0}
+container hummus,{'ounce': 10.0}
+instant or bread machine yeast,"{'teaspoon': 2.74, 'tablespoon': 0.75}"
+green,{'ounce': 12.0}
+mozzarella cheese stick,{'mozzarella cheese stick': 4.0}
+white miso,{'tablespoon': 2.0}
+real maple syrup,"{'tablespoon': 4.0, 'cup': 0.25}"
+kimchi,{'cup': 1.25}
+light cooking oil,{'tablespoon': 2.0}
+extra sharp cheddar,{'ounce': 8.0}
+frozen mixed vegetable,{'pound': 1.0}
+firm tofu,{'ounce': 28.0}
+light oil,{'tablespoon': 1.0}
+natural creamy peanut butter,{'cup': 0.25}
+snap pea,{'pound': 0.5}
+hulled hemp seed,{'tablespoon': 4.0}
+sweetener,{}
+fried onion,{'ounce': 3.0}
+hemp seed heart,{'tablespoon': 1.0}
+wheat flour,{'cup': 20.75}
+butter and flour,{}
+french fried onion,{'ounce': 3.0}
+dry chorizo,{'ounce': 4.0}
+dry pinto bean,"{'cup': 2.0, 'pound': 1.0}"
+reduced sodium chicken broth,{'cup': 3.0}
+can tomato,{'ounce': 15.0}
+pork chop,{'pork chop': 4.0}
+fuji apple,{'fuji apple': 2.0}
+deli ham,"{'slice': 12.0, 'ounce': 4.5}"
+bratwurst link,{'bratwurst link': 5.0}
+cheese tortelloni,{'ounce': 8.0}
+instant or rapid rise yeast,{'teaspoon': 2.0}
+queso fresco or monterey jack,{'ounce': 2.0}
+whole wheat pita bread,{'whole wheat pita bread': 2.0}
+jumbo pasta shell,{'ounce': 8.0}
+long grain rice,{'cup': 8.5}
+cinnamon stick,"{'ounce': 7.25, 'cinnamon stick': 2.0}"
+black tea,"{'bag': 4.0, 'black tea': 4.0}"
+beef roast,{'pound': 2.0}
+unsweetened applesauce,{'cup': 9.41}
+frozen blueberries,{'cup': 1.5}
+parsley leaf,{'cup': 1.0}
+chipotle pepper in adobo sauce,"{'tablespoon': 1.0, 'chipotle pepper in adobo sauce': 2.0, 'ounce': 2.0}"
+sweet onion,{'sweet onion': 2.0}
+chicken or vegetable broth,{'cup': 1.0}
+ground turkey 97% lean,{'ounce': 19.0}
+frozen cut leaf spinach,{'pound': 0.75}
+relish,{'tablespoon': 1.0}
+heart of romaine,{'heart of romaine': 2.0}
+strong coffee,{'cup': 5.0}
+frozen black eyed peas or purple hull pea,{'pound': 1.0}
+unsweetened coconut flake,{'cup': 1.58}
+virgin coconut oil,{'tablespoon': 2.0}
+frozen mango chunk,{'pound': 0.5}
+lite coconut milk,{'ounce': 13.0}
+stale bread,{'cup': 1.0}
+meat,{'cup': 0.25}
+vegetable,{'cup': 0.25}
+light or neutral oil,{'tablespoon': 2.0}
+salad green,{'cup': 6.0}
+mandarin orange,{'ounce': 11.0}
+rotisserie chicken breast,"{'rotisserie chicken breast': 1.0, 'cup': 1.5}"
+crunchy chow mein noodle,{'cup': 1.0}
+berry,{}
+nut,{}
+lemon or lime juice,"{'tablespoon': 2.0, 'lemon or lime juice': 1.0}"
+cod steak,{'ounce': 5.0}
+corn tortilla chip,{'ounce': 8.0}
+water,{'cup': 0.5}
+buttermilk,{'cup': 2.5}
+can white bean,{'ounce': 15.0}
+wide rice noodle,{'ounce': 15.0}
+white mushroom,{'ounce': 8.0}
+baby red potato,{'pound': 2.0}
+poblano pepper,{'poblano pepper': 14.0}
+chorizo,{'pound': 0.75}
+homemade enchilada sauce,{'batch': 1.0}
+high smoke point cooking oil,{'tablespoon': 2.0}
+dry brown lentil,{'cup': 4.75}
+cilantro leaf,{'cup': 1.25}
+poppy seed,"{'teaspoon': 2.0, 'tablespoon': 0.25}"
+chipotle pepper powder,{'teaspoon': 0.5}
+pork butt roast,{'pound': 6.0}
+rigatoni,"{'ounce': 20.0, 'pound': 1.0}"
+red or yellow lentil,{'pound': 0.5}
+taco sauce or sauce,{}
+split chicken breasts bone in,{'split chicken breasts bone in': 2.0}
+egg noodle,{'ounce': 6.0}
+chicken wings and drumette,{'pound': 1.5}
+raspberry jam,{'cup': 2.5}
+rice or apple cider vinegar,{'cup': 0.33}
+beef stew meat,{'pound': 4.0}
+frozen pearl onion,{'ounce': 14.0}
+rice vermicelli or rice stick,{'ounce': 8.0}
+cabbage and carrot,{'ounce': 9.0}
+shredded sweetened coconut,{'cup': 3.0}
+semi sweet chocolate,"{'ounce': 3.0, 'cup': 0.33}"
+french or ciabatta roll,{'ounce': 24.0}
+provolone,{'slice': 5.0}
+white vinegar,{'cup': 4.0}
+unfiltered apple juice or cider,{'quart': 2.0}
+cranberry juice cocktail,{'quart': 1.0}
+milk chocolate chip,"{'cup': 0.5, 'tablespoon': 3.0}"
+d'anjou pear,"{""d'anjou pear"": 1.0}"
+frozen seafood mix,"{'ounce': 8.0, 'pound': 0.5}"
+spaghetti squash,{'cup': 4.0}
+harissa,{'cup': 0.25}
+cumin seed,{'teaspoon': 2.0}
+split pea,{'pound': 3.0}
+sprigs thyme,"{'teaspoon': 0.25, 'sprigs thyme': 8.0}"
+extra wide egg noodle,{'ounce': 8.0}
+five spice blend,{'tablespoon': 1.5}
+quick cooking yellow grit,{'cup': 1.0}
+chicken skin,{'pound': 2.0}
+jalapeno,"{'jalapeno': 5.0, 'ounce': 4.0}"
+lacinato kale,"{'lacinato kale': 1.0, 'pound': 0.5, 'cup': 5.0}"
+mint extract,{'teaspoon': 1.5}
+mini chocolate chip,{'cup': 0.25}
+chocolate syrup,{'cup': 0.25}
+jam or jelly,{'cup': 0.75}
+orange juice concentrate,{'cup': 0.5}
+frozen pineapple,{'cup': 0.5}
+chipotle chili powder,{'teaspoon': 0.5}
+brioche bun,{'brioche bun': 4.0}
+neutral cooking oil,"{'tablespoon': 3.0, 'cup': 0.25}"
+whole milk mozzarella,{'ounce': 4.0}
+active dry yeast,{'teaspoon': 4.0}
+hatch chile,{'pound': 0.5}
+rice or grain,{'cup': 2.5}
+beet,{'pound': 0.67}
+peppercorn,{'teaspoon': 0.5}
+red seedless grape,{'cup': 1.0}
+pepper jack,"{'ounce': 4.0, 'cup': 2.0}"
+light mayonnaise,{'cup': 1.83}
+raw sunflower seed,{'cup': 0.75}
+frozen strawberry,"{'pound': 0.25, 'cup': 1.0, 'ounce': 16.0}"
+rose,{'cup': 1.0}
+short grain white rice,{'cup': 2.0}
+crab stick,{'ounce': 4.0}
+nori snack pack,{'ounce': 0.36}
+salad bar vegetable,{}
+whole split chicken,{'pound': 4.0}
+seasoning blend,{'tablespoon': 2.0}
+dried currant,{'cup': 0.25}
+"garlic, or garlic powder",{'teaspoon': 0.25}
+frozen shrimp,{'pound': 0.5}
+fish sauce,"{'teaspoon': 0.25, 'tablespoon': 2.5}"
+jasmine or basmati rice,{'cup': 8.0}
+monterey jack,"{'ounce': 8.0, 'cup': 2.5}"
+boneless beef shoulder roast,{'pound': 6.0}
+frozen mixed berry,{'ounce': 12.0}
+lasagna noodle,"{'ounce': 8.0, 'pound': 2.0}"
+"ground pork, chicken or turkey",{'pound': 0.5}
+chicken drumstick,{'pound': 3.5}
+wild caught salmon,{'ounce': 14.0}
+creamy caesar dressing,{'cup': 0.75}
+shittake mushroom,{'shittake mushroom': 3.0}
+bone in chicken,{'pound': 2.0}
+thai red curry paste,{'tablespoon': 2.0}
+baby bok choy,{'bunch': 1.0}
+vegetable or chicken broth,{'cup': 4.0}
+rice vermicelli noodle,{'ounce': 11.5}
+rotisserie chicken carcas,{'rotisserie chicken carcas': 1.0}
+block extra firm tofu,{'ounce': 28.0}
+farro,{'cup': 5.5}
+"brown sugar, maple syrup, or honey",{'teaspoon': 0.5}
+semi pearled farro,{'cup': 1.0}
+canola or vegetable oil,{'tablespoon': 3.0}
+gyoza or wonton wrapper,{'gyoza or wonton wrapper': 50.0}
+dry red lentil,{'cup': 4.0}
+bone in skin on chicken legs,{'bone in skin on chicken legs': 2.0}
+unsweetened shredded coconut,{'cup': 1.58}
+refried bean,{'cup': 4.0}
+yellow or red onion,{'yellow or red onion': 1.0}
+chicken thigh,"{'chicken thigh': 12.0, 'pound': 10.0}"
+pitted kalamata olive,{'cup': 0.66}
+gnocchi,{'pound': 2.0}
+chili garlic sauce or sambal oelek,{'tablespoon': 1.5}
+ground pork or turkey,{'pound': 1.0}
+canola oil,"{'tablespoon': 1.5, 'cup': 0.25}"
+linguine,{'ounce': 8.0}
+montreal steak seasoning,{'tablespoon': 0.5}
+frozen green,{'pound': 0.5}
+powdered ginger,{'teaspoon': 2.0}
+dry active yeast,{'teaspoon': 2.0}
+hominy,{'ounce': 15.0}
+"pork, chicken, or beef",{'cup': 1.5}
+salmon filet,{'pound': 1.67}
+rice wine,{'tablespoon': 9.0}
+boneless skinless chicken breasts or thigh,{'pound': 1.5}
+taco blend cheese,{'cup': 1.5}
+dry navy bean,{'pound': 3.0}
+lemon pepper,{'teaspoon': 0.25}
+dill,{'teaspoon': 1.25}
+frozen berry,{'cup': 1.0}
+sprigs dill,{}
+matzo meal,{'cup': 0.75}
+pita,{'pita': 11.0}
+mustard green,{'pound': 1.0}
+navy bean,{'pound': 1.0}
+creole seasoning,{'tablespoon': 2.5}
+whole milk or cream,{'cup': 0.25}
+baby spinach or baby green,{'cup': 6.0}
+unsweetened apple sauce,{'cup': 4.25}
+ricotta cheese,"{'ounce': 45.0, 'cup': 1.0}"
+marshmallow,{'marshmallow': 10.0}
+chili powder blend,"{'tablespoon': 0.5, 'teaspoon': 2.0}"
+iceberg lettuce,{'head': 1.5}
+frozen cheese ravioli,{'ounce': 20.0}
+boneless pork chop,{'pound': 1.25}
+greek plain yogurt,{'cup': 0.33}
+canola,{'tablespoon': 3.0}
+plum,{'pound': 0.5}
+"bulgur, quinoa, couscous, or rice",{'cup': 2.0}
+thin spaghetti or angel hair pasta,{'pound': 1.0}
+cantaloupe,{'cantaloupe': 0.5}
+frozen pitted sweet cherry,{'cup': 1.0}
+shallot,{'tablespoon': 2.0}
+sprigs mint,"{'sprigs mint': 3.0, 'tablespoon': 2.0}"
+ground turkey 93% lean,{'ounce': 19.0}
+thin center cut pork chop,{'pound': 1.0}
+blackberry jam or preserve,{'cup': 0.5}
+light coconut milk,"{'ounce': 43.0, 'cup': 1.0}"
+white fish filet,{'pound': 0.67}
+cumin lime coleslaw,{'batch': 0.5}
+red creamer potato,{'pound': 1.25}
+allspice,"{'teaspoon': 2.0, 'tablespoon': 0.5}"
+banana chip,{'cup': 1.0}
+frozen seasoning mix,{'ounce': 10.0}
+half and half or cream,{'tablespoon': 4.0}
+red enchilada sauce,"{'red enchilada sauce': 1.5, 'ounce': 10.0}"
+"jalapeños, pickled","{'jalapeños, pickled': 2.0}"
+monterey jack or pepper jack,{'ounce': 4.0}
+fajita diameter tortilla,{'fajita diameter tortilla': 4.0}
+dinosaur or lacinato kale,{'dinosaur or lacinato kale': 0.5}
+milk 2% or higher fat content,{'cup': 0.5}
+boneless beef rump or shoulder roast,{'pound': 3.0}
+baby portobello mushroom,{'ounce': 8.0}
+masa harina or cornmeal,{'cup': 0.5}
+stuffing or dressing,{'cup': 3.0}
+turkey or ham,{'cup': 1.0}
+milk or cream,{'tablespoon': 2.0}
+plain gelatin,{'ounce': 1.25}
+smoked provolone,{'slice': 3.0}
+active dry yeast or one,{'ounce': 0.25}
+five spice powder,{'tablespoon': 2.0}
+bone in skin on chicken,{'pound': 4.0}
+solid pack pumpkin puree,{'ounce': 15.0}
+raw unsalted sunflower seed,{'cup': 0.5}
+soft taco 8 inch tortilla,{'soft taco 8 inch tortilla': 8.0}
+homemade red enchilada sauce,{'cup': 2.0}
+seasoned rice,{'cup': 0.5}
+sauce,"{'cup': 0.5, 'dash': 10.0}"
+coarse brown or creole mustard,{'tablespoon': 1.0}
+blackened seasoning,{'tablespoon': 1.0}
+vermicelli noodle,{'ounce': 8.0}
+tilapia filet,"{'tilapia filet': 4.0, 'ounce': 3.0, 'pound': 1.0}"
+cream or half and half,{'tablespoon': 2.0}
+tahini sesame seed paste,{'cup': 0.33}
+6 inch corn tortilla,{'6 inch corn tortilla': 12.0}
+frozen broccoli and cauliflower,{'pound': 1.5}
+2% or whole milk,{'cup': 4.0}
+gouda or smoked mozzarella,{'cup': 1.0}
+frozen onion bell pepper celery mix,{'rib': 12.0}
+dry long grain white rice,{'cup': 2.5}
+yukon gold potato,{'pound': 6.0}
+anchovy paste or anchovy filet,{'teaspoon': 1.0}
+crushed pineapple,{'ounce': 35.0}
+shredded coconut sweetened,{'cup': 0.33}
+"milk, dairy or soy",{'cup': 1.0}
+7 or 8 inch flour tortilla,{'7 or 8 inch flour tortilla': 2.0}
+mixed vegetables a salad bar,{'cup': 1.0}
+white chocolate chip,{'cup': 0.33}
+bone in chicken thighs,{'pound': 6.5}
+chevre goat cheese,{'ounce': 2.0}
+dried date,{'cup': 0.5}
+whole pita bread,{'whole pita bread': 4.0}
+medjool date,{'medjool date': 6.0}
+gorgonzola,{'cup': 0.25}
+red wine or apple cider vinegar,{'teaspoon': 1.0}
+cashew,{'cup': 0.5}
+"dried fruit raisins, cranberries or apricot",{'cup': 0.25}
+frozen cut spinach,{'pound': 0.25}
+ciabatta roll,{'ciabatta roll': 2.0}
+mozzarella cheese,"{'cup': 1.0, 'ounce': 2.0}"
+flank or skirt steak,{'pound': 1.0}
+plain or vanilla soy milk,{'cup': 1.0}
+sweetened shredded coconut,{'cup': 0.33}
+fajita flour tortilla,{'fajita flour tortilla': 18.0}
+yellow bell pepper,{'yellow bell pepper': 1.0}
+parmesan cheese,{'cup': 1.33}
+buckwheat soba noodle,{'ounce': 8.0}
+instant or active dry yeast,{'teaspoon': 2.0}
+israeli couscous,{'cup': 1122.0}
+white onion,{'white onion': 1.0}
+shaved parmesan,{'ounce': 2.0}
+wheat tortilla,{'ounce': 8.0}
+semi sweet chocolate chip,"{'tablespoon': 1.0, 'cup': 0.33}"
+wheat roll,{'wheat roll': 4.0}
+chicken bouillon,"{'teaspoon': 0.5, 'tablespoon': 2.0}"
+red wine or beef broth,{'cup': 0.5}
+beef,{'cup': 2.0}
+multi purpose beef,{'cup': 1.0}
+boneless beef rump roast,{'pound': 4.0}
+sun dried tomato sauce,{'recipe': 1.0}
+serrano or jalapeno pepper,{'serrano or jalapeno pepper': 1.0}
+6 inch tortilla,{'6 inch tortilla': 8.0}
+tomatoes w or chile,{'ounce': 14.0}
+ground cardamom,{'teaspoon': 0.25}
+banana pepper,{'cup': 0.5}
+pico de gallo,{'pico de gallo': 2.0}
+apple juice,{'cup': 1.5}
+shelled almond,{'pound': 1.0}
+enchilada sauce,"{'cup': 1.0, 'ounce': 10.0}"
+yellow grit,{'cup': 1.0}
+v juice,"{'ounce': 32.0, 'cup': 2.0}"
+white bean,{'ounce': 15.0}
+smoked ham,{'pound': 0.5}
+frozen cheese tortellini,{'ounce': 12.0}
+vegetable scrap,{}
+chicken carcas,{}
+whole chicken,{'pound': 4.0}
+bulb garlic,{'clove': 0.5}
+jumbo shell,{'ounce': 12.0}
+lo mein noodle,{'ounce': 4.0}
+zucchini squash,{'pound': 1.0}
+coriander,{'teaspoon': 0.25}
+cilantro or mint,{'handful': 1.0}
+frozen raspberry,{'ounce': 40.0}
+ice,{'ice': 4.0}
+thick cut pork chop,{'pound': 2.0}
+curly leaf parsley,{'curly leaf parsley': 1.0}
+non stick spray,{}
+dried herb,{'teaspoon': 1.0}
+fettuccini,{'pound': 1.0}
+cider vinegar,"{'tablespoon': 1.0, 'cup': 0.75}"
+red lentil,{'pound': 1.0}
+ground ginger dry,{'teaspoon': 1.0}
+smoked gouda,{'ounce': 2.0}
+italian cheese,{'ounce': 2.0}
+dry fettuccine,{'ounce': 16.0}
+naan,{'naan': 1.0}
+frozen peach,{'ounce': 16.0}
+round pita pocket,{'round pita pocket': 0.5}
+pineapple jam,{'ounce': 18.0}
+ground dried ginger,{'teaspoon': 1.25}
+dark molasses,{'cup': 1.1600000000000001}
+semi sweet baking chocolate,{'ounce': 4.0}
+egg roll wrapper,{'package': 1.0}
+chicken base,{'teaspoon': 1.0}
+bone in turkey,{'pound': 6.0}
+"chicken, breast or thigh",{'pound': 2.0}
+wild rice mix,{'cup': 2.5}
+banana frozen,{'banana frozen': 1.0}
+vanilla soy milk,{'cup': 1.0}
+packet instant or bread machine yeast,{'teaspoon': 2.25}
+fat free plain yogurt,{'cup': 0.5800000000000001}
+boston butt or pork shoulder,{'pound': 3.5}
+coffee bean,{'tablespoon': 3.0}
+dry old fashioned oat,{'cup': 5.5}
+plain non fat yogurt,{'cup': 0.5}
+dry jasmine rice,{'cup': 1.5}
+quick or old fashioned oat,{'cup': 1.0}
+pork loin filet,{'pound': 2.0}
+italian blend cheese,{'cup': 1.0}
+10 inch flour tortilla,{'10 inch flour tortilla': 6.0}
+skin on bone in chicken,{'pound': 4.0}
+squash,{'squash': 2.0}
+tuna steak,{'ounce': 12.0}
+sambal,{'tablespoon': 3.5}
+boneless chicken breast,{'pound': 1.0}
+"homemade naan, pita or flatbread","{'homemade naan, pita or flatbread': 4.0}"
+thin cut pork chop,{'thin cut pork chop': 4.0}
+apricot preserve,{'cup': 0.5}
+quick cooking grit,"{'cup': 0.75, 'tablespoon': 3.0}"
+mustard,"{'cup': 0.25, 'tablespoon': 1.0}"
+summer squash,{'summer squash': 1.0}
+jar red pepper,{'ounce': 12.0}
+cloves garlic,{'tablespoon': 2.0}
+chunk tuna,{'ounce': 5.0}
+corn in husks,{'cob': 4.0}
+smoked ham hock,{'smoked ham hock': 4.0}
+dry bean mix,{'pound': 1.0}
+chicken base or bouillon,{'tablespoon': 2.5}
+white wine,{'cup': 0.75}
+soba noodle,{'ounce': 8.0}
+turnip,{'turnip': 1.0}
+"vegetable shortening, oil, or butter",{'tablespoon': 1.0}
+bread flour,{'cup': 6.75}
+dry thyme,{'teaspoon': 1.0}
+lemongras,{'stalk': 1.0}
+rice paper wrapper,{'rice paper wrapper': 10.0}
+red leaf lettuce,{'red leaf lettuce': 0.5}
+bean thread,{'ounce': 2.0}
+krab,{'ounce': 8.0}
+peppers chipotle pepper in adobo,{'peppers chipotle pepper in adobo': 3.0}
+beef bouillon,{'beef bouillon': 2.0}
+dry pasta,{'ounce': 6.0}
+turkey meatball,{'batch': 0.5}
+turkey italian sausage,{'pound': 1.25}
+worcestershire,{'tablespoon': 1.0}
+beer,{'ounce': 12.0}
+bouillon,"{'cup': 2.0, 'bouillon': 3.0}"
+lard,{'tablespoon': 5.0}
+dried black eyed pea,{'pound': 1.0}
+chicken or vegetable bouillon,{'tablespoon': 1.0}
+dill pickle,{'cup': 0.25}
+dry dill,{'teaspoon': 0.5}
+cajun seasoning,{'teaspoon': 1.0}
+sticks cinnamon,{'sticks cinnamon': 4.0}
+butter or cooking oil,{'tablespoon': 3.0}
+seasoning mix,{'rib': 12.0}
+maple or pancake syrup,{'tablespoon': 1.0}
+honey peanut,{'cup': 0.5}
+hot curry powder,{'tablespoon': 1.0}
+bok choy,{'bok choy': 1.0}
+bean sprout,{'ounce': 12.0}
+evaporated milk or cream,{'cup': 0.5}
+honey or sugar,{'tablespoon': 1.0}
+jalapeño pepper,{'jalapeño pepper': 1.0}
+thick cut boneless pork chop,{'thick cut boneless pork chop': 4.0}
+pack hamburger or sandwich bun,{'pack hamburger or sandwich bun': 8.0}
+chipotle pepper in adobo,{'can': 3.0}
+pineapple can,{'ounce': 8.0}
+parsley flake,{'teaspoon': 1.0}
+homemade marinara,{'cup': 3.5}
+cream cheese or neufchatel,{'ounce': 8.0}
+imitation lobster or crab,{'ounce': 8.0}
+wonton wrapper,{'package': 2.0}
+quick oat,{'cup': 1.0}
+each grape leaf,{'jar': 1.0}
+applesauce,{'cup': 2.0}
+can chunk light tuna in water,{'ounce': 5.0}
+frozen sweet pea,{'cup': 2.0}
+brief spray non stick spray,{}
+corn bread or muffin mix,{'box': 2.0}
+steel cut oat,{'cup': 2.0}
+generous non stick spray,{}
+sweet relish,{'tablespoon': 1.0}
+tony caschere’s seasoning salt,{'teaspoon': 0.5}
+"bullion, vegetable, or chicken","{'bullion, vegetable, or chicken': 2.0}"
+chili garlic paste,{'teaspoon': 1.0}
+poblano and sweet potato salad,{'cup': 2.0}
+dried bay leaf,{'dried bay leaf': 1.0}
+"6″, 8″ or 10″ flour tortilla","{'6″, 8″ or 10″ flour tortilla': 1.0}"
+creamed spinach,{'cup': 0.25}
+homemade meatball,{'homemade meatball': 4.0}
+hearty roll,{'hearty roll': 1.0}
+italian sausage casing,{'pound': 1.25}
+russet or red potato,{'pound': 2.0}

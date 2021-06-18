@@ -4,18 +4,19 @@ import requests
 from time import sleep
 from random import randint
 import sqlite3
+from datacleaner import clean
 
-# Budget bytes database entry
+## Budget bytes database entry USING WEB SCRAPER ##
 
 # clean the links up
 links = []
-f = open("links2.txt", "r")
+f = open("Blinks.txt", "r")
 links = f.readline()
 final_links = links.replace('[', '').replace(']', '').split(', ')
 
 # clean the images up
 images = []
-f = open("images.txt", "r")
+f = open("Bimages.txt", "r")
 images = f.readline()
 final_images = images.replace('[', '').replace(']', '').split(', ')
 
@@ -29,14 +30,14 @@ def insertInfoIntoRecipe(name, time, url, image, calories):
         cursor = sqliteConnection.cursor()
         print("Connected to SQLite")
 
-        sqlite_insert_with_param = """INSERT INTO recipes2
+        sqlite_insert_with_param = """INSERT INTO recipes3
                           (name, time, url, image, calories) 
                           VALUES (?, ?, ?, ?, ?);"""
 
         data_tuple = (name, time, url, image, calories)
         cursor.execute(sqlite_insert_with_param, data_tuple)
         sqliteConnection.commit()
-        print("Python Variables inserted successfully into recipes2")
+        print("Python Variables inserted successfully into recipes3")
         cursor.close()
     except sqlite3.Error as error:
         print("Failed to insert Python variable into sqlite table", error)
@@ -50,10 +51,10 @@ def insertFoodIntoIngredients(food):
         cursor = sqliteConnection.cursor()
         print("Connected to SQLite")
 
-        sqlite_select_food_with_param = """SELECT id FROM ingredients2
+        sqlite_select_food_with_param = """SELECT id FROM ingredients3
                         WHERE ingredient = ?;"""
 
-        sqlite_insert_with_param = """INSERT INTO ingredients2
+        sqlite_insert_with_param = """INSERT INTO ingredients3
                           (ingredient) 
                           VALUES (?);"""
 
@@ -83,13 +84,13 @@ def selectFood(food, amount, unit):
         cursor = sqliteConnection.cursor()
         print("Connected to SQLite")
 
-        sqlite_select_recipe_with_param = """SELECT id FROM recipes2 ORDER BY id DESC LIMIT 1;"""
+        sqlite_select_recipe_with_param = """SELECT id FROM recipes3 ORDER BY id DESC LIMIT 1;"""
 
-        sqlite_select_food_with_param = """SELECT id FROM ingredients2
+        sqlite_select_food_with_param = """SELECT id FROM ingredients3
                           WHERE ingredient = ?;"""
 
-        sqlite_insert_with_param = """INSERT INTO recipe_ingredients2
-                          (recipes2_id, ingredients2_id, amount, unit) 
+        sqlite_insert_with_param = """INSERT INTO recipe_ingredients3
+                          (recipes3_id, ingredients3_id, amount, unit) 
                           VALUES (?, ?, ?, ?);"""
 
         cursor.execute(sqlite_select_recipe_with_param)
@@ -136,6 +137,7 @@ for link in final_links:
         recipe_name = recipe.find('h2', class_ = 'wprm-recipe-name wprm-block-text-bold').text
     except AttributeError:
         recipe_name = None
+        continue
 
     try:
         minutes = recipe.find('span', class_ = 'wprm-recipe-details wprm-recipe-details-minutes wprm-recipe-total_time wprm-recipe-total_time-minutes').text
@@ -173,7 +175,11 @@ for link in final_links:
             unit = None
 
         food = ingredient.find('span', class_ = 'wprm-recipe-ingredient-name').text
+        if food == None:
+            continue
         result = clean(food, amount, unit)
+        if result[0] == None:
+            continue
         insertFoodIntoIngredients(result[0])
         selectFood(result[0], result[1], result[2])
 
