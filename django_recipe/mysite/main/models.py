@@ -56,5 +56,5 @@ class user_recipes(models.Model):
 class recipe_list(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_list", null=True)
     ingredient_name = models.ForeignKey('ingredients3', related_name='recipe_list', on_delete=models.SET_NULL, null=True, blank=True)
-    ingredient_amount = models.IntegerField()
+    ingredient_amount = models.FloatField()
     ingredient_unit = models.CharField(max_length=50)
