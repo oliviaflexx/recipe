@@ -6,6 +6,8 @@ try:
     sqlite_create_table_query = '''CREATE TABLE recipe_ingredients(
                                 recipe_id INTEGER,
                                 ingredient_id INTEGER,
+                                amount TEXT,
+                                unit TEXT,
                                 FOREIGN KEY(recipe_id) REFERENCES recipe(id),
                                 FOREIGN KEY(ingredient_id) REFERENCES ingredients(id)
                                 );'''

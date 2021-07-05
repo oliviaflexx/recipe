@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{% block title %}Selected recipes{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated%}
+    <div id="content" name="content">
+        <form method="post" action="#">
+            {% csrf_token %}
+            {% for user_recipe in user_recipes1%}
+                {% if user_recipe.percent != 0%}
+                    <a href= {{user_recipe.recipe.url}} target="_blank"> <h1>{{user_recipe.recipe.name}}</h1></a>
+                    <img src={{user_recipe.recipe.image}}>
+                    <p>{{user_recipe.percent}}% match</p>
+                    <button type="submit", name = 'a{{user_recipe.recipe.id}}'> Add to Recipe List</button>
+                {% endif %}
+            {% endfor %}
+        </form>
+    </div>
+    {% else %}
+    <a href="/login">Login Here to Access Content</a>
+    {% endif %}
+{% endblock %}

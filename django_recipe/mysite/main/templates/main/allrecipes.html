@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% block title %}View Recipes {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated%}
+        <div id="content" name="content">
+            {% for recipe in recipes%}
+                <h1>{{recipe.name}}</h1>
+                <img src={{recipe.image}}> 
+                {% for genre in recipe.genre.all %}
+                    <h2>{{genre}}</h2>
+                {% endfor %}
+                {% for ingredient in recipe.ingredient_amounts.all %}
+                    <li>{{ingredient.ingredient}}, {{ingredient.amount}}, {{ingredient.unit}}</li>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% else %}
+    {% endif %}
+        <a href="/login">Login Here to Access Content</a>
+{% endblock %}

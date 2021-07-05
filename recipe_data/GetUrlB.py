@@ -18,7 +18,7 @@ for page in pages:
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     posts = soup.find_all('div', class_ = 'post-image')
     for post in posts:
-        get url
+        # get url
         links = post.a['href']
         urls.append(links)
         # Get image

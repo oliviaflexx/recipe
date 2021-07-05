@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+{% block title %}View Ingredients {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated%}
+        <div id="content" name="content">
+            <form method="post" action="#">
+                {% csrf_token %}
+                <button type="submit", name="save", value="save">Find Recipes</button>
+                {% for ingredient in user_ingredients%}
+                <div class="input-group-text">
+                    {% if ingredient.checked == True %}
+                    <li>{{ingredient.ingredient}}<input type="checkbox" value="touched" name="{{ingredient.id}}" checked></li>
+                    {% else %}
+                    <li>{{ingredient.ingredient}}<input type="checkbox" value="touched" name="{{ingredient.id}}"></li>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </form>
+    {% else%}
+        <a href="/login">Login Here to Access Content</a>
+    {% endif %}
+{% endblock %}

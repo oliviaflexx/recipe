@@ -1,3 +1,4 @@
+# coding=utf-8
 import re
 import sys
 import inflect
@@ -28,7 +29,7 @@ def clean(name, amount, unit):
 
     salt = re.findall(r"\bsalt\b", name)
     if salt:
-        if 'seasoning' not in name:
+        if 'seasoning' not in name and 'black' not in name and 'breadcrumbs' not in name and 'zucchini' not in name and 'seasoning' not in name:
             amount = None
             name = None
             unit = None
@@ -46,18 +47,14 @@ def clean(name, amount, unit):
         unit = None
         return name, amount, unit
 
-    if 'water' in name:
-        if 'in' not in name:
+    water = re.findall(r"\bwater\b", name)
+    if water:
+        if '+' not in name and 'or' not in name and 'coconut' not in name and 'soaked' not in name and 'sparkling' not in name:
             amount = None
             name = None
             unit = None
             return name, amount, unit
-
-    if 'pepper' in name and 'mill' in name:
-        amount = None
-        name = None
-        unit = None
-        return name, amount, unit
+####
 
     # Clean the amounts
     if amount:
@@ -67,41 +64,25 @@ def clean(name, amount, unit):
         amount = amount.replace('½', '1/2')
         amount = amount.replace('⅔', '2/3')
 
-        if 'oz' in amount:
-            if '/' in amount:
-                indexy = amount.index('/')
-                nummy = int(amount[indexy - 1]) / int(amount[indexy + 1])
-                amount = re.sub('\d/\d', str(nummy), amount)
-                
-            if re.findall('\doz', amount):
-                amount = amount.replace('oz', ' oz')
-                
-            if '(' in amount:
-                amount = amount.replace('(', '')
-                amount = amount.replace(')', '')
-
-            splitamount = amount.split()
-            if len(splitamount) == 3:
-                unit = 'oz'
-                amount = float(splitamount[0]) * float(splitamount[1])
-                amount = str(amount)
-            elif len(splitamount) == 2:
-                unit = 'oz'
-                amount = splitamount[0]
-                amount = str(amount)
-        if 'lb' in amount:
-            splitamount = amount.split()
-            if len(splitamount) == 3:
-                unit = 'lb'
-                amount = float(splitamount[0]) * float(splitamount[1])
-                amount = str(amount)
-            elif len(splitamount) == 2:
-                unit = 'lb'
-                amount = splitamount[0]
-                amount = str(amount)
+        amount = amount.strip()
 
         if '-' in amount:
-            amount = re.sub('-.*', '', amount)
+            indexy = amount.index('-')
+            try:
+                if amount[indexy + 2] != '/':
+                    if not re.findall('-$', amount):
+                        amount = re.sub('-.*', '', amount)
+                else:
+                    amount = amount.replace('-',' ')
+            except IndexError:
+                print('IndexError caught')
+
+        if 'to' in amount:
+            amount = re.sub('to.*', '', amount)
+        if 'or' in amount:
+            amount = re.sub('or.*', '', amount)
+            
+        amount = amount.strip()
 
         if '/' in amount:
             inde = amount.index('/')
@@ -130,6 +111,11 @@ def clean(name, amount, unit):
                     amount = int(num[0]) + (int(num[1]) / int(num[2]))
                     amount = round(amount, 2)
 
+        splitamount = amount.split()
+        if len(splitamount) == 2:
+            amount = float(splitamount[0]) * float(splitamount[1])
+
+        # Not sure of this
         amount = re.sub("[^0-9\.]", "", str(amount))
         amount = re.sub('\.$', '', str(amount))
         amount = amount.strip()
@@ -137,21 +123,19 @@ def clean(name, amount, unit):
     if unit:
         unit = unit.lower()
         if '-' in unit:
-            unit = re.sub('-.*', '', unit)
+            unit = re.sub('-', '', unit)
+
         num = re.findall('\d', unit)
         many = len(num)
         if re.findall('[\d]*[.][\d]+', unit):
             dotnum = re.findall('[\d]*[.][\d]+', unit)
             amount = float(amount) * float(dotnum[0])
-            unit = 'oz'
         if many == 2:
             tuple1 = (num[0], num[1])
             joined = ''.join(tuple1)
             amount = float(amount) * float(joined)
-            unit = 'oz'
         elif many == 1:
             amount = float(amount) * float(num[0])
-            unit = 'oz'
         unit = unit.replace('.', '')
         
         if 'lbs' in unit:
@@ -170,15 +154,9 @@ def clean(name, amount, unit):
 
     name = name.lower()
     name = name.replace('*', '')
-    name = name.replace('to season', '')
-    name = name.replace('hard', '')
-    name = name.replace('metled', '')
-    if 'capers' not in name:
-        name = name.replace('cap', '')
     name = name.replace('cubed', '')
     name = name.replace('cubes', '')
-    name = name.replace('cube', '')
-    name = name.replace('broken', '')
+
     name = name.replace('from', '')
     name = name.replace('roughly', '')
     name = name.replace('peeled', '')
