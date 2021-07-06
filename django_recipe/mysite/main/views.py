@@ -1,9 +1,10 @@
 from os import name
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import or_ingredients, recipe_ingredients3, recipes3, ingredients3, genres3, user_ingredients, user_recipes
+from .models import or_ingredients, recipe_ingredients3, recipes3, ingredients3, genres3, user_ingredients, user_recipes, grocery_list
 import csv
 from django import template
+import inflect
 
 def index(response):
     return render(response, "main/home.html")
@@ -48,25 +49,63 @@ def myrecipes(response):
     user_recipes1 = response.user.recipes.filter(percent__gt=0).order_by('-percent')
     if response.method == 'POST':
         for user_recipe in user_recipes1:
-            print(user_recipe.recipe)
-            if response.POST.get('a' + str(user_recipe.recipe.id)):
+            if response.POST.get('a' + str(user_recipe.recipe.id)) == 'clicked':
                 user_recipe.checked = True
                 user_recipe.save()
-                print(user_recipe.checked)
+
+                # for user_recipe in user_recipes1:
+                    # p = inflect.engine()
+                    # if user_recipe.checked == True:
+                ingredients = user_recipe.recipe.ingredient_amounts.all()
+                for ingredient in ingredients:
+                    ingredient_name = ingredient.ingredient
+                    ingredient_amount = ingredient.amount
+                    ingredient_unit = ingredient.unit
+                    if grocery_list.objects.filter(user=response.user,name=ingredient_name, unit=ingredient_unit).exists():
+                        model_ing = grocery_list.objects.get(user=response.user,name=ingredient_name, unit=ingredient_unit)
+                        total_amount = float(model_ing.amount) + float(ingredient_amount)
+                        print(total_amount)
+                        if total_amount > 1:
+                            # model_ing.name =p.plural(model_ing.name)
+                            # model_ing.unit = p.plural(model_ing.unit)
+                            pass
+                        model_ing.amount = total_amount
+                        #### its not updating its adding, should check if recipe is already in recipe list
+                    else:
+                        if ingredient_amount > 1:
+                            # ingredient_name = p.plural(ingredient_name)
+                            # ingredient_unit = p.plural(ingredient_unit)
+                            pass
+                        model_ing = grocery_list.objects.create(user=response.user,name=ingredient_name, unit=ingredient_unit,amount=ingredient_amount)
+                    model_ing.save()
+            elif response.POST.get('d' + str(user_recipe.recipe.id)) == 'clicked':
+                user_recipe.checked = False
+                user_recipe.save()
+                ingredients = user_recipe.recipe.ingredient_amounts.all()
+                for ingredient in ingredients:
+                    ingredient_name = ingredient.ingredient
+                    ingredient_amount = ingredient.amount
+                    ingredient_unit = ingredient.unit
+                    if grocery_list.objects.filter(user=response.user,name=ingredient_name, unit=ingredient_unit, amount=ingredient_amount).exists():
+                        model_ing = grocery_list.objects.get(user=response.user,name=ingredient_name, unit=ingredient_unit, amount=ingredient_amount)
+                        model_ing.delete()
+                        print('deleted')
+                    else:
+                        model_ing = grocery_list.objects.get(user=response.user,name=ingredient_name, unit=ingredient_unit)
+                        total_amount = float(model_ing.amount) - float(ingredient_amount)
+                        print(total_amount)
+                        print(ingredient.ingredient)
+                        if total_amount <= 1:
+                            # model_ing.name =p.singular(model_ing.name)
+                            # model_ing.unit = p.singular(model_ing.unit)
+                            pass
+                        model_ing.amount = total_amount
+                    model_ing.save()
+                    
     return render(response, 'main/selected_recipes.html', {'user_recipes1': user_recipes1})
 
 def groceryList(response):
-    user_recipes1 = response.user.recipes.all()
-
-    for user_recipe in user_recipes1:
-        print(user_recipe.checked)
-        if user_recipe.checked == True:
-            ingredients = user_recipe.recipe.ingredient_amounts.all()
-            for ingredient in ingredients:
-                print(ingredient.ingredient)
-                print(ingredient.amount)
-                print(ingredient.unit)
-    return render(response, 'main/grocery_list.html')
+    return render(response, 'main/grocery_list.html', {'ingredients': grocery_list.objects.filter(user=response.user), 'recipes': user_recipes.objects.filter(user=response.user,checked=True)})
 
 def addData(response):
 

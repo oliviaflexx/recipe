@@ -11,7 +11,12 @@
                     <a href= {{user_recipe.recipe.url}} target="_blank"> <h1>{{user_recipe.recipe.name}}</h1></a>
                     <img src={{user_recipe.recipe.image}}>
                     <p>{{user_recipe.percent}}% match</p>
-                    <button type="submit", name = 'a{{user_recipe.recipe.id}}'> Add to Recipe List</button>
+                    {% if user_recipe.checked == False %}
+                        <button type="submit", name = 'a{{user_recipe.recipe.id}}' value='clicked'> Add to Recipe List</button>
+                    {% else %}
+                        <p>Recipe Added to List</p>
+                        <button type="submit", name = 'd{{user_recipe.recipe.id}}' value='clicked'> Remove Recipe From List</button>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </form>

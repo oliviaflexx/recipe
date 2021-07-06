@@ -53,8 +53,10 @@ class user_recipes(models.Model):
     def __str__(self):
         return self.recipe
 
-class recipe_list(models.Model):
+class grocery_list(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_list", null=True)
-    ingredient_name = models.ForeignKey('ingredients3', related_name='recipe_list', on_delete=models.SET_NULL, null=True, blank=True)
-    ingredient_amount = models.IntegerField()
-    ingredient_unit = models.CharField(max_length=50)
+    name = models.ForeignKey('ingredients3', related_name='recipe_list', on_delete=models.SET_NULL, null=True, blank=True)
+    amount = models.FloatField()
+    unit = models.CharField(max_length=50)
+    class Meta:
+        ordering = ['name']

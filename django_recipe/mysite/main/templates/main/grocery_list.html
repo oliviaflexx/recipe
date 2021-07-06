@@ -2,5 +2,22 @@
 {% block title %}Grocery list{% endblock %}
 
 {% block content %}
-<p>I haven't done shit with this grocery list/p>
+<table style="width:100%">
+    <tr>
+      <th>Name</th>
+      <th>Amount</th> 
+      <th>Unit</th>
+    </tr>
+    {% for ingredient in ingredients %}
+    <tr>
+      <td>{{ingredient.name}}</td>
+      <td>{{ingredient.amount}}</td>
+      <td>{{ingredient.unit}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% for recipe in recipes%}
+  <p>{{recipe.recipe.name}}</p>
+  {% endfor %}
+
 {% endblock %}
