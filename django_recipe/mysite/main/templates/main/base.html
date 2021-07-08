@@ -44,6 +44,11 @@
 		<a href="/adddata">Add Data</a>
 		<a href='/myrecipes'>My Recipes</a>
 		<a href='/grocerylist'>My Grocery List</a>
+		{% if user.is_authenticated%}
+			<a href='/logout'>Logout</a>
+		{% else %}
+			<a href='/login'>Login</a>
+		{% endif %}
 	</div>
 	<div id="content" name="content" class="main">
 		<div class="row justify-content-center">

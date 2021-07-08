@@ -2,20 +2,28 @@
 {% block title %}View Recipes {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated%}
         <div id="content" name="content">
-            {% for recipe in recipes%}
-                <h1>{{recipe.name}}</h1>
-                <img src={{recipe.image}}> 
-                {% for genre in recipe.genre.all %}
+        {% if user.is_authenticated%}
+        <form method="post" action="#">
+            {% csrf_token %}
+            {% for user_recipe in user_recipes1%}
+                <h1>{{user_recipe.recipe.name}}</h1>
+                <img src={{user_recipe.recipe.image}}> 
+                {% if user_recipe.checked == False %}
+                    <button type="submit", name = 'Aa{{user_recipe.recipe.id}}' value='clicked'> Add to Recipe List</button>
+                {% else %}
+                    <button type="submit", name = 'Ad{{user_recipe.recipe.id}}' value='clicked'> Remove Recipe From List</button>
+                {% endif %}
+                {% for genre in user_recipe.recipe.genre.all %}
                     <h2>{{genre}}</h2>
                 {% endfor %}
-                {% for ingredient in recipe.ingredient_amounts.all %}
+                {% for ingredient in user_recipe.recipe.ingredient_amounts.all %}
                     <li>{{ingredient.ingredient}}, {{ingredient.amount}}, {{ingredient.unit}}</li>
                 {% endfor %}
             {% endfor %}
-        </div>
-    {% else %}
-    {% endif %}
+        </form>
+        {% else %}
         <a href="/login">Login Here to Access Content</a>
+        {% endif%}
+        </div>
 {% endblock %}

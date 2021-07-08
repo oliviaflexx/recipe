@@ -13,11 +13,19 @@ def register(response):
             # Make their ingredient list now so it can be faster later
             ingredients = ingredients3.objects.all().order_by('name')
             for ingredient in ingredients:
-                entry = user_ingredients.objects.create(
-                    user=response.user, ingredient=ingredient, checked=False)
+                if or_ingredients.objects.filter(or_name=ingredient).exists():
+                    entry = user_ingredients.objects.create(
+                        user=response.user, ingredient=ingredient, checked=False, or_ingredient=True)
+                    print(ingredient.name)
+                else:
+                    entry = user_ingredients.objects.create(
+                        user=response.user, ingredient=ingredient, checked=False, or_ingredient=False)
                 entry.save()
         return redirect("/home")
     else:
         form = RegisterForm()
 
     return render(response, "register/register.html", {"form": form})
+
+def logout(response):
+    return render(response, 'registration/logout.html')

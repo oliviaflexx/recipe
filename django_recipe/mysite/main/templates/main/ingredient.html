@@ -6,8 +6,8 @@
         <div id="content" name="content">
             <form method="post" action="#">
                 {% csrf_token %}
-                <button type="submit", name="save", value="save">Find Recipes</button>
-                {% for ingredient in user_ingredients%}
+                <button type="submit", name="save", value="save">Update My Ingredients</button>
+                {% for ingredient in non_ors%}
                 <div class="input-group-text">
                     {% if ingredient.checked == True %}
                     <li>{{ingredient.ingredient}}<input type="checkbox" value="touched" name="{{ingredient.id}}" checked></li>
