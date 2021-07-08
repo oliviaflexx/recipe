@@ -50,7 +50,7 @@ class user_ingredients(models.Model):
 class user_recipes(models.Model):
     recipe = models.ForeignKey('recipes3', related_name='user_recipe', on_delete=models.SET_NULL, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes", null=True)
-    percent = models.IntegerField()
+    percent = models.IntegerField(blank=True, null=True)
     checked = models.BooleanField(default=False)
 
     def __str__(self):
