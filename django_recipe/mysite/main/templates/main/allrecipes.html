@@ -10,9 +10,9 @@
                 <h1>{{user_recipe.recipe.name}}</h1>
                 <img src={{user_recipe.recipe.image}}> 
                 {% if user_recipe.checked == False %}
-                    <button type="submit", name = 'Aa{{user_recipe.recipe.id}}' value='clicked'> Add to Recipe List</button>
+                    <button type="submit", name = 'add' value='{{user_recipe.recipe.id}}'> Add to Recipe List</button>
                 {% else %}
-                    <button type="submit", name = 'Ad{{user_recipe.recipe.id}}' value='clicked'> Remove Recipe From List</button>
+                    <button type="submit", name = 'sub' value='{{user_recipe.recipe.id}}'> Remove Recipe From List</button>
                 {% endif %}
                 {% for genre in user_recipe.recipe.genre.all %}
                     <h2>{{genre}}</h2>

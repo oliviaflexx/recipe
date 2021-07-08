@@ -12,10 +12,10 @@
                     <img src={{user_recipe.recipe.image}}>
                     <p>{{user_recipe.percent}}% match</p>
                     {% if user_recipe.checked == False %}
-                        <button type="submit", name = 'a{{user_recipe.recipe.id}}' value='clicked'> Add to Recipe List</button>
+                        <button type="submit", name = 'add' value='{{user_recipe.recipe.id}}'> Add to Recipe List</button>
                     {% else %}
                         <p>Recipe Added to List</p>
-                        <button type="submit", name = 'd{{user_recipe.recipe.id}}' value='clicked'> Remove Recipe From List</button>
+                        <button type="submit", name = 'sub' value='{{user_recipe.recipe.id}}'> Remove Recipe From List</button>
                     {% endif %}
                 {% endif %}
             {% endfor %}

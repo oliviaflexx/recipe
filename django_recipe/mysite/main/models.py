@@ -61,5 +61,4 @@ class grocery_list(models.Model):
     name = models.ForeignKey('ingredients3', related_name='recipe_list', on_delete=models.SET_NULL, null=True, blank=True)
     amount = models.FloatField(blank=True, null=True)
     unit = models.CharField(max_length=50, blank=True, null=True)
-    class Meta:
-        ordering = ['name']
+    checked = models.BooleanField(default=False)

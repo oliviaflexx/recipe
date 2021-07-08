@@ -5,18 +5,29 @@
 {% if user.is_authenticated%}
 <table style="width:100%">
     <tr>
+      <th>Checklist</th>
       <th>Name</th>
       <th>Amount</th> 
       <th>Unit</th>
     </tr>
+    <form method="post" action="#"></form>
+    {% csrf_token %}
     {% for ingredient in ingredients %}
     <tr>
+      {% if ingredient.checked == True %}
+      <td><input type="checkbox" value="checked" name="{{ingredient.id}}" checked></td>
+      {% else %}
+      <td><input type="checkbox" value="checked" name="{{ingredient.id}}"></td>
+      {% endif %}
+    </form>
       <td>{{ingredient.name}}</td>
       <td>{{ingredient.amount}}</td>
       <td>{{ingredient.unit}}</td>
     </tr>
+
     {% endfor %}
   </table>
+  <h2>List of Recipes</h2>
   {% for recipe in recipes%}
   <p>{{recipe.recipe.name}}</p>
   {% endfor %}
