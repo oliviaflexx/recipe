@@ -6,16 +6,16 @@ import csv
 from django import template
 import inflect
 from .funky import add_up, sub_out
+from django.core.paginator import Paginator
 
 def index(response):
     return render(response, "main/home.html")
 
 def allRecipes(response):
     if response.user.is_authenticated:
-        user_recipes1 = response.user.recipes.all()
+
         if response.method == 'POST':
-            # print(response)
-            print(response.POST)
+            posts = response.user.recipes.all().order_by('id')
             if response.POST.__contains__('add'):
                 id = response.POST.get('add')
                 recipe = recipes3.objects.get(id=id)
@@ -28,9 +28,44 @@ def allRecipes(response):
                 user_recipe = user_recipes.objects.get(user=response.user, recipe=recipe)
                 sub_out(user_recipe, response.user)
 
-            return render(response, "main/allrecipes.html", {'user_recipes1':user_recipes1})
+            elif response.POST.get('save'):
+                if response.POST.__contains__('meal_type'):
+                    meal0 = response.POST.get('meal_type')
+                    if meal0 =='lunch':
+                        breakfast = genres3.objects.get(name='breakfast')
+                        dessert = genres3.objects.get(name='dessert')
+                        posts = posts.exclude(recipe__genre=breakfast).exclude(recipe__genre=dessert)
+                    else:
+                        meal = genres3.objects.get(name=meal0)
+                        posts = posts.filter(recipe__genre=meal.id)
+
+                if response.POST.__contains__('restrict'):
+                    restricts = response.POST.getlist('restrict')
+                    for restrict in restricts:
+                        print(restrict)
+                        if restrict == 'gluten':
+                            restrict = 'gluten free'
+                        restricter = genres3.objects.get(name=restrict)
+                        posts = posts.filter(recipe__genre=restricter)
+
+                if response.POST.__contains__('orderby'):
+                    order = response.POST.get('orderby')
+                    if order == 'calories':
+                        posts = response.user.recipes.exclude(recipe__calories=0).order_by('recipe__calories')
+                    else:
+                        posts = response.user.recipes.exclude(recipe__time=0).order_by('recipe__time')
+
+            paginator = Paginator(posts, 25)
+            page = response.GET.get('page')
+            posts = paginator.get_page(page)
+
+            return render(response, "main/allrecipes.html", {'posts':posts})
         else:
-            return render(response, "main/allrecipes.html", {'user_recipes1':user_recipes1})
+            posts = response.user.recipes.all().order_by('id')
+            paginator = Paginator(posts, 25)
+            page = response.GET.get('page')
+            posts = paginator.get_page(page)
+            return render(response, "main/allrecipes.html", {'posts':posts})
     else:
         return render(response, "main/allrecipes.html")
 
@@ -38,6 +73,7 @@ def allRecipes(response):
 def ingredientPicker(response):
     if response.method == 'POST':
         if response.POST.get('save'):
+            print(response.POST)
             for ingredient in response.user.ingredients.all():
                 if response.POST.get(str(ingredient.id)) == "touched":
                     ingredient.checked = True
@@ -93,7 +129,7 @@ def myrecipes(response):
                 recipe = recipes3.objects.get(id=id)
                 user_recipe = user_recipes.objects.get(user=response.user, recipe=recipe)
                 add_up(user_recipe, response.user)
-                
+
             elif response.POST.__contains__('sub'):
                 id = response.POST.get('sub')
                 recipe = recipes3.objects.get(id=id)

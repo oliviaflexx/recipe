@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from register import views as v
+import debug_toolbar
 
 urlpatterns = [
     path('', include('main.urls')),
     path('admin/', admin.site.urls),
     path("register/", v.register, name="register"),
     path('', include("django.contrib.auth.urls")),
+    path('__debug__/', include(debug_toolbar.urls)),
 ]
