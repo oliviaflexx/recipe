@@ -45,7 +45,7 @@ class user_ingredients(models.Model):
     or_ingredient = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.ingredient
+        return str(self.id)
 
 class user_recipes(models.Model):
     recipe = models.ForeignKey('recipes3', related_name='user_recipe', on_delete=models.SET_NULL, null=True, blank=True)
@@ -54,7 +54,7 @@ class user_recipes(models.Model):
     checked = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.recipe
+        return str(self.id)
 
 class grocery_list(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_list", null=True)
@@ -62,3 +62,9 @@ class grocery_list(models.Model):
     amount = models.FloatField(blank=True, null=True)
     unit = models.CharField(max_length=50, blank=True, null=True)
     checked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.id)
+
+
+

@@ -10,9 +10,9 @@
                 {% for ingredient in non_ors%}
                 <div class="input-group-text">
                     {% if ingredient.checked == True %}
-                    <li>{{ingredient.ingredient}}<input type="checkbox" value="touched" name="{{ingredient.id}}" checked></li>
+                    <li>{{ingredient.ingredient}}<input type="checkbox" value="{{ingredient.id}}" name= "touched" checked></li>
                     {% else %}
-                    <li>{{ingredient.ingredient}}<input type="checkbox" value="touched" name="{{ingredient.id}}"></li>
+                    <li>{{ingredient.ingredient}}<input type="checkbox" value="{{ingredient.id}}" name= "touched"></li>
                     {% endif %}
                 </div>
                 {% endfor %}

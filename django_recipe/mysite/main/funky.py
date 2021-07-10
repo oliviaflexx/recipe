@@ -1,10 +1,12 @@
 from .models import or_ingredients, recipe_ingredients3, recipes3, ingredients3, genres3, user_ingredients, user_recipes, grocery_list
 
 def add_up(user_recipe, the_user):
+    # grocery_list.objects.all().delete()
     user_recipe.checked = True
     user_recipe.save()
     # p = inflect.engine()
-    ingredients = user_recipe.recipe.ingredient_amounts.all()
+    ingredients = recipe_ingredients3.objects.select_related('ingredient').filter(recipe=user_recipe.recipe)
+    # ingredients = user_recipe.recipe.select_related('ingredient').ingredient_amounts.all()
     for ingredient in ingredients:
         ingredient_name = ingredient.ingredient
         ingredient_amount = ingredient.amount

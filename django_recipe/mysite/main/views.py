@@ -1,4 +1,5 @@
 from os import name
+from django.db.models.query import QuerySet, Prefetch
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import or_ingredients, recipe_ingredients3, recipes3, ingredients3, genres3, user_ingredients, user_recipes, grocery_list
@@ -15,7 +16,7 @@ def allRecipes(response):
     if response.user.is_authenticated:
 
         if response.method == 'POST':
-            posts = response.user.recipes.all().order_by('id')
+            posts = user_recipes.objects.select_related('recipe').filter(user=response.user)
             if response.POST.__contains__('add'):
                 id = response.POST.get('add')
                 recipe = recipes3.objects.get(id=id)
@@ -29,31 +30,34 @@ def allRecipes(response):
                 sub_out(user_recipe, response.user)
 
             elif response.POST.get('save'):
+                genres = genres3.objects.all()
                 if response.POST.__contains__('meal_type'):
                     meal0 = response.POST.get('meal_type')
                     if meal0 =='lunch':
-                        breakfast = genres3.objects.get(name='breakfast')
-                        dessert = genres3.objects.get(name='dessert')
+                        breakfast = genres.get(name='breakfast')
+                        dessert = genres.get(name='dessert')
                         posts = posts.exclude(recipe__genre=breakfast).exclude(recipe__genre=dessert)
                     else:
-                        meal = genres3.objects.get(name=meal0)
+                        # meal = genres3.objects.get(name=meal0)
+                        meal = genres.get(name=meal0)
                         posts = posts.filter(recipe__genre=meal.id)
 
                 if response.POST.__contains__('restrict'):
                     restricts = response.POST.getlist('restrict')
                     for restrict in restricts:
-                        print(restrict)
                         if restrict == 'gluten':
                             restrict = 'gluten free'
-                        restricter = genres3.objects.get(name=restrict)
+                        restricter = genres.get(name=restrict)
                         posts = posts.filter(recipe__genre=restricter)
 
                 if response.POST.__contains__('orderby'):
                     order = response.POST.get('orderby')
                     if order == 'calories':
-                        posts = response.user.recipes.exclude(recipe__calories=0).order_by('recipe__calories')
+                        posts = posts.exclude(recipe__calories=0).order_by('recipe__calories')
                     else:
-                        posts = response.user.recipes.exclude(recipe__time=0).order_by('recipe__time')
+                        posts = posts.exclude(recipe__time=0).order_by('recipe__time')
+                else:
+                    posts = posts.order_by('id')
 
             paginator = Paginator(posts, 25)
             page = response.GET.get('page')
@@ -61,7 +65,7 @@ def allRecipes(response):
 
             return render(response, "main/allrecipes.html", {'posts':posts})
         else:
-            posts = response.user.recipes.all().order_by('id')
+            posts = user_recipes.objects.select_related('recipe').filter(user=response.user).order_by('recipe__name')
             paginator = Paginator(posts, 25)
             page = response.GET.get('page')
             posts = paginator.get_page(page)
@@ -73,48 +77,57 @@ def allRecipes(response):
 def ingredientPicker(response):
     if response.method == 'POST':
         if response.POST.get('save'):
-            print(response.POST)
-            for ingredient in response.user.ingredients.all():
-                if response.POST.get(str(ingredient.id)) == "touched":
-                    ingredient.checked = True
-                    if or_ingredients.objects.filter(in_name=ingredient.ingredient).exists():
-                        print('exists')
-                        for or_name in or_ingredients.objects.filter(in_name=ingredient.ingredient):
-                            recipes0 = recipe_ingredients3.objects.filter(ingredient=or_name.or_name)
-                            for recipe0 in recipes0:
-                                print(f'OR:', recipe0.recipe)
-                            thing = user_ingredients.objects.get(user=response.user, ingredient=or_name.or_name)
-                            print(f'CHECKED BEFORE:', thing.ingredient.name, thing.checked)
-                            thing.checked = True
-                            thing.save()
-                            print(f'CHECKED AFTER:', thing.checked)
-                else:
-                    ingredient.checked = False
-
+            # print(response.POST)
+            selected_ingredients = response.POST.getlist('touched')
+            db_ingredients = user_ingredients.objects.select_related('ingredient').filter(user=response.user)
+            for sel_ing in selected_ingredients:
+                ingredient = db_ingredients.get(pk=sel_ing)
+                ingredient.checked = True
+                if or_ingredients.objects.filter(in_name=ingredient.ingredient).exists():
+                    print('exists')
+                    for or_name in or_ingredients.objects.filter(in_name=ingredient.ingredient):
+                        recipes0 = recipe_ingredients3.objects.filter(ingredient=or_name.or_name)
+                        for recipe0 in recipes0:
+                            print(f'OR:', recipe0.recipe)   
+                        thing = db_ingredients.get(ingredient=or_name.or_name)
+                        print(f'CHECKED BEFORE:', thing.ingredient.name, thing.checked)
+                        thing.checked = True
+                        thing.save()
+                        print(f'CHECKED AFTER:', thing.checked)
                 ingredient.save()
-            recipes = recipes3.objects.all()
-            user_recipes.objects.filter(user=response.user).delete()
-            for recipe in recipes:
-                counter = 0
-                ingredients = recipe.ingredients.all()
-                total = len(ingredients)
-                for checked in user_ingredients.objects.filter(user=response.user, checked = True):
-                    if ingredients.filter(name = checked.ingredient).exists():
-                        counter = counter + 1
-                    #### elif ingredients.filter(name =)
-                        if checked.or_ingredient == True:
-                            print("IT WORKED")
-                            print(recipe.name)
-                percent = (counter / total) * 100
-                entry = user_recipes.objects.create(recipe = recipe, user = response.user, percent = percent)
+
+            recipe_list = []
+            for sel_ing in selected_ingredients:
+                ingredient = db_ingredients.get(pk=sel_ing)
+                recipes = recipe_ingredients3.objects.select_related('recipe').filter(ingredient = ingredient.ingredient)
+                for recipe in recipes:
+                    recipe_list.append(recipe.recipe)
+
+            users = user_recipes.objects.filter(user=response.user)
+            for user in users:
+                user.percent = None
+
+            recipe_dict = {}
+            for recipe in recipe_list:
+                try:
+                    recipe_dict[recipe] = recipe_dict[recipe] + 1
+                except KeyError:
+                    recipe_dict.update({recipe: 1})
+            
+            for key in recipe_dict:
+                total = key.ingredients.all().count()
+                percent = (recipe_dict[key] / total) * 100
+                entry = user_recipes.objects.get(recipe = key, user = response.user)
+                entry.percent = percent
                 entry.save()
 
             return redirect('/myrecipes')
+
     else:
         if response.user.is_authenticated:
             # user_recipes.objects.all().delete()
             # user_ingredients.objects.all().delete()
-            non_ors = user_ingredients.objects.filter(user=response.user,or_ingredient=False)
+            non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False)
             return render(response, "main/ingredient.html", {'non_ors': non_ors})
         else:
             return redirect('/login')
@@ -122,7 +135,7 @@ def ingredientPicker(response):
 def myrecipes(response):
     if response.user.is_authenticated:
         # user_recipe0 = user_recipes.objects.filter(percent > 0)
-        user_recipes1 = response.user.recipes.filter(percent__gt=0).order_by('-percent')
+        user_recipes1 = response.user.recipes.select_related('recipe').exclude(percent__isnull=True).order_by('-percent')
         if response.method == 'POST':
             if response.POST.__contains__('add'):
                 id = response.POST.get('add')

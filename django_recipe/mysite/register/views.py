@@ -22,12 +22,14 @@ def register(response):
                 else:
                     entry = user_ingredients.objects.create(
                         user=new_user, ingredient=ingredient, checked=False, or_ingredient=False)
-                entry.save()
             
-            recipes = recipes3.objects.all()
+            recipes = recipes3.objects.all().order_by('name')
             for recipe in recipes:
                 user_recipes.objects.create(user=new_user, recipe=recipe)
-        return redirect("/home")
+                print(recipe.name)
+            return redirect("/home")
+            
+        return render(response, "register/register.html", {"form": form})
     else:
         form = RegisterForm()
 

@@ -37,17 +37,14 @@
         <img src={{user_recipe.recipe.image}}> 
         <p>Calories: {{user_recipe.recipe.calories}}</p>
         <p>Time: {{user_recipe.recipe.time}}</p>
+        {% for genre in user_recipe.recipe.genre.all %}
+            <p>{{genre}}</p>
+        {% endfor %}
         {% if user_recipe.checked == False %}
             <button type="submit", name = 'add' value='{{user_recipe.recipe.id}}'> Add to Recipe List</button>
         {% else %}
             <button type="submit", name = 'sub' value='{{user_recipe.recipe.id}}'> Remove Recipe From List</button>
         {% endif %}
-        {% for genre in user_recipe.recipe.genre.all %}
-            <h2>{{genre}}</h2>
-        {% endfor %}
-        {% for ingredient in user_recipe.recipe.ingredient_amounts.all %}
-            <li>{{ingredient.ingredient}}, {{ingredient.amount}}, {{ingredient.unit}}</li>
-        {% endfor %}
     {% endfor %}
     </form>
     {% if posts.paginator.num_pages > 1 %}
@@ -64,3 +61,4 @@
 {% endif%}
 </div>
 {% endblock %}
+
