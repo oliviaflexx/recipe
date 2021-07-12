@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+app_name = 'main'
 urlpatterns = [
     path('', views.index, name='index'),
     path('adddata/', views.addData, name="addData"),
@@ -9,5 +10,6 @@ urlpatterns = [
     path('myrecipes/', views.myrecipes, name='myrecipes'),
     path('ingredients/', views.ingredientPicker, name='ingredientPicker'),
     path('home/',views.index, name='index'),
-    path('grocerylist/', views.groceryList, name='groceryList')
+    path('grocerylist/', views.groceryList, name='groceryList'),
+    path('ajaxfunc/', views.ajax_func, name='ajax_func')
 ]

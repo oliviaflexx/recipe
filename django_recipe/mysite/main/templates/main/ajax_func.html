@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+{% block title %}View Recipes {% endblock %}
+
+{% block content %}
+<div id="content" name="content">
+    <form method="POST" id="ajax-func">
+        {% csrf_token %}
+        <button type="submit", name = 'add', value='34', id='like-button' class='addit'> Add to Recipe List</button>
+        <p id='like-count'>0</p>
+    </form>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(document).on('click', '#like-button', function (e) {
+        e.preventDefault();
+        $.ajax({
+        type: 'POST',
+        url: '{% url "main:ajax_func" %}',
+        data: {
+            postid: $('#like-button').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        success: function (json) {
+            document.getElementById("like-count").innerHTML = json['result']
+        },
+        error: function (xhr, errmsg, err) {
+
+        }
+        });
+    })
+  </script>
+{% endblock %}

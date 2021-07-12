@@ -1,6 +1,6 @@
 from os import name
 from django.db.models.query import QuerySet, Prefetch
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .models import or_ingredients, recipe_ingredients3, recipes3, ingredients3, genres3, user_ingredients, user_recipes, grocery_list
 import csv
@@ -8,28 +8,32 @@ from django import template
 import inflect
 from .funky import add_up, sub_out
 from django.core.paginator import Paginator
+import json
 
 def index(response):
     return render(response, "main/home.html")
+
+def ajax_func(request):
+    if request.POST.get('action') == 'post':
+        id = int(request.POST.get('postid'))
+
+        data = {
+            'value': '35'
+        }
+        print('success')
+
+        like = 'like'
+        result = 35
+        return JsonResponse({'result': result, 'like': like})
+
+    return render(request, 'main/ajax_func.html')
 
 def allRecipes(response):
     if response.user.is_authenticated:
 
         if response.method == 'POST':
-            posts = user_recipes.objects.select_related('recipe').filter(user=response.user)
-            if response.POST.__contains__('add'):
-                id = response.POST.get('add')
-                recipe = recipes3.objects.get(id=id)
-                user_recipe = user_recipes.objects.get(user=response.user, recipe=recipe)
-                add_up(user_recipe, response.user)
-            
-            elif response.POST.__contains__('sub'):
-                id = response.POST.get('sub')
-                recipe = recipes3.objects.get(id=id)
-                user_recipe = user_recipes.objects.get(user=response.user, recipe=recipe)
-                sub_out(user_recipe, response.user)
-
-            elif response.POST.get('save'):
+            posts = user_recipes.objects.select_related('recipe').filter(user=response.user).order_by('id')
+            if response.POST.get('save'):
                 genres = genres3.objects.all()
                 if response.POST.__contains__('meal_type'):
                     meal0 = response.POST.get('meal_type')
@@ -64,11 +68,13 @@ def allRecipes(response):
             posts = paginator.get_page(page)
 
             return render(response, "main/allrecipes.html", {'posts':posts})
+        
         else:
             posts = user_recipes.objects.select_related('recipe').filter(user=response.user).order_by('recipe__name')
             paginator = Paginator(posts, 25)
             page = response.GET.get('page')
             posts = paginator.get_page(page)
+
             return render(response, "main/allrecipes.html", {'posts':posts})
     else:
         return render(response, "main/allrecipes.html")
@@ -153,13 +159,22 @@ def myrecipes(response):
     else:
         return render(response, 'main/selected_recipes.html')
     
-
 def groceryList(response):
     # grocery_list.objects.all().delete()
     if response.user.is_authenticated:
         return render(response, 'main/grocery_list.html', {'ingredients': grocery_list.objects.filter(user=response.user).order_by('name__name'), 'recipes': user_recipes.objects.filter(user=response.user,checked=True)})
     else:
         return render(response, 'main/grocery_list.html')
+
+def add_recipe(request):
+    recipe_id = request.GET.get('recipe_id', None)
+    recipe = recipes3.objects.get(id=recipe_id)
+    user_recipe = user_recipes.objects.get(user=request.user, recipe=recipe)
+    add_up(user_recipe, request.user)
+    data = {
+        'added': True
+    }
+    return JsonResponse(data)
 
 def addData(response):
     if response.method == 'POST':

@@ -4,33 +4,34 @@
 {% block content %}
 <div id="content" name="content">
 {% if user.is_authenticated%}
+<div id='message'>Initial Text</div>
     <form method="post" action="#">
     {% csrf_token %}
-    <p>Order recipes by:</p>
-    <input type='radio' id='calories' name='orderby' value='calories'>
-    <label for='calories'>Calories</label><br>
-    <input type='radio' id='time' name='orderby' value='time'>
-    <label for='time'>Time</label><br>
+        <p>Order recipes by:</p>
+        <input type='radio' id='calories' name='orderby' value='calories'>
+        <label for='calories'>Calories</label><br>
+        <input type='radio' id='time' name='orderby' value='time'>
+        <label for='time'>Time</label><br>
 
-    <p> Choose one or more restriction categories </p>
-    <input type='checkbox' id='vegeterian' name='restrict' value='vegeterian'>
-    <label for='vegeterian'>Vegeterian</label><br>
-    <input type='checkbox' id='vegan' name='restrict' value='vegan'>
-    <label for='vegan'>Vegan</label><br>
-    <input type='checkbox' id='gluten' name='restrict' value='gluten'>
-    <label for='gluten'>Gluten Free</label><br>
-    
-    <p> Choose a meal type </p>
-    <input type='radio' id='breakfast' name='meal_type' value='breakfast'>
-    <label for='breakfast'>Breakfast</label><br>
-    <input type='radio' id='lunch' name='meal_type' value='lunch'>
-    <label for='lunch'>Lunch/Dinner</label><br>
-    <input type='radio' id='dessert' name='meal_type' value='dessert'>
-    <label for='dessert'>Dessert</label><br>
-    
-    <button type="submit" id='save' name='save' value='save'>Show Preferences</button>
+        <p> Choose one or more restriction categories </p>
+        <input type='checkbox' id='vegeterian' name='restrict' value='vegeterian'>
+        <label for='vegeterian'>Vegeterian</label><br>
+        <input type='checkbox' id='vegan' name='restrict' value='vegan'>
+        <label for='vegan'>Vegan</label><br>
+        <input type='checkbox' id='gluten' name='restrict' value='gluten'>
+        <label for='gluten'>Gluten Free</label><br>
+        
+        <p> Choose a meal type </p>
+        <input type='radio' id='breakfast' name='meal_type' value='breakfast'>
+        <label for='breakfast'>Breakfast</label><br>
+        <input type='radio' id='lunch' name='meal_type' value='lunch'>
+        <label for='lunch'>Lunch/Dinner</label><br>
+        <input type='radio' id='dessert' name='meal_type' value='dessert'>
+        <label for='dessert'>Dessert</label><br>
+        
+        <button type="submit" id='save' name='save' value='save'>Show Preferences</button>
     </form>
-    <form method="post" action="#">
+    <form method="get">
     {% csrf_token %}
     {% for user_recipe in posts%}
         <a href= {{user_recipe.recipe.url}} target="_blank"> <h1>{{user_recipe.recipe.name}}</h1></a>
@@ -41,9 +42,9 @@
             <p>{{genre}}</p>
         {% endfor %}
         {% if user_recipe.checked == False %}
-            <button type="submit", name = 'add' value='{{user_recipe.recipe.id}}'> Add to Recipe List</button>
+            <button type="submit", name = 'add', value='{{user_recipe.recipe.id}}', id='add'> Add to Recipe List</button>
         {% else %}
-            <button type="submit", name = 'sub' value='{{user_recipe.recipe.id}}'> Remove Recipe From List</button>
+            <button type="submit", name = 'sub', value='{{user_recipe.recipe.id}}', id='sub'> Remove Recipe From List</button>
         {% endif %}
     {% endfor %}
     </form>
@@ -62,3 +63,5 @@
 </div>
 {% endblock %}
 
+{% block javascript %}
+{% endblock %}
