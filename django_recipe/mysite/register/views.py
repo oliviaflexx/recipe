@@ -26,7 +26,6 @@ def register(response):
             recipes = recipes3.objects.all().order_by('name')
             for recipe in recipes:
                 user_recipes.objects.create(user=new_user, recipe=recipe)
-                print(recipe.name)
             return redirect("/home")
             
         return render(response, "register/register.html", {"form": form})

@@ -11,5 +11,7 @@ urlpatterns = [
     path('ingredients/', views.ingredientPicker, name='ingredientPicker'),
     path('home/',views.index, name='index'),
     path('grocerylist/', views.groceryList, name='groceryList'),
-    path('ajaxfunc/', views.ajax_func, name='ajax_func')
+    path('like/', views.like, name='like'),
+    path('add_recipe/', views.add_recipe, name='add_recipe'),
+    path('liked_recipes/',views.liked_recipes, name='liked_recipes')
 ]

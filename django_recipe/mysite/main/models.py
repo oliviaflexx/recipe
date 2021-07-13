@@ -52,7 +52,8 @@ class user_recipes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes", null=True)
     percent = models.IntegerField(blank=True, null=True)
     checked = models.BooleanField(default=False)
-
+    liked = models.BooleanField(default=False)
+    
     def __str__(self):
         return str(self.id)
 

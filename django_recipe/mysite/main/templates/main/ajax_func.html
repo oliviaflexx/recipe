@@ -11,23 +11,23 @@
 {% endblock %}
 {% block javascript %}
 <script>
-    $(document).on('click', '#like-button', function (e) {
-        e.preventDefault();
-        $.ajax({
-        type: 'POST',
-        url: '{% url "main:ajax_func" %}',
-        data: {
-            postid: $('#like-button').val(),
-            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-            action: 'post'
-        },
-        success: function (json) {
-            document.getElementById("like-count").innerHTML = json['result']
-        },
-        error: function (xhr, errmsg, err) {
+$(document).on('click', '#like-button', function (e) {
+    e.preventDefault();
+    $.ajax({
+    type: 'POST',
+    url: '{% url "main:ajax_func" %}',
+    data: {
+        postid: $('#like-button').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        action: 'post'
+    },
+    success: function (json) {
+        document.getElementById("like-count").innerHTML = json['result']
+    },
+    error: function (xhr, errmsg, err) {
 
-        }
-        });
-    })
-  </script>
+    }
+    });
+})
+</script>
 {% endblock %}

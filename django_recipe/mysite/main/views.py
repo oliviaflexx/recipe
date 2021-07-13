@@ -13,20 +13,46 @@ import json
 def index(response):
     return render(response, "main/home.html")
 
-def ajax_func(request):
+def like(request):
     if request.POST.get('action') == 'post':
         id = int(request.POST.get('postid'))
+        user_recipe = user_recipes.objects.get(user=request.user, id=id)
+        print(user_recipe.recipe.name)
+        if request.POST.get('liked') == 'Dislike':
+            print('disliked')
+            result = 'Like'
+            user_recipe.liked = False
+            user_recipe.save()
+            print(result)
+        else:
+            print('liked')
+            user_recipe.liked = True
+            user_recipe.save()
+            result = 'Dislike'
+            print(result)
+        return JsonResponse({'result': result, 'id': user_recipe.id})
 
-        data = {
-            'value': '35'
-        }
-        print('success')
 
-        like = 'like'
-        result = 35
-        return JsonResponse({'result': result, 'like': like})
+def add_recipe(request):
+    if request.POST.get('action') == 'post':
+        id = request.POST.get('postid')
+        recipe = recipes3.objects.get(id=id)
+        print(recipe.name)
+        print(request.POST.get('checked'))
+        user_recipe = user_recipes.objects.get(user=request.user, recipe=recipe)
 
-    return render(request, 'main/ajax_func.html')
+        if request.POST.get('checked') == 'Remove From Grocery List':
+            print('disliked')
+            result = 'Add to Grocery List'
+            sub_out(user_recipe, request.user)
+            print(result)
+        else:
+            print('liked')
+            result = 'Remove From Recipe List'
+            add_up(user_recipe, request.user)
+            print(result)
+
+        return JsonResponse({'result': result, 'id':id})
 
 def allRecipes(response):
     if response.user.is_authenticated:
@@ -142,23 +168,18 @@ def myrecipes(response):
     if response.user.is_authenticated:
         # user_recipe0 = user_recipes.objects.filter(percent > 0)
         user_recipes1 = response.user.recipes.select_related('recipe').exclude(percent__isnull=True).order_by('-percent')
-        if response.method == 'POST':
-            if response.POST.__contains__('add'):
-                id = response.POST.get('add')
-                recipe = recipes3.objects.get(id=id)
-                user_recipe = user_recipes.objects.get(user=response.user, recipe=recipe)
-                add_up(user_recipe, response.user)
-
-            elif response.POST.__contains__('sub'):
-                id = response.POST.get('sub')
-                recipe = recipes3.objects.get(id=id)
-                user_recipe = user_recipes.objects.get(user=response.user, recipe=recipe)
-                sub_out(user_recipe, response.user)
-                
         return render(response, 'main/selected_recipes.html', {'user_recipes1': user_recipes1})
     else:
         return render(response, 'main/selected_recipes.html')
-    
+
+def liked_recipes(response):
+    if response.user.is_authenticated:
+        # user_recipe0 = user_recipes.objects.filter(percent > 0)
+        user_recipes1 = response.user.recipes.select_related('recipe').exclude(liked=False)
+        return render(response, 'main/selected_recipes.html', {'user_recipes1': user_recipes1})
+    else:
+        return render(response, 'main/selected_recipes.html')
+
 def groceryList(response):
     # grocery_list.objects.all().delete()
     if response.user.is_authenticated:
@@ -166,15 +187,6 @@ def groceryList(response):
     else:
         return render(response, 'main/grocery_list.html')
 
-def add_recipe(request):
-    recipe_id = request.GET.get('recipe_id', None)
-    recipe = recipes3.objects.get(id=recipe_id)
-    user_recipe = user_recipes.objects.get(user=request.user, recipe=recipe)
-    add_up(user_recipe, request.user)
-    data = {
-        'added': True
-    }
-    return JsonResponse(data)
 
 def addData(response):
     if response.method == 'POST':

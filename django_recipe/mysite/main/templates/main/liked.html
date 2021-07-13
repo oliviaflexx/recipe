@@ -1,5 +1,5 @@
 {% extends "main/base.html" %}
-{% block title %}Selected recipes{% endblock %}
+{% block title %}Liked recipes{% endblock %}
 
 {% block content %}
     {% if user.is_authenticated%}
@@ -7,7 +7,7 @@
         <form method="POST" action="#">
             {% csrf_token %}
             {% for user_recipe in user_recipes1%}
-                {% if user_recipe.percent != 0%}
+                {% if user_recipe.liked == True %}
                     <a href= {{user_recipe.recipe.url}} target="_blank"> <h1>{{user_recipe.recipe.name}}</h1></a>
                     <img src={{user_recipe.recipe.image}}>
                     <p>{{user_recipe.percent}}% match</p>
