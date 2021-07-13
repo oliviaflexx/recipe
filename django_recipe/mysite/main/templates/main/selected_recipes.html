@@ -11,6 +11,9 @@
                     <a href= {{user_recipe.recipe.url}} target="_blank"> <h1>{{user_recipe.recipe.name}}</h1></a>
                     <img src={{user_recipe.recipe.image}}>
                     <p>{{user_recipe.percent}}% match</p>
+                    <p id='cal{{user_recipe.recipe.id}}'></p>
+                    <p id='time{{user_recipe.recipe.id}}'></p>
+                    <p id='genres{{user_recipe.recipe.id}}'></p>
                     {% if user_recipe.checked == True%}
                         <button type="submit", class = 'add', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Remove From Grocery List</button>
                     {% else %}
@@ -21,6 +24,7 @@
                     {% else %}
                         <button type="submit", class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'>Like</button>
                     {% endif %}
+                    <button type='submit', class='show', id= 's{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Show More</button>
                 {% endif %}
             {% endfor %}
         </form>
@@ -44,6 +48,7 @@
         },
         success: function (json) {
             document.getElementById('c' + json['id']).textContent = json['result']
+            document.getElementsByName()
         },
         error: function (xhr, errmsg, err) {
     
@@ -65,6 +70,30 @@
         },
         success: function (json) {
             document.getElementById('l' + json['id']).textContent = json['result']
+        },
+        error: function (xhr, errmsg, err) {
+    
+        }
+        });
+    })
+</script>
+<script>
+    $(document).on('click', '.show', function (b) {
+        b.preventDefault();
+        $.ajax({
+        type: 'POST',
+        url: '{% url "main:show" %}',
+        data: {
+          postid: $(this).val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+          action: 'post',
+          shown: $(this).text(),
+        },
+        success: function (json) {
+            document.getElementById('s' + json['id']).textContent = json['result']
+            document.getElementById('time' + json['id']).textContent = json['time']
+            document.getElementById('cal' + json['id']).textContent = json['calories']
+            document.getElementById('genres' + json['id']).textContent = json['genres']
         },
         error: function (xhr, errmsg, err) {
     

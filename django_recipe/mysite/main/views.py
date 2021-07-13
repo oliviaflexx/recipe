@@ -13,6 +13,28 @@ import json
 def index(response):
     return render(response, "main/home.html")
 
+def show(request):
+    if request.POST.get('action') == 'post':
+        id = int(request.POST.get('postid'))
+        recipe = recipes3.objects.get(id=id)
+
+        if request.POST.get('shown') == 'Show Less':
+            result = 'Show More'
+            calories = ''
+            time = ''
+            genres = ''
+            print(result)
+        else:
+            genres_list = []
+            calories = 'Calories: ' + str(recipe.calories)
+            time = 'Time: ' + str(recipe.time) + ' Minutes'
+            for genre in recipe.genre.all():
+                genres_list.append(genre.name)
+            genres = 'Genres: ' + str(genres_list)
+            result = 'Show Less'
+            print(result)
+        return JsonResponse({'result': result, 'id': recipe.id, 'calories': calories, 'time': time, 'genres': genres })
+
 def like(request):
     if request.POST.get('action') == 'post':
         id = int(request.POST.get('postid'))

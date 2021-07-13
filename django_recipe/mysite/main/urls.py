@@ -13,5 +13,6 @@ urlpatterns = [
     path('grocerylist/', views.groceryList, name='groceryList'),
     path('like/', views.like, name='like'),
     path('add_recipe/', views.add_recipe, name='add_recipe'),
-    path('liked_recipes/',views.liked_recipes, name='liked_recipes')
+    path('liked_recipes/',views.liked_recipes, name='liked_recipes'),
+    path('show/',views.show, name='show'),
 ]
