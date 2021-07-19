@@ -2,9 +2,9 @@
 {% block title %}View Recipes {% endblock %}
 
 {% block content %}
+{% load static %}
 <div id="content" name="content">
 {% if user.is_authenticated%}
-<div id='message'>Initial Text</div>
     <form method="post" action="#">
     {% csrf_token %}
         <p>Order recipes by:</p>
@@ -45,11 +45,15 @@
           <button type="submit", class = 'add', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Add to Recipe List</button>
         {% endif %}
         {% if user_recipe.liked == True%}
-          <button type="submit", class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'>Dislike</button>
+        <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up-fill"></i></button>
         {% else %}
-          <button type="submit", class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'>Like</button>
+        <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up"></i></button>
         {% endif %}
-        <button type='submit', class='show', id= 's{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Show More</button>
+        {% if user_recipe.disliked == True%}
+        <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down-fill"></i></button>
+        {% else %}
+        <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down"></i></button>
+      {% endif %}
     {% endfor %}
     </form>
     {% if posts.paginator.num_pages > 1 %}
@@ -68,7 +72,7 @@
 {% endblock %}
 {% block javascript %}
 <script>
-  $(document).on('click', '.add', function (e) {
+  $(document).on('click', '.add', function (h) {
       e.preventDefault();
       $.ajax({
       type: 'POST',
@@ -89,8 +93,8 @@
   })
   </script>
   <script>
-    $(document).on('click', '.like', function (h) {
-        h.preventDefault();
+    $(document).on('click', '.like', function (t) {
+      t.preventDefault();
         $.ajax({
         type: 'POST',
         url: '{% url "main:like" %}',
@@ -98,10 +102,17 @@
           postid: $(this).val(),
           csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
           action: 'post',
-          liked: $(this).text(),
         },
         success: function (json) {
-            document.getElementById('l' + json['id']).textContent = json['result']
+          var recipeliked = document.getElementById('l' + json['id']);
+          if (json['result'] == 'liked') {
+            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>'
+            var recipedis = document.getElementById('d' + json['id']);
+            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>'
+          }
+          else {
+            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>'
+          }
         },
         error: function (xhr, errmsg, err) {
     
@@ -110,27 +121,55 @@
     })
 </script>
 <script>
-  $(document).on('click', '.show', function (b) {
-      b.preventDefault();
+  $(document).on('click', '.dislike', function (h) {
+      h.preventDefault();
       $.ajax({
       type: 'POST',
-      url: '{% url "main:show" %}',
+      url: '{% url "main:dislike" %}',
       data: {
         postid: $(this).val(),
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
         action: 'post',
-        shown: $(this).text(),
       },
       success: function (json) {
-          document.getElementById('s' + json['id']).textContent = json['result']
-          document.getElementById('time' + json['id']).textContent = json['time']
-          document.getElementById('cal' + json['id']).textContent = json['calories']
-          document.getElementById('genres' + json['id']).textContent = json['genres']
+        var recipedis = document.getElementById('d' + json['id']);
+          if (json['result'] == 'disliked') {
+            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down-fill"></i>';
+            var recipeliked = document.getElementById('l' + json['id']);
+            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>'
+          }
+          else if (json['result'] == 'undisliked') {
+            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>';
+          }
       },
       error: function (xhr, errmsg, err) {
   
       }
       });
   })
+</script>
+<script>
+$(document).on('click', '.show', function (b) {
+  b.preventDefault();
+  $.ajax({
+  type: 'POST',
+  url: '{% url "main:show" %}',
+  data: {
+  postid: $(this).val(),
+  csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+  action: 'post',
+  shown: $(this).text(),
+  },
+  success: function (json) {
+      document.getElementById('s' + json['id']).textContent = json['result']
+      document.getElementById('time' + json['id']).textContent = json['time']
+      document.getElementById('cal' + json['id']).textContent = json['calories']
+      document.getElementById('genres' + json['id']).textContent = json['genres']
+  },
+  error: function (xhr, errmsg, err) {
+
+  }
+  });
+}) 
 </script>
 {% endblock %}

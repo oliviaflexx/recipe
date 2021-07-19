@@ -30,7 +30,10 @@ def show(request):
             time = 'Time: ' + str(recipe.time) + ' Minutes'
             for genre in recipe.genre.all():
                 genres_list.append(genre.name)
-            genres = 'Genres: ' + str(genres_list)
+            if len(genres_list) == 0:
+                genres = ''
+            else:
+                genres = 'Genres: ' + str(genres_list)
             result = 'Show Less'
             print(result)
         return JsonResponse({'result': result, 'id': recipe.id, 'calories': calories, 'time': time, 'genres': genres })
@@ -40,18 +43,37 @@ def like(request):
         id = int(request.POST.get('postid'))
         user_recipe = user_recipes.objects.get(user=request.user, id=id)
         print(user_recipe.recipe.name)
-        if request.POST.get('liked') == 'Dislike':
-            print('disliked')
-            result = 'Like'
+        if user_recipe.liked == True:
             user_recipe.liked = False
             user_recipe.save()
-            print(result)
+            print('unliked')
+            result = 'unliked'
         else:
-            print('liked')
             user_recipe.liked = True
+            user_recipe.disliked = False
             user_recipe.save()
-            result = 'Dislike'
-            print(result)
+            result = 'liked'
+            print('liked')
+
+        return JsonResponse({'id': user_recipe.id, 'result': result})
+
+def dislike(request):
+    if request.POST.get('action') == 'post':
+        id = int(request.POST.get('postid'))
+        user_recipe = user_recipes.objects.get(user=request.user, id=id)
+        print(user_recipe.recipe.name)
+        if user_recipe.disliked == True:
+            user_recipe.disliked = False
+            user_recipe.save()
+            print('undisliked')
+            result = 'undisliked'
+        else:
+            user_recipe.disliked = True
+            user_recipe.liked = False
+            user_recipe.save()
+            print('disliked')
+            result = 'disliked'
+
         return JsonResponse({'result': result, 'id': user_recipe.id})
 
 

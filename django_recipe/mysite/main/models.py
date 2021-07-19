@@ -53,7 +53,8 @@ class user_recipes(models.Model):
     percent = models.IntegerField(blank=True, null=True)
     checked = models.BooleanField(default=False)
     liked = models.BooleanField(default=False)
-    
+    disliked = models.BooleanField(default=False)
+
     def __str__(self):
         return str(self.id)
 
