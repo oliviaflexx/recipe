@@ -50,10 +50,11 @@ def like(request):
             result = 'unliked'
         else:
             user_recipe.liked = True
+            user_recipe.save()
+            print(user_recipe.liked)
             user_recipe.disliked = False
             user_recipe.save()
             result = 'liked'
-            print('liked')
 
         return JsonResponse({'id': user_recipe.id, 'result': result})
 
@@ -156,6 +157,9 @@ def ingredientPicker(response):
             # print(response.POST)
             selected_ingredients = response.POST.getlist('touched')
             db_ingredients = user_ingredients.objects.select_related('ingredient').filter(user=response.user)
+            for ingredient in db_ingredients:
+                ingredient.checked = False
+                ingredient.save()
             for sel_ing in selected_ingredients:
                 ingredient = db_ingredients.get(pk=sel_ing)
                 ingredient.checked = True
@@ -181,7 +185,8 @@ def ingredientPicker(response):
 
             users = user_recipes.objects.filter(user=response.user)
             for user in users:
-                user.percent = None
+                user.percent = 0
+                user.save()
 
             recipe_dict = {}
             for recipe in recipe_list:
@@ -211,18 +216,20 @@ def ingredientPicker(response):
 def myrecipes(response):
     if response.user.is_authenticated:
         # user_recipe0 = user_recipes.objects.filter(percent > 0)
-        user_recipes1 = response.user.recipes.select_related('recipe').exclude(percent__isnull=True).order_by('-percent')
+        user_recipes1 = response.user.recipes.select_related('recipe').exclude(percent=0).order_by('-percent')
         return render(response, 'main/selected_recipes.html', {'user_recipes1': user_recipes1})
     else:
         return render(response, 'main/selected_recipes.html')
 
 def liked_recipes(response):
     if response.user.is_authenticated:
-        # user_recipe0 = user_recipes.objects.filter(percent > 0)
+        # user_recipe0 = user_recipes.objects.filter(percent > 0
         user_recipes1 = response.user.recipes.select_related('recipe').exclude(liked=False)
-        return render(response, 'main/selected_recipes.html', {'user_recipes1': user_recipes1})
+        for recipe in user_recipes1:
+            print(recipe.recipe)
+        return render(response, 'main/liked.html', {'user_recipes1': user_recipes1})
     else:
-        return render(response, 'main/selected_recipes.html')
+        return render(response, 'main/home.html')
 
 def groceryList(response):
     # grocery_list.objects.all().delete()

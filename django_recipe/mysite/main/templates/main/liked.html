@@ -7,25 +7,28 @@
         <form method="POST" action="#">
             {% csrf_token %}
             {% for user_recipe in user_recipes1%}
-                {% if user_recipe.liked == True %}
-                    <a href= {{user_recipe.recipe.url}} target="_blank"> <h1>{{user_recipe.recipe.name}}</h1></a>
-                    <img src={{user_recipe.recipe.image}}>
-                    <p>{{user_recipe.percent}}% match</p>
-                    <p id='cal{{user_recipe.recipe.id}}'></p>
-                    <p id='time{{user_recipe.recipe.id}}'></p>
-                    <p id='genres{{user_recipe.recipe.id}}'></p>
-                    {% if user_recipe.checked == True%}
-                        <button type="submit", class = 'add', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Remove From Grocery List</button>
-                    {% else %}
-                        <button type="submit", class = 'add', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Add to Grocery List</button>
-                    {% endif %}
-                    {% if user_recipe.liked == True%}
-                        <button type="submit", class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'>Dislike</button>
-                    {% else %}
-                        <button type="submit", class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'>Like</button>
-                    {% endif %}
-                    <button type='submit', class='show', id= 's{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Show More</button>
+                <a href= {{user_recipe.recipe.url}} target="_blank"> <h1>{{user_recipe.recipe.name}}</h1></a>
+                <img src={{user_recipe.recipe.image}}>
+                <p>{{user_recipe.percent|default:"0"}}% match</p>
+                <p id='cal{{user_recipe.recipe.id}}'></p>
+                <p id='time{{user_recipe.recipe.id}}'></p>
+                <p id='genres{{user_recipe.recipe.id}}'></p>
+                {% if user_recipe.checked == True%}
+                    <button type="submit", class = 'add', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Remove From Grocery List</button>
+                {% else %}
+                    <button type="submit", class = 'add', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Add to Grocery List</button>
                 {% endif %}
+                {% if user_recipe.liked == True%}
+                <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up-fill"></i></button>
+                {% else %}
+                <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up"></i></button>
+                {% endif %}
+                {% if user_recipe.disliked == True%}
+                <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down-fill"></i></button>
+                {% else %}
+                <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down"></i></button>
+                {% endif %}
+                <button type='submit', class='show', id= 's{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Show More</button>
             {% endfor %}
         </form>
     </div>
@@ -56,8 +59,8 @@
     })
 </script>
 <script>
-    $(document).on('click', '.like', function (h) {
-        h.preventDefault();
+    $(document).on('click', '.like', function (t) {
+      t.preventDefault();
         $.ajax({
         type: 'POST',
         url: '{% url "main:like" %}',
@@ -65,16 +68,51 @@
           postid: $(this).val(),
           csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
           action: 'post',
-          liked: $(this).text(),
         },
         success: function (json) {
-            document.getElementById('l' + json['id']).textContent = json['result']
+          var recipeliked = document.getElementById('l' + json['id']);
+          if (json['result'] == 'liked') {
+            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>'
+            var recipedis = document.getElementById('d' + json['id']);
+            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>'
+          }
+          else {
+            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>'
+          }
         },
         error: function (xhr, errmsg, err) {
     
         }
         });
     })
+</script>
+<script>
+  $(document).on('click', '.dislike', function (h) {
+      h.preventDefault();
+      $.ajax({
+      type: 'POST',
+      url: '{% url "main:dislike" %}',
+      data: {
+        postid: $(this).val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        action: 'post',
+      },
+      success: function (json) {
+        var recipedis = document.getElementById('d' + json['id']);
+          if (json['result'] == 'disliked') {
+            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down-fill"></i>';
+            var recipeliked = document.getElementById('l' + json['id']);
+            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>'
+          }
+          else if (json['result'] == 'undisliked') {
+            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>';
+          }
+      },
+      error: function (xhr, errmsg, err) {
+  
+      }
+      });
+  })
 </script>
 <script>
     $(document).on('click', '.show', function (b) {
