@@ -3,64 +3,54 @@
 <head>
 	<title>{% block title %}Recipe Site{% endblock %}</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&display=swap" rel="stylesheet">
 </head>
-<style type="text/css">
-	.sidenav {
-		height:100%;
-		width:160px;
-		position: fixed;
-		z-index:1;
-		top:0;
-		left:0;
-		background-color:#111;
-		overflow-x: hidden;
-		padding-top: 20px;
-	}    
-
-			.sidenav a {
-		padding:6px 8px 6px 16px;
-		text-decoration: none;
-		font-size:25px;
-		color: #818181;
-		display:block;
-	}  
-
-			.sidenav a:hover{
-		color:#f1f1f1;
-	}     
-
-			.main{
-		margin-left:160px;
-		padding: 0px 10px;
-	}   
-</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+	body {
+		background-color: #EDFAFD;
+		font-family: 'Poppins', sans-serif;
+		color: #023E8A;
+	}
+	a.nav-item {
+		color: #023E8A;
+	}
+	a.nav-item:hover {
+		color: #0096C7;
+	}
+	.large-icon {
+		font-size: 25px;
+	}
+</style>
 <body>
-	<div class="sidenav">
-		<a href="/allrecipes">All Recipes</a>
-		<a href="/ingredients">Ingredients</a>
-		<a href="/adddata">Add Data</a>
-		<a href='/myrecipes'>My Recipes</a>
-		<a href='/grocerylist'>My Grocery List</a>
-		<a href='/liked_recipes'>Liked Recipes</a>
-		{% if user.is_authenticated%}
-			<a href='/logout'>Logout</a>
-		{% else %}
-			<a href='/login'>Login</a>
-		{% endif %}
-	</div>
+	<nav class="navbar navbar-expand-lg navbar-light">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse nav-fill" id="navbarSupportedContent">
+			<a class="nav-link nav-item" href="/home"><i class="bi bi-house large-icon"></i></a>
+			<a class="nav-link nav-item" href="/allrecipes">All Recipes</a>
+			<a class="nav-link nav-item" href="/adddata">Add Data</a>
+			<a class="nav-link nav-item" href="/myrecipes">My Recipes</a>
+			<a class="nav-link nav-item" href="/grocerylist">My Grocery List</a>
+			<a class="nav-link nav-item" href="/liked_recipes">Liked Recipes</a>
+			{% if user.is_authenticated%}
+			<a class="nav-link nav-item" href="/logout"><i class="bi bi-box-arrow-right large-icon"></i></a>
+			{% else %}
+			<a class="nav-link nav-item" href="/login">Login</a>
+			{% endif %}
+		  </div>
+	</nav>
 	<div id="content" name="content" class="main">
-		<div class="row justify-content-center">
-			<div class="col-8">
-				<h1 class="mt-2">My Site</h1>
-				<hr class="mt-0 mb-4">
-				{% block content %}
-				{% endblock %}
-			</div>
-		</div>
+	<div class="container">
+		{% block content %}
+		{% endblock %}
+	</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
