@@ -2,11 +2,64 @@
 {% block title %}HomePage{% endblock %}
 
 {% block content %}
-<style>
-</style>
-<div class="row">
-    <div class="col-md-12" style='padding-top: 30px;'>
-        <h1 class="text-center">We build your grocery list</h1>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/home.css' %}">
+
+<div class="container first">
+    <div class="row">
+        <div class="col-md-12" style='padding-top: 30px; background-image: url("https://www.freepik.com/free-photo/vegetables-set-left-black-slate_986619.htm#page=1&query=background%20food&position=12");'>
+            <h1 class="text-center">We build your grocery list</h1>
+            <p class="text-center">Whether you have ingredients already or have nothing and want to find something, LOGO will help you!</p>
+            <p class="text-center">Choose your path...</p>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 50px;">
+        <div class="col-lg-6 col-12 left">
+            <div class='container have shadow'>
+                <div class="row" style="padding-bottom: 20px;">
+                    <h2 class="text-center">Based on what you <b>have</b></h2>
+                </div>
+                <div class="row">
+                    <h4><u>Step 1</u>: Tell us the ingredients you already have at home and we find you recipes that match</h3>
+                    <br>
+                    <h4><u>Step 2</u>: Browse your best matched recipes add to your recipe list</h3>
+                </div>
+                <br>
+                <div class="row" style="justify-content: space-around;">
+                    <a class="text-center started1 shadow-sm position-relative bottom" href="/ingredients">Get Started</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 right">
+            <div class='container want shadow'>
+                <div class="row">
+                    <h2 class="text-center">Based on what you <b>want</b></h2>
+                </div>
+                <div class="row">
+                    <h4><u>Step 1</u>: Select the recipes you want by filtering with categories like diet or meal type</h3>
+                    <br>
+                    <h4><u>Step 2</u>: Browse our recipes and add them to your grocery list</h4>
+                </div>
+                <br>
+                <div class="row" style="justify-content: space-around;">
+                    <a class="text-center started2 shadown-sm" href="/allrecipes">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container second">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="container more">
+                <img src="https://jessicainthekitchen.com/wp-content/uploads/2021/06/Vegan-Cheesecake-17-655x985.jpg" style='height: 100%; width: 100%; object-fit: contain'>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="container more">
+                
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

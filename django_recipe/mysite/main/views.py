@@ -13,7 +13,7 @@ import json
 def index(response):
     return render(response, "main/home.html")
 
-def show(request):
+def showmore(request):
     if request.POST.get('action') == 'post':
         id = int(request.POST.get('postid'))
         recipe = recipes3.objects.get(id=id)
@@ -103,6 +103,7 @@ def allRecipes(response):
     if response.user.is_authenticated:
 
         if response.method == 'POST':
+            print(response.POST)
             posts = user_recipes.objects.select_related('recipe').filter(user=response.user).order_by('id')
             if response.POST.get('save'):
                 genres = genres3.objects.all()

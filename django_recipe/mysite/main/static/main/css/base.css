@@ -1,0 +1,22 @@
+body {
+    background: linear-gradient(45deg, #FFBA08, #FFE8AD);
+    /* background-color: #FFBA08; */
+    font-family: 'Poppins', sans-serif;
+    color: #03071E;
+}
+a.nav-item {
+    color: white; 
+}
+a.nav-item:hover {
+    color: #fe7606;
+}
+.large-icon {
+    font-size: 25px;
+}
+.navbar {
+    background-color: black;
+}
+
+.main #content {
+    overflow: hidden;
+}

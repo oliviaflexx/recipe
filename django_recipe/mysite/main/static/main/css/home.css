@@ -1,0 +1,67 @@
+div.col-md-6 {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 15px;
+}
+div.container.want{
+    background: linear-gradient(45deg, #FFBA08, #FAA307);
+    background-color: white;
+    padding: 30px;
+    min-height: 100%;
+}
+
+div.container.have {
+    background: linear-gradient(45deg, #E85D04, #F48C06);
+    background-color: #370617;
+    color: black;
+    padding: 30px;
+    min-height: 100%;
+}
+
+a.started1 {
+    background-color: #03071E;
+    padding: .5em;
+    color: white;
+    position: absolute;
+    bottom: 0px;
+}
+a.started2 {
+    background-color: #03071E;
+    padding: .5em;
+    color: white;
+}
+
+div.container.second {
+    background-color: black;
+    min-width: 100%;
+}
+img {
+    height: 100%; 
+    width: 100%; 
+    object-fit: contain;
+}
+
+div.container.more {
+    padding: 15px;
+    color: #DC2F02;
+}
+
+.col-12.veggies {
+    padding: 0px;
+    position: relative;
+    background-image: url('/static/main/images/black_veggies.jpg');
+}
+
+.child1 {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    color: white;
+}
+
+.child2 {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    color: white;
+}

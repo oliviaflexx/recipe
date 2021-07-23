@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from register import views as v
 import debug_toolbar
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', include('main.urls')),
@@ -25,3 +26,5 @@ urlpatterns = [
     path('', include("django.contrib.auth.urls")),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

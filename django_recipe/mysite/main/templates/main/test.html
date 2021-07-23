@@ -1,36 +1,77 @@
-<nav class="navbar navbar-expand-lg">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="color:black;"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/home">Home</a>
+<style>
+    .wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #7386D5;
+    color: #fff;
+    transition: all 0.3s;
+}
+</style>    
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Recipe Category Selector</h3>
+        </div>
+        <ul class="list-unstyled components">
+            <li class="active">
+                <form method="post" action="#">
+                    {% csrf_token %}
+                        <p>Order recipes by:</p>
+                        <input type='radio' id='calories' name='orderby' value='calories'>
+                        <label for='calories'>Calories</label><br>
+                        <input type='radio' id='time' name='orderby' value='time'>
+                        <label for='time'>Time</label><br>
+                        <p> Choose one or more restriction categories </p>
+                        <input type='checkbox' id='vegeterian' name='restrict' value='vegeterian'>
+                        <label for='vegeterian'>Vegeterian</label><br>
+                        <input type='checkbox' id='vegan' name='restrict' value='vegan'>
+                        <label for='vegan'>Vegan</label><br>
+                        <input type='checkbox' id='gluten' name='restrict' value='gluten'>
+                        <label for='gluten'>Gluten Free</label><br>
+                        
+                        <p> Choose a meal type </p>
+                        <input type='radio' id='breakfast' name='meal_type' value='breakfast'>
+                        <label for='breakfast'>Breakfast</label><br>
+                        <input type='radio' id='lunch' name='meal_type' value='lunch'>
+                        <label for='lunch'>Lunch/Dinner</label><br>
+                        <input type='radio' id='dessert' name='meal_type' value='dessert'>
+                        <label for='dessert'>Dessert</label><br>
+                        
+                        <button type="submit" id='save' name='save' value='save'>Show Preferences</button>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/allrecipes">All Recipes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/adddata">Add Data</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/myrecipes">My Recipes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/grocerylist">My Grocery List</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/liked_recipes">Liked Recipes</a>
-            </li>
-            {% if user.is_authenticated%}
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-            </li>
-            {% endif %}
         </ul>
-      </div>
-</nav>
+    </nav>
+<div class=container>
+    <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <i class="fas fa-align-left"></i>
+        <span>Toggle Sidebar</span>
+    </button>
+</div>
+
+    <script>
+    $(document).ready(function () {
+
+    $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+    });
+
+    $('#sidebarCollapse').on('click', function () {
+        // open or close navbar
+        $('#sidebar').toggleClass('active');
+        // close dropdowns
+        $('.collapse.in').toggleClass('in');
+        // and also adjust aria-expanded attributes we use for the open/closed arrows
+        // in our CSS
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
+
+    });
+    </script>
