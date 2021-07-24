@@ -1,22 +1,22 @@
 body {
-    background: linear-gradient(45deg, #FFBA08, #FFE8AD);
-    /* background-color: #FFBA08; */
-    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    font-family: 'Lato', sans-serif;
     color: #03071E;
 }
 a.nav-item {
-    color: white; 
+    color: black; 
 }
 a.nav-item:hover {
-    color: #fe7606;
+    color: white;
 }
 .large-icon {
     font-size: 25px;
 }
 .navbar {
-    background-color: black;
+    background: linear-gradient(45deg, #FF7B00, #FFC300);
 }
 
 .main #content {
     overflow: hidden;
+    background-color: white;
 }

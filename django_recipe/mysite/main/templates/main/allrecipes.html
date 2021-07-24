@@ -49,17 +49,37 @@
         {% csrf_token %}
         <div class="row topper">
           {% for user_recipe in posts%}
-          <div class="col-md-6 col-sm-12 text-center">
-            <a href= {{user_recipe.recipe.url}} target="_blank"> <h3>{{user_recipe.recipe.name}}</h3></a>
-            <img src={{user_recipe.recipe.image}}> 
-            <p id='cal{{user_recipe.recipe.id}}'></p>
-            <p id='time{{user_recipe.recipe.id}}'></p>
-            <p id='genres{{user_recipe.recipe.id}}'></p>
+          <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+            <div class="recipe-container text-center">
+              <a href= {{user_recipe.recipe.url}} target="_blank"><h4>{{user_recipe.recipe.name}}</h4></a>
+              <div class="img-container position-relative start-50 bottom-50">
+                <img src={{user_recipe.recipe.image}}> 
+                {% if user_recipe.checked == True%}
+                  <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-check-lg recipe-button"></i></button>
+                {% else %}
+                  <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-plus-lg recipe-button"></i></button>
+                {% endif %}
+              </div>
+              <p id='cal{{user_recipe.recipe.id}}'></p>
+              <p id='time{{user_recipe.recipe.id}}'></p>
+              <p id='genres{{user_recipe.recipe.id}}'></p>
+            </div>
+            <div class="button-container">
+              {% if user_recipe.liked == True%}
+                <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up-fill recipe-button"></i></button>
+              {% else %}
+                <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up-fill recipe-button"></i></button>
+              {% endif %}
+              {% if user_recipe.disliked == True%}
+                <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down-fill recipe-button"></i></button>
+              {% else %}
+                <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down recipe-button"></i></button>
+              {% endif %}
+            </div>
           </div>
-            {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}
+            {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
               {% if forloop.last %}</div>{% endif %}
           {% endfor %}
-          
   
         </form>
         {% if posts.paginator.num_pages > 1 %}

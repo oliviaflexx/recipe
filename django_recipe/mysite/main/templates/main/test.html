@@ -1,77 +1,24 @@
-<style>
-    .wrapper {
-    display: flex;
-    width: 100%;
-}
-
-#sidebar {
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 999;
-    background: #7386D5;
-    color: #fff;
-    transition: all 0.3s;
-}
-</style>    
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Recipe Category Selector</h3>
+for myrecipes
+<form method="POST" action="#">
+    {% csrf_token %}
+    <div class="row topper">
+      {% for user_recipe in posts%}
+      <div class="col-lg-6 col-md-12 col-sm-12 text-center">
+        <div class="recipe-container text-center">
+          <div class="row flex-nowrap">
+            <div class="col-md-1 col-sm-1">
+              <p>First col</p>
+            </div>
+            <div class="col-md-11 col-sm-11">
+              <a href= {{user_recipe.recipe.url}} target="_blank"><h4>{{user_recipe.recipe.name}}</h4></a>
+              <div class="img-container position-relative start-50 bottom-50">
+                <img src={{user_recipe.recipe.image}}> 
+                <i class="bi bi-bag-plus"></i>
+              </div>
+              <p id='cal{{user_recipe.recipe.id}}'></p>
+              <p id='time{{user_recipe.recipe.id}}'></p>
+              <p id='genres{{user_recipe.recipe.id}}'></p>
+    
+            </div>
+          </div>
         </div>
-        <ul class="list-unstyled components">
-            <li class="active">
-                <form method="post" action="#">
-                    {% csrf_token %}
-                        <p>Order recipes by:</p>
-                        <input type='radio' id='calories' name='orderby' value='calories'>
-                        <label for='calories'>Calories</label><br>
-                        <input type='radio' id='time' name='orderby' value='time'>
-                        <label for='time'>Time</label><br>
-                        <p> Choose one or more restriction categories </p>
-                        <input type='checkbox' id='vegeterian' name='restrict' value='vegeterian'>
-                        <label for='vegeterian'>Vegeterian</label><br>
-                        <input type='checkbox' id='vegan' name='restrict' value='vegan'>
-                        <label for='vegan'>Vegan</label><br>
-                        <input type='checkbox' id='gluten' name='restrict' value='gluten'>
-                        <label for='gluten'>Gluten Free</label><br>
-                        
-                        <p> Choose a meal type </p>
-                        <input type='radio' id='breakfast' name='meal_type' value='breakfast'>
-                        <label for='breakfast'>Breakfast</label><br>
-                        <input type='radio' id='lunch' name='meal_type' value='lunch'>
-                        <label for='lunch'>Lunch/Dinner</label><br>
-                        <input type='radio' id='dessert' name='meal_type' value='dessert'>
-                        <label for='dessert'>Dessert</label><br>
-                        
-                        <button type="submit" id='save' name='save' value='save'>Show Preferences</button>
-            </li>
-        </ul>
-    </nav>
-<div class=container>
-    <button type="button" id="sidebarCollapse" class="btn btn-info">
-        <i class="fas fa-align-left"></i>
-        <span>Toggle Sidebar</span>
-    </button>
-</div>
-
-    <script>
-    $(document).ready(function () {
-
-    $("#sidebar").mCustomScrollbar({
-        theme: "minimal"
-    });
-
-    $('#sidebarCollapse').on('click', function () {
-        // open or close navbar
-        $('#sidebar').toggleClass('active');
-        // close dropdowns
-        $('.collapse.in').toggleClass('in');
-        // and also adjust aria-expanded attributes we use for the open/closed arrows
-        // in our CSS
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    });
-
-    });
-    </script>
