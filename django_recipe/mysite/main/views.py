@@ -18,25 +18,20 @@ def showmore(request):
         id = int(request.POST.get('postid'))
         recipe = recipes3.objects.get(id=id)
 
-        if request.POST.get('shown') == 'Show Less':
-            result = 'Show More'
-            calories = ''
-            time = ''
-            genres = ''
-            print(result)
-        else:
-            genres_list = []
-            calories = 'Calories: ' + str(recipe.calories)
-            time = 'Time: ' + str(recipe.time) + ' Minutes'
-            for genre in recipe.genre.all():
-                genres_list.append(genre.name)
-            if len(genres_list) == 0:
-                genres = ''
+        calories = str(recipe.calories) + ' Calories'
+        time = str(recipe.time) + ' Minutes'
+
+        genres = ''
+        for genre in recipe.genre.all():
+            if genres == '':
+                genres = str(genre)
             else:
-                genres = 'Genres: ' + str(genres_list)
-            result = 'Show Less'
-            print(result)
-        return JsonResponse({'result': result, 'id': recipe.id, 'calories': calories, 'time': time, 'genres': genres })
+                genres = genres + ' ,' + str(genre)
+
+        print(recipe.name)
+        print(calories)
+        print(genres)
+        return JsonResponse({'id': recipe.id, 'calories': calories, 'time': time, 'genres': genres })
 
 def like(request):
     if request.POST.get('action') == 'post':
@@ -81,9 +76,8 @@ def dislike(request):
 def add_recipe(request):
     if request.POST.get('action') == 'post':
         id = request.POST.get('postid')
-        recipe = recipes3.objects.get(id=id)
-        print(recipe.name)
-        user_recipe = user_recipes.objects.get(user=request.user, recipe=recipe)
+        user_recipe = user_recipes.objects.get(pk=id)
+        print(user_recipe.recipe.name)
 
         if user_recipe.checked == True:
             result = 'unchecked'
