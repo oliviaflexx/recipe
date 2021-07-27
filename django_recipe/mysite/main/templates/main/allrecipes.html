@@ -51,13 +51,13 @@
           {% for user_recipe in posts%}
           <div class="col-lg-6 col-md-12 col-sm-12 text-center">
             <div class="recipe-container text-center">
-              <a href= {{user_recipe.recipe.url}} target="_blank"><h4>{{user_recipe.recipe.name}}</h4></a>
+              <a href= {{user_recipe.recipe.url}} target="_blank"><h4 class="recipe-title">{{user_recipe.recipe.name}}</h4></a>
               <div class="img-container position-relative start-50 bottom-50">
                 <img src={{user_recipe.recipe.image}}> 
                 {% if user_recipe.checked == True%}
-                  <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-check-lg recipe-button"></i></button>
+                  <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-check-lg"></i></button>
                 {% else %}
-                  <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-plus-lg recipe-button"></i></button>
+                  <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-plus-lg"></i></button>
                 {% endif %}
               </div>
               <p id='cal{{user_recipe.recipe.id}}'></p>
@@ -66,14 +66,14 @@
             </div>
             <div class="button-container">
               {% if user_recipe.liked == True%}
-                <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up-fill recipe-button"></i></button>
+                <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up-fill"></i></button>
               {% else %}
-                <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up-fill recipe-button"></i></button>
+                <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up"></i></button>
               {% endif %}
               {% if user_recipe.disliked == True%}
-                <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down-fill recipe-button"></i></button>
+                <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down-fill"></i></button>
               {% else %}
-                <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down recipe-button"></i></button>
+                <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down"></i></button>
               {% endif %}
             </div>
           </div>
@@ -96,85 +96,90 @@
     {% endif%}
     </div>
 {% endblock %}
+
 {% block javascript %}
 <script>
-  $(document).on('click', '.add', function (h) {
-      e.preventDefault();
-      $.ajax({
-      type: 'POST',
-      url: '{% url "main:add_recipe" %}',
-      data: {
-        postid: $(this).val(),
-        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-        action: 'post',
-        checked: $(this).text(),
-      },
-      success: function (json) {
-          document.getElementById(json['id']).textContent = json['result']
-      },
-      error: function (xhr, errmsg, err) {
-  
-      }
-      });
-  })
-  </script>
-  <script>
-    $(document).on('click', '.like', function (t) {
-      t.preventDefault();
-        $.ajax({
-        type: 'POST',
-        url: '{% url "main:like" %}',
-        data: {
-          postid: $(this).val(),
-          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-          action: 'post',
-        },
-        success: function (json) {
-          var recipeliked = document.getElementById('l' + json['id']);
-          if (json['result'] == 'liked') {
-            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>'
-            var recipedis = document.getElementById('d' + json['id']);
-            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>'
-          }
-          else {
-            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>'
-          }
-        },
-        error: function (xhr, errmsg, err) {
-    
+  $(document).on('click', '.add-position-fixed', function (h) {
+    h.preventDefault();
+    $(this).attr('disabled', true);
+    $.ajax({
+    type: 'POST',
+    url: '{% url "main:add_recipe" %}',
+    data: {
+    postid: $(this).val(),
+    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+    action: 'post',
+    },
+    success: function (json) {
+        var recipechecked = document.getElementById('c' + json['id']);
+        $(recipechecked).attr('disabled', false);
+        if (json['result'] == 'checked') {
+        recipechecked.innerHTML = '<i class="bi bi-check-lg"></i>'
         }
-        });
-    })
-</script>
-<script>
-  $(document).on('click', '.dislike', function (h) {
-      h.preventDefault();
-      $.ajax({
-      type: 'POST',
-      url: '{% url "main:dislike" %}',
-      data: {
+        else {
+        recipechecked.innerHTML = '<i class="bi bi-plus-lg"></i>'
+        }
+    },
+    error: function (xhr, errmsg, err) {
+
+    }
+    });
+})
+
+$(document).on('click', '.like', function (t) {
+    t.preventDefault();
+    $.ajax({
+    type: 'POST',
+    url: '{% url "main:like" %}',
+    data: {
         postid: $(this).val(),
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
         action: 'post',
-      },
-      success: function (json) {
+    },
+    success: function (json) {
+        var recipeliked = document.getElementById('l' + json['id']);
+        if (json['result'] == 'liked') {
+        recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>'
         var recipedis = document.getElementById('d' + json['id']);
-          if (json['result'] == 'disliked') {
-            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down-fill"></i>';
-            var recipeliked = document.getElementById('l' + json['id']);
-            recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>'
-          }
-          else if (json['result'] == 'undisliked') {
-            recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>';
-          }
-      },
-      error: function (xhr, errmsg, err) {
-  
-      }
-      });
-  })
-</script>
-<script>
+        recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>'
+        }
+        else {
+        recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>'
+        }
+    },
+    error: function (xhr, errmsg, err) {
+
+    }
+    });
+})
+
+$(document).on('click', '.dislike', function (h) {
+    h.preventDefault();
+    $.ajax({
+    type: 'POST',
+    url: '{% url "main:dislike" %}',
+    data: {
+    postid: $(this).val(),
+    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+    action: 'post',
+    },
+    success: function (json) {
+    var recipedis = document.getElementById('d' + json['id']);
+        if (json['result'] == 'disliked') {
+        recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down-fill"></i>';
+        var recipeliked = document.getElementById('l' + json['id']);
+        recipeliked.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>'
+        }
+        else if (json['result'] == 'undisliked') {
+        recipedis.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>';
+        }
+    },
+    error: function (xhr, errmsg, err) {
+
+    }
+    });
+})
+
 $(document).on('click', '.showmore', function (b) {
   b.preventDefault();
   $.ajax({
@@ -199,3 +204,4 @@ $(document).on('click', '.showmore', function (b) {
 }) 
 </script>
 {% endblock %}
+

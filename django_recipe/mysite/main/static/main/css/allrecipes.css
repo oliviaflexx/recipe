@@ -11,16 +11,25 @@ div.recipe-container {
     max-width: 500px;
     margin-right: auto;
     margin-left: auto;
+    padding-bottom: 10px;
+
 
   }
 
   div.recipe-container:hover {
-    background: linear-gradient(45deg, #FFB700, #FFD000);
+    background: linear-gradient(45deg, #F48C06, #FFBA08);
     transform: translateY(-7px);
     transition: all 0.3s ease 0s;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   }
   
+  div.button-container:hover {
+    background: linear-gradient(45deg, #F48C06, #FFBA08);
+    transform: translateY(-7px);
+    transition: all 0.3s ease 0s;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
+
   div.button-container {
     text-align: center;
     padding: 10px 20px;
@@ -47,21 +56,11 @@ div.recipe-container {
     object-fit: cover;
     border-radius: 20px;
   }
-  div.col-md-6.col-sm-12 {
-      
-  }
     
   .add-position-fixed {
     position: absolute;
     top: 8px;
     right: 16px;
-  }
-
-
-  @media screen and (max-width: 992px) {
-    div.img-container {
-        width: 
-    }
   }
 
   button {
@@ -84,19 +83,10 @@ div.recipe-container {
     font-size: 28px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 }
-  }
 
-  boom {
-    background-color: white;
-    
-    border-radius: 50%;
-    color: black;
-    padding-left: 10px;
-    padding-right: 10px;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-    border: none;
+  button[disabled=disabled], button:disabled {
+    background-color: #FF7B00;
   }
-
   .like {
     margin-right: 40px;
   }
@@ -104,3 +94,29 @@ div.recipe-container {
   a {
     color: black;
   }
+
+  .bi.bi-hand-thumbs-up-fill, .bi.bi-hand-thumbs-down-fill {
+    color: #FF7B00;
+  }
+
+  .bi.bi-check-lg {
+    color: #19d016;
+  }
+
+  #save {
+    border-radius: 25px;
+    background-color: #FFEA00;
+    font-size: 25px;
+    margin-top: 25px;
+  }
+
+  #save:hover {
+    background-color: #FFC300;
+  }
+
+  .recipe-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+

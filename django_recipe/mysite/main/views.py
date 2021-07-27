@@ -83,17 +83,14 @@ def add_recipe(request):
         id = request.POST.get('postid')
         recipe = recipes3.objects.get(id=id)
         print(recipe.name)
-        print(request.POST.get('checked'))
         user_recipe = user_recipes.objects.get(user=request.user, recipe=recipe)
 
-        if request.POST.get('checked') == 'Remove From Grocery List':
-            print('disliked')
-            result = 'Add to Grocery List'
+        if user_recipe.checked == True:
+            result = 'unchecked'
             sub_out(user_recipe, request.user)
             print(result)
         else:
-            print('liked')
-            result = 'Remove From Recipe List'
+            result = 'checked'
             add_up(user_recipe, request.user)
             print(result)
 

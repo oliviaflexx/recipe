@@ -29,7 +29,7 @@
                     {% else %}
                     <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down"></i></button>
                     {% endif %}
-                    <button type='submit', class='show', id= 's{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Show More</button>
+                    <button type='submit', class='showmore', id= 's{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'>Show More</button>
                 {% endif %}
             {% endfor %}
         </form>
@@ -118,11 +118,11 @@
   })
 </script>
 <script>
-    $(document).on('click', '.show', function (b) {
+    $(document).on('click', '.showmore', function (b) {
         b.preventDefault();
         $.ajax({
         type: 'POST',
-        url: '{% url "main:show" %}',
+        url: '{% url "main:showmore" %}',
         data: {
           postid: $(this).val(),
           csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
