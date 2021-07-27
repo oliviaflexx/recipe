@@ -92,7 +92,6 @@ def add_recipe(request):
 
 def allRecipes(response):
     if response.user.is_authenticated:
-
         if response.method == 'POST':
             print(response.POST)
             posts = user_recipes.objects.select_related('recipe').filter(user=response.user).order_by('id')
@@ -206,10 +205,50 @@ def ingredientPicker(response):
             return redirect('/login')
 
 def myrecipes(response):
+    
     if response.user.is_authenticated:
+        if response.method == 'POST':
+            print(response.POST)
+            posts = response.user.recipes.select_related('recipe').exclude(percent=0).order_by('-percent')
+            if response.POST.get('save'):
+                genres = genres3.objects.all()
+                if response.POST.__contains__('meal_type'):
+                    meal0 = response.POST.get('meal_type')
+                    if meal0 =='lunch':
+                        breakfast = genres.get(name='breakfast')
+                        dessert = genres.get(name='dessert')
+                        posts = posts.exclude(recipe__genre=breakfast).exclude(recipe__genre=dessert)
+                    else:
+                        # meal = genres3.objects.get(name=meal0)
+                        meal = genres.get(name=meal0)
+                        posts = posts.filter(recipe__genre=meal.id)
+
+                if response.POST.__contains__('restrict'):
+                    restricts = response.POST.getlist('restrict')
+                    for restrict in restricts:
+                        if restrict == 'gluten':
+                            restrict = 'gluten free'
+                        restricter = genres.get(name=restrict)
+                        posts = posts.filter(recipe__genre=restricter)
+
+                if response.POST.__contains__('orderby'):
+                    order = response.POST.get('orderby')
+                    if order == 'calories':
+                        posts = posts.exclude(recipe__calories=0).order_by('recipe__calories')
+                    else:
+                        posts = posts.exclude(recipe__time=0).order_by('recipe__time')
+                else:
+                    posts = posts.order_by('id')
+
+            paginator = Paginator(posts, 25)
+            page = response.GET.get('page')
+            posts = paginator.get_page(page)
+
+            return render(response, "main/selected_recipes.html", {'posts':posts})
+        else:
         # user_recipe0 = user_recipes.objects.filter(percent > 0)
-        user_recipes1 = response.user.recipes.select_related('recipe').exclude(percent=0).order_by('-percent')
-        return render(response, 'main/selected_recipes.html', {'user_recipes1': user_recipes1})
+            posts = response.user.recipes.select_related('recipe').exclude(percent=0).order_by('-percent')
+            return render(response, 'main/selected_recipes.html', {'posts': posts})
     else:
         return render(response, 'main/selected_recipes.html')
 

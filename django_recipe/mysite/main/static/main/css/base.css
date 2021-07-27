@@ -20,3 +20,11 @@ a.nav-item:hover {
     overflow: hidden;
     background-color: white;
 }
+
+footer .footer-copyright {
+    background-color: black;
+    color: white;
+}
+footer a {
+    color: white;
+}

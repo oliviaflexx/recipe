@@ -75,6 +75,7 @@ div.recipe-container {
   }
   .like {
     margin-right: 40px;
+    margin-top: 50px;
   }
 
   a {
@@ -91,13 +92,13 @@ div.recipe-container {
 
   #save {
     border-radius: 25px;
-    background-color: #FFEA00;
+    background-color: #FFC300;
     font-size: 25px;
     margin-top: 25px;
   }
 
   #save:hover {
-    background-color: #FFC300;
+    background-color: #FFEA00;
   }
 
   .recipe-title {
@@ -121,4 +122,18 @@ div.recipe-container {
     padding-top: 15px;
     font-size: larger;
     visibility: hidden;
+  }
+
+  .progress, .progress-bar {
+    border-radius: 20px;
+  }
+  .progress-bar {
+    background: linear-gradient(45deg, #FDDB9B, #FCC55F);
+    color: black;
+  }
+  .progress {
+    height: 35px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    background: linear-gradient(45deg, white, #FFF3D6);
   }

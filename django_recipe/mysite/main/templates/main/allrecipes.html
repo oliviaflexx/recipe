@@ -1,9 +1,10 @@
 {% extends "main/base.html" %}
-{% block title %}View Recipes {% endblock %}
+{% block title %}All Recipes {% endblock %}
 
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/allrecipes.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/pagination_blue.css' %}">
 
   {% if user.is_authenticated%}
   <div class="row topper" style="justify-content: space-around;">
@@ -84,13 +85,30 @@
   
         </form>
         {% if posts.paginator.num_pages > 1 %}
+          <div class="pagination">
             {% if posts.has_previous %}
-                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            <a class="pagination-action" href="?page=1">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i> </a>
+            <a class="pagination-action" href="?page={{ posts.previous_page_number }}">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
             {% endif %}
-            <span>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+            {% for num in posts.paginator.page_range %}
+                {% if posts.number == num %}
+                    <span class="pagination-number pagination-current">{{ num }}</span>
+                {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
+                    <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
             {% if posts.has_next %}
-                <a href="?page={{ posts.next_page_number }}">next</a>
+                <a class="pagination-action" href="?page={{ posts.next_page_number }}">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+                <a class="pagination-action" href="?page={{ posts.paginator.num_pages }}">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                </a>
             {% endif %}
+          </div>
         {% endif %}
     {% else %}
     <a href="/login">Login Here to Access Content</a>
