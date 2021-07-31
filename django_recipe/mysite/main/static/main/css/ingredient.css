@@ -1,0 +1,58 @@
+button {
+    display: inline-block;
+    border: none;
+    border-radius: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+    text-decoration: none;
+    background: white;
+    color: black;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 28px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+div.ingredient-container {
+    background-color: white;
+    margin-top: 30px;
+    position: relative;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    max-width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 10px;
+    padding-top: 5px;
+  }
+
+.row.topper {
+    justify-content: center;
+}
+
+#searchbar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 25px;
+    width: 314px;
+}
+
+.bi.bi-check-lg {
+    color: #19d016;
+}
+
+.bi.bi-plus-lg {
+    color: black;
+}
+
+  button[disabled=disabled], button:disabled {
+    background-color: #FF7B00;
+  }

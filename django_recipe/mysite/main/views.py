@@ -10,6 +10,71 @@ from .funky import add_up, sub_out
 from django.core.paginator import Paginator
 import json
 
+def add_ingredient(request):
+    print("yes")
+    if request.POST.get('action') == 'post':
+        id = request.POST.get('postid')
+        ingredient_list = []
+        ingredient = user_ingredients.objects.get(pk=id, user=request.user)
+        if ingredient.checked == False:
+            print("action to check")
+            ingredient.checked = True
+            ingredient.save()
+            ingredient_list.append(ingredient)
+            if or_ingredients.objects.filter(in_name=ingredient.ingredient).exists():
+                print('exists')
+                for or_name in or_ingredients.objects.filter(in_name=ingredient.ingredient):  
+                    thing = user_ingredients.objects.get(ingredient=or_name.or_name, user=request.user)
+                    print(f'CHECKED BEFORE:', thing.ingredient.name, thing.checked)
+                    thing.checked = True
+                    thing.save()
+                    ingredient_list.append(thing)
+                    print(f'CHECKED AFTER:', thing.checked)
+
+            for sel_ing in ingredient_list:
+                recipes = recipe_ingredients3.objects.select_related('recipe').filter(ingredient = sel_ing.ingredient)
+                for recipe in recipes:
+                    total = recipe.recipe.ingredients.all().count()
+                    print(recipe.recipe.name)
+                    print(total)
+                    percent = (1 / total) * 100
+                    percent = round(percent, 0)
+                    entry = user_recipes.objects.get(recipe = recipe.recipe, user = request.user)
+                    print(f'before percent:', entry.percent)
+                    entry.percent = entry.percent + percent
+                    entry.save()
+                    print(f'after percent:', entry.percent)
+        else:
+            print('action to not check')
+            ingredient.checked = False
+            ingredient.save()
+            ingredient_list.append(ingredient)
+            if or_ingredients.objects.filter(in_name=ingredient.ingredient).exists():
+                print('exists')
+                for or_name in or_ingredients.objects.filter(in_name=ingredient.ingredient):  
+                    thing = user_ingredients.objects.get(ingredient=or_name.or_name, user=request.user)
+                    print(f'CHECKED BEFORE:', thing.ingredient.name, thing.checked)
+                    thing.checked = False
+                    thing.save()
+                    ingredient_list.append(thing)
+                    print(f'CHECKED AFTER:', thing.checked)
+
+            for sel_ing in ingredient_list:
+                recipes = recipe_ingredients3.objects.select_related('recipe').filter(ingredient = sel_ing.ingredient)
+                for recipe in recipes:
+                    total = recipe.recipe.ingredients.all().count()
+                    print(f'NEW RECIPE:', recipe.recipe.name)
+                    print(f'Total ingredients:', total)
+                    percent = (1 / total) * 100
+                    percent = round(percent, 0)
+                    entry = user_recipes.objects.get(recipe = recipe.recipe, user = request.user)
+                    print(f'before percent:', entry.percent)
+                    entry.percent = entry.percent - percent
+                    entry.save()
+                    print(f'after percent:', entry.percent)
+
+        return JsonResponse({'id': id})
+
 def index(response):
     return render(response, "main/home.html")
 
@@ -143,66 +208,13 @@ def allRecipes(response):
 
 
 def ingredientPicker(response):
-    if response.method == 'POST':
-        if response.POST.get('save'):
-            # print(response.POST)
-            selected_ingredients = response.POST.getlist('touched')
-            db_ingredients = user_ingredients.objects.select_related('ingredient').filter(user=response.user)
-            for ingredient in db_ingredients:
-                ingredient.checked = False
-                ingredient.save()
-            for sel_ing in selected_ingredients:
-                ingredient = db_ingredients.get(pk=sel_ing)
-                ingredient.checked = True
-                if or_ingredients.objects.filter(in_name=ingredient.ingredient).exists():
-                    print('exists')
-                    for or_name in or_ingredients.objects.filter(in_name=ingredient.ingredient):
-                        recipes0 = recipe_ingredients3.objects.filter(ingredient=or_name.or_name)
-                        for recipe0 in recipes0:
-                            print(f'OR:', recipe0.recipe)   
-                        thing = db_ingredients.get(ingredient=or_name.or_name)
-                        print(f'CHECKED BEFORE:', thing.ingredient.name, thing.checked)
-                        thing.checked = True
-                        thing.save()
-                        print(f'CHECKED AFTER:', thing.checked)
-                ingredient.save()
-
-            recipe_list = []
-            for sel_ing in selected_ingredients:
-                ingredient = db_ingredients.get(pk=sel_ing)
-                recipes = recipe_ingredients3.objects.select_related('recipe').filter(ingredient = ingredient.ingredient)
-                for recipe in recipes:
-                    recipe_list.append(recipe.recipe)
-
-            users = user_recipes.objects.filter(user=response.user)
-            for user in users:
-                user.percent = 0
-                user.save()
-
-            recipe_dict = {}
-            for recipe in recipe_list:
-                try:
-                    recipe_dict[recipe] = recipe_dict[recipe] + 1
-                except KeyError:
-                    recipe_dict.update({recipe: 1})
-            
-            for key in recipe_dict:
-                total = key.ingredients.all().count()
-                percent = (recipe_dict[key] / total) * 100
-                entry = user_recipes.objects.get(recipe = key, user = response.user)
-                entry.percent = percent
-                entry.save()
-
-            return redirect('/myrecipes')
-
+    if response.user.is_authenticated:
+        # user_recipes.objects.all().delete()
+        # user_ingredients.objects.all().delete()
+        non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False)
+        return render(response, "main/ingredient.html", {'non_ors': non_ors})
     else:
-        if response.user.is_authenticated:
-            # user_recipes.objects.all().delete()
-            # user_ingredients.objects.all().delete()
-            non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False)
-            return render(response, "main/ingredient.html", {'non_ors': non_ors})
-        else:
-            return redirect('/login')
+        return redirect('/login')
 
 def myrecipes(response):
     
@@ -248,6 +260,10 @@ def myrecipes(response):
         else:
         # user_recipe0 = user_recipes.objects.filter(percent > 0)
             posts = response.user.recipes.select_related('recipe').exclude(percent=0).order_by('-percent')
+            paginator = Paginator(posts, 25)
+            page = response.GET.get('page')
+            posts = paginator.get_page(page)
+
             return render(response, 'main/selected_recipes.html', {'posts': posts})
     else:
         return render(response, 'main/selected_recipes.html')
