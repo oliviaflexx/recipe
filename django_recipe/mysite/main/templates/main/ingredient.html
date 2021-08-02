@@ -9,6 +9,17 @@
     <h1>Choose your ingredients</h1>
     </div>
     <div class="row">
+        <form method="POST" action="#">
+        {% csrf_token %}
+        {% if selected == 'show selected'%}
+            <button type="submit" id='show' name='save' value='select'>Show Selected Ingredients Only</button>
+        {% else %}
+            <button type="submit" id='show' name='save' value='no select'>Show All Ingredients</button>
+        {% endif %}
+        </form>
+    </div>
+
+    <div class="row">
         <div class="col-md-12 col-sm-12 text-center">
             <form method="POST" action="#">
                 {% csrf_token %}

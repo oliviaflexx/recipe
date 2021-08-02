@@ -56,3 +56,23 @@ div.ingredient-container {
   button[disabled=disabled], button:disabled {
     background-color: #FF7B00;
   }
+
+  .row.topper {
+    padding-top: 50px;
+}
+
+#show {
+    border-radius: 25px;
+    background-color: #FFC300;
+    font-size: 20px;
+    margin-top: 25px;
+  }
+
+#show:hover {
+    background-color: #FFEA00;
+  }
+
+.row {
+    justify-content: space-around;
+    padding-bottom: 20px;
+}

@@ -209,10 +209,19 @@ def allRecipes(response):
 
 def ingredientPicker(response):
     if response.user.is_authenticated:
-        # user_recipes.objects.all().delete()
-        # user_ingredients.objects.all().delete()
-        non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False)
-        return render(response, "main/ingredient.html", {'non_ors': non_ors})
+        if response.method == 'POST':
+            print(response.POST)
+            if response.POST.get('save') == 'select':
+                non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False, checked=True)
+                return render(response, "main/ingredient.html", {'non_ors': non_ors, 'selected': 'no selected'})
+            elif response.POST.get('save') == 'no select':
+                non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False)
+                return render(response, "main/ingredient.html", {'non_ors': non_ors, 'selected': 'show selected'})
+        else:
+            # user_recipes.objects.all().delete()
+            # user_ingredients.objects.all().delete()
+            non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False)
+            return render(response, "main/ingredient.html", {'non_ors': non_ors, 'selected': 'show selected'})
     else:
         return redirect('/login')
 
