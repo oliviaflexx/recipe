@@ -67,7 +67,12 @@
             <p id="genres{{user_recipe.recipe.id}}"></p>
           </div>
           <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="{{user_recipe.percent}}" aria-valuemin="0" aria-valuemax="100">{{user_recipe.percent}}% match</div>
+            {% if user_recipe.percent > 65%}
+            <div class="progress-bar" role="progressbar" style="width: {{user_recipe.percent}}%;" aria-valuenow="{{user_recipe.percent}}" aria-valuemin="0" aria-valuemax="100"><p style="padding-top: 15px;">{{user_recipe.percent}}% match</p></div>
+            {% else %}
+            <div class="progress-bar" role="progressbar" style="width: {{user_recipe.percent}}%;" aria-valuenow="{{user_recipe.percent}}" aria-valuemin="0" aria-valuemax="100"></div>
+            <p>{{user_recipe.percent}}% match</p>
+            {% endif %}
           </div>
         </div>
         {% if user_recipe.liked == True%}

@@ -136,3 +136,10 @@ div.recipe-container {
     margin-top: 10px;
     background: linear-gradient(45deg, white, #FFF3D6);
   }
+
+  .progress p {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    font-size: 20px;
+  }
