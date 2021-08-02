@@ -10,6 +10,20 @@ from .funky import add_up, sub_out
 from django.core.paginator import Paginator
 import json
 
+def checky(request):
+    if request.POST.get('action') == 'post':
+        id = request.POST.get('postid')
+        grocery = grocery_list.objects.get(pk=id)
+        if grocery.checked == True:
+            grocery.checked = False
+            grocery.save()
+            checked = 'no'
+        else:
+            grocery.checked = True
+            grocery.save()
+            checked = 'yes'
+
+        return JsonResponse({'id': id, 'checked': checked})
 def add_ingredient(request):
     print("yes")
     if request.POST.get('action') == 'post':
