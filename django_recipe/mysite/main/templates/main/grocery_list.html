@@ -32,10 +32,16 @@
 
     {% endfor %}
   </table>
-  <h2>List of Recipes</h2>
-  {% for recipe in recipes%}
-  <p>{{recipe.recipe.name}}</p>
-  {% endfor %}
+  <div class="row">
+    <div class="col-md-12 text-center">
+    <p>List of Recipes</p>
+    {% for recipe in recipes%}
+      <a href={{recipe.recipe.url}}>{{recipe.recipe.name}}</a>
+      <br>
+    {% endfor %}
+    </div>
+  </div>
+  
 {% else%}
 <a href="/login">Login Here to Access Content</a>
 {% endif %}

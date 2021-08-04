@@ -2,6 +2,8 @@ body {
     background-color: white;
     font-family: 'Lato', sans-serif;
     color: #03071E;
+    height: 100%;
+    position: relative;
 }
 a.nav-item {
     color: black; 
@@ -17,14 +19,22 @@ a.nav-item:hover {
 }
 
 .main #content {
-    overflow: hidden;
     background-color: white;
+    min-height: 100vh; /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 56px; /* height of your footer */
 }
 
 footer .footer-copyright {
     background-color: black;
     color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 footer a {
     color: white;
 }
+

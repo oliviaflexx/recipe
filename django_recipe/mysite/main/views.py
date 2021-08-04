@@ -24,6 +24,7 @@ def checky(request):
             checked = 'yes'
 
         return JsonResponse({'id': id, 'checked': checked})
+
 def add_ingredient(request):
     print("yes")
     if request.POST.get('action') == 'post':
@@ -115,56 +116,46 @@ def showmore(request):
 def like(request):
     if request.POST.get('action') == 'post':
         id = int(request.POST.get('postid'))
-        user_recipe = user_recipes.objects.get(user=request.user, id=id)
-        print(user_recipe.recipe.name)
-        if user_recipe.liked == True:
-            user_recipe.liked = False
-            user_recipe.save()
+        recipe = recipes3.objects.get(id=id)
+        if request.user in recipe.liked.all():
             print('unliked')
             result = 'unliked'
+            recipe.liked.remove(request.user)
         else:
-            user_recipe.liked = True
-            user_recipe.save()
-            print(user_recipe.liked)
-            user_recipe.disliked = False
-            user_recipe.save()
+            recipe.liked.add(request.user)
             result = 'liked'
+            print('liked')
 
-        return JsonResponse({'id': user_recipe.id, 'result': result})
+        return JsonResponse({'id': recipe.id, 'result': result})
 
 def dislike(request):
     if request.POST.get('action') == 'post':
         id = int(request.POST.get('postid'))
-        user_recipe = user_recipes.objects.get(user=request.user, id=id)
-        print(user_recipe.recipe.name)
-        if user_recipe.disliked == True:
-            user_recipe.disliked = False
-            user_recipe.save()
+        recipe = recipes3.objects.get(id=id)
+        if request.user in recipe.disliked.all():
             print('undisliked')
             result = 'undisliked'
+            recipe.disliked.remove(request.user)
         else:
-            user_recipe.disliked = True
-            user_recipe.liked = False
-            user_recipe.save()
-            print('disliked')
+            recipe.disliked.add(request.user)
             result = 'disliked'
+            print('disliked')
 
-        return JsonResponse({'result': result, 'id': user_recipe.id})
+        return JsonResponse({'result': result, 'id': id})
 
 
 def add_recipe(request):
     if request.POST.get('action') == 'post':
         id = request.POST.get('postid')
-        user_recipe = user_recipes.objects.get(pk=id)
-        print(user_recipe.recipe.name)
+        recipe = recipes3.objects.get(id=id)
 
-        if user_recipe.checked == True:
+        if request.user in recipe.checked.all():
             result = 'unchecked'
-            sub_out(user_recipe, request.user)
+            sub_out(recipe, request.user)
             print(result)
         else:
             result = 'checked'
-            add_up(user_recipe, request.user)
+            add_up(recipe, request.user)
             print(result)
 
         return JsonResponse({'result': result, 'id':id})
@@ -173,7 +164,7 @@ def allRecipes(response):
     if response.user.is_authenticated:
         if response.method == 'POST':
             print(response.POST)
-            posts = user_recipes.objects.select_related('recipe').filter(user=response.user).order_by('id')
+            posts = recipes3.objects.all().order_by('name')
             if response.POST.get('save'):
                 genres = genres3.objects.all()
                 if response.POST.__contains__('meal_type'):
@@ -181,11 +172,11 @@ def allRecipes(response):
                     if meal0 =='lunch':
                         breakfast = genres.get(name='breakfast')
                         dessert = genres.get(name='dessert')
-                        posts = posts.exclude(recipe__genre=breakfast).exclude(recipe__genre=dessert)
+                        posts = posts.exclude(enre=breakfast).exclude(genre=dessert)
                     else:
                         # meal = genres3.objects.get(name=meal0)
                         meal = genres.get(name=meal0)
-                        posts = posts.filter(recipe__genre=meal.id)
+                        posts = posts.filter(genre=meal.id)
 
                 if response.POST.__contains__('restrict'):
                     restricts = response.POST.getlist('restrict')
@@ -193,16 +184,16 @@ def allRecipes(response):
                         if restrict == 'gluten':
                             restrict = 'gluten free'
                         restricter = genres.get(name=restrict)
-                        posts = posts.filter(recipe__genre=restricter)
+                        posts = posts.filter(genre=restricter)
 
                 if response.POST.__contains__('orderby'):
                     order = response.POST.get('orderby')
                     if order == 'calories':
-                        posts = posts.exclude(recipe__calories=0).order_by('recipe__calories')
+                        posts = posts.exclude(calories=0).order_by('calories')
                     else:
-                        posts = posts.exclude(recipe__time=0).order_by('recipe__time')
+                        posts = posts.exclude(time=0).order_by('time')
                 else:
-                    posts = posts.order_by('id')
+                    posts = posts.order_by('name')
 
             paginator = Paginator(posts, 25)
             page = response.GET.get('page')
@@ -211,12 +202,13 @@ def allRecipes(response):
             return render(response, "main/allrecipes.html", {'posts':posts})
         
         else:
-            posts = user_recipes.objects.select_related('recipe').filter(user=response.user).order_by('recipe__name')
+            posts = recipes3.objects.all().order_by('name')
             paginator = Paginator(posts, 25)
             page = response.GET.get('page')
             posts = paginator.get_page(page)
-
-            return render(response, "main/allrecipes.html", {'posts':posts})
+            recipes = recipes3.objects.all()
+            
+            return render(response, "main/allrecipes.html", {'posts':posts, 'user': response.user})
     else:
         return render(response, "main/allrecipes.html")
 

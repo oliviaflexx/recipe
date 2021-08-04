@@ -10,6 +10,9 @@ class recipes3(models.Model):
     calories = models.FloatField(null=True, blank=True)
     ingredients = models.ManyToManyField('ingredients3', related_name='recipes')
     genre = models.ManyToManyField('genres3', related_name='recipes')
+    liked =models.ManyToManyField(User, related_name='liked')
+    disliked =models.ManyToManyField(User, related_name='disliked')
+    checked =models.ManyToManyField(User, related_name='checked')
 
     def __str__(self):
         return self.name

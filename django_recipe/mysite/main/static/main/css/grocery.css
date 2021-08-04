@@ -29,3 +29,11 @@ table, th, td {
         padding: 1px;
  }
 }
+
+.row {
+    padding-top: 20px;
+}
+
+p {
+    font-size: 30px;
+}
