@@ -161,6 +161,7 @@ def add_recipe(request):
 
 def allRecipes(response):
     if response.user.is_authenticated:
+        orderby = meal_type = veggie = vegan = gluten_free = 'none'
         if response.method == 'POST':
             print(response.POST)
             posts = recipes3.objects.prefetch_related('checked', 'liked', 'disliked').order_by('name')
@@ -172,21 +173,33 @@ def allRecipes(response):
                         breakfast = genres.get(name='breakfast')
                         dessert = genres.get(name='dessert')
                         posts = posts.exclude(enre=breakfast).exclude(genre=dessert)
+                        meal_type = 'lunch'
                     else:
                         # meal = genres3.objects.get(name=meal0)
                         meal = genres.get(name=meal0)
                         posts = posts.filter(genre=meal.id)
+                        meal_type = meal0
 
                 if response.POST.__contains__('restrict'):
                     restricts = response.POST.getlist('restrict')
                     for restrict in restricts:
                         if restrict == 'gluten':
                             restrict = 'gluten free'
+                            gluten_free = restrict
+                            print('GLUTEN')
+                        if restrict == 'vegeterian':
+                            veggie = restrict
+                            print('VEGGIE')
+                            print(veggie)
+                        if restrict == 'vegan':
+                            vegan = restrict
+                            print(vegan)
                         restricter = genres.get(name=restrict)
                         posts = posts.filter(genre=restricter)
 
                 if response.POST.__contains__('orderby'):
                     order = response.POST.get('orderby')
+                    orderby = order
                     if order == 'calories':
                         posts = posts.exclude(calories=0).order_by('calories')
                     else:
@@ -198,7 +211,7 @@ def allRecipes(response):
             page = response.GET.get('page')
             posts = paginator.get_page(page)
 
-            return render(response, "main/allrecipes.html", {'posts':posts})
+            return render(response, "main/allrecipes.html", {'posts':posts, 'orderby': orderby, 'meal_type': meal_type, 'veggie':veggie, 'vegan':vegan, 'gluten_free': gluten_free})
         
         else:
             posts = recipes3.objects.prefetch_related('checked', 'liked', 'disliked').order_by('name')
@@ -206,7 +219,7 @@ def allRecipes(response):
             page = response.GET.get('page')
             posts = paginator.get_page(page)
             
-            return render(response, "main/allrecipes.html", {'posts':posts, 'user': response.user})
+            return render(response, "main/allrecipes.html", {'posts':posts, 'user': response.user, 'orderby': orderby, 'meal_type': meal_type, 'veggie':veggie, 'vegan':vegan, 'gluten_free': gluten_free})
     else:
         return render(response, "main/allrecipes.html")
 

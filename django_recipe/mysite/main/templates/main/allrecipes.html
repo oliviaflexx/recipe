@@ -18,28 +18,76 @@
   <div class="row">
       <div class="col-12 col-md-4 text-center">
         <h4 class=text-center>Sort by</h4>
+        {% if orderby == 'none' %}
           <input type='radio' id='calories' name='orderby' value='calories'>
           <label for='calories'>Calories</label><br>
           <input type='radio' id='time' name='orderby' value='time'>
           <label for='time'>Time</label><br>
+        {% elif orderby == 'calories' %}
+          <input type='radio' id='calories' name='orderby' value='calories' checked>
+          <label for='calories'>Calories</label><br>
+          <input type='radio' id='time' name='orderby' value='time'>
+          <label for='time'>Time</label><br>
+        {% else %}
+          <input type='radio' id='calories' name='orderby' value='calories' checked>
+          <label for='calories'>Calories</label><br>
+          <input type='radio' id='time' name='orderby' value='time' checked>
+          <label for='time'>Time</label><br>
+        {% endif %}
+      
       </div>
       <div class="col-12 col-md-4 text-center">
         <h4 class=text-center>Special Diet</h4>
+          {% if veggie == 'none' %}
           <input type='checkbox' id='vegeterian' name='restrict' value='vegeterian'>
+          {% else %}
+          <input type='checkbox' id='vegeterian' name='restrict' value='vegeterian' checked>
+          {% endif %}
           <label for='vegeterian'>Vegeterian</label><br>
+          {% if vegan == 'none' %}
           <input type='checkbox' id='vegan' name='restrict' value='vegan'>
+          {% else %}
+          <input type='checkbox' id='vegan' name='restrict' value='vegan' checked>
+          {% endif %}
           <label for='vegan'>Vegan</label><br>
+          {% if gluten_free == 'none' %}
           <input type='checkbox' id='gluten' name='restrict' value='gluten'>
+          {% else %}
+          <input type='checkbox' id='gluten' name='restrict' value='gluten' checked>
+          {% endif %}
           <label for='gluten'>Gluten Free</label><br>
       </div>
       <div class="col-12 col-md-4 text-center">
         <h4 class=text-center>Meal Type</h4>
+          {% if meal_type == 'none' %}
           <input type='radio' id='breakfast' name='meal_type' value='breakfast'>
           <label for='breakfast'>Breakfast</label><br>
           <input type='radio' id='lunch' name='meal_type' value='lunch'>
           <label for='lunch'>Lunch/Dinner</label><br>
           <input type='radio' id='dessert' name='meal_type' value='dessert'>
           <label for='dessert'>Dessert</label><br>
+          {% elif meal_type == 'lunch' %}
+          <input type='radio' id='breakfast' name='meal_type' value='breakfast'>
+          <label for='breakfast'>Breakfast</label><br>
+          <input type='radio' id='lunch' name='meal_type' value='lunch' checked>
+          <label for='lunch'>Lunch/Dinner</label><br>
+          <input type='radio' id='dessert' name='meal_type' value='dessert'>
+          <label for='dessert'>Dessert</label><br>
+          {% elif meal_type == 'breakfast' %}
+          <input type='radio' id='breakfast' name='meal_type' value='breakfast' checked>
+          <label for='breakfast'>Breakfast</label><br>
+          <input type='radio' id='lunch' name='meal_type' value='lunch'>
+          <label for='lunch'>Lunch/Dinner</label><br>
+          <input type='radio' id='dessert' name='meal_type' value='dessert'>
+          <label for='dessert'>Dessert</label><br>
+          {% else %}
+          <input type='radio' id='breakfast' name='meal_type' value='breakfast'>
+          <label for='breakfast'>Breakfast</label><br>
+          <input type='radio' id='lunch' name='meal_type' value='lunch'>
+          <label for='lunch'>Lunch/Dinner</label><br>
+          <input type='radio' id='dessert' name='meal_type' value='dessert' checked>
+          <label for='dessert'>Dessert</label><br>
+          {% endif %}
       </div>
   </div>
   <div class="row" style="justify-content: space-around;">
