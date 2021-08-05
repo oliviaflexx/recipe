@@ -2,7 +2,7 @@ from os import name
 from django.db.models.query import QuerySet, Prefetch
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from .models import or_ingredients, recipe_ingredients3, recipes3, ingredients3, genres3, user_ingredients, user_recipes, grocery_list
+from .models import or_ingredients, recipe_ingredients3, recipes3, ingredients3, genres3, user_recipes, grocery_list
 import csv
 from django import template
 import inflect
@@ -30,59 +30,55 @@ def add_ingredient(request):
     if request.POST.get('action') == 'post':
         id = request.POST.get('postid')
         ingredient_list = []
-        ingredient = user_ingredients.objects.get(pk=id, user=request.user)
-        if ingredient.checked == False:
+        ingredient = ingredients3.objects.get(pk=id)
+        if request.user not in ingredient.checked.all():
             print("action to check")
-            ingredient.checked = True
-            ingredient.save()
+            ingredient.checked.add(request.user)
             ingredient_list.append(ingredient)
-            if or_ingredients.objects.filter(in_name=ingredient.ingredient).exists():
+            if or_ingredients.objects.filter(in_name=ingredient).exists():
                 print('exists')
-                for or_name in or_ingredients.objects.filter(in_name=ingredient.ingredient):  
-                    thing = user_ingredients.objects.get(ingredient=or_name.or_name, user=request.user)
-                    print(f'CHECKED BEFORE:', thing.ingredient.name, thing.checked)
-                    thing.checked = True
-                    thing.save()
+                for or_name in or_ingredients.objects.filter(in_name=ingredient):  
+                    thing = ingredients3.objects.get(name=or_name.or_name)
+                    thing.checked.add(request.user)
                     ingredient_list.append(thing)
-                    print(f'CHECKED AFTER:', thing.checked)
 
             for sel_ing in ingredient_list:
-                recipes = recipe_ingredients3.objects.select_related('recipe').filter(ingredient = sel_ing.ingredient)
+                recipes = recipe_ingredients3.objects.select_related('recipe').filter(ingredient = sel_ing)
                 for recipe in recipes:
                     total = recipe.recipe.ingredients.all().count()
                     print(recipe.recipe.name)
                     print(total)
                     percent = (1 / total) * 100
                     percent = round(percent, 0)
-                    entry = user_recipes.objects.get(recipe = recipe.recipe, user = request.user)
+                    entry, created = user_recipes.objects.get_or_create(recipe = recipe.recipe, user = request.user)
+                    if created:
+                        entry.percent = 0
                     print(f'before percent:', entry.percent)
                     entry.percent = entry.percent + percent
                     entry.save()
                     print(f'after percent:', entry.percent)
         else:
             print('action to not check')
-            ingredient.checked = False
-            ingredient.save()
+            ingredient.checked.remove(request.user)
             ingredient_list.append(ingredient)
-            if or_ingredients.objects.filter(in_name=ingredient.ingredient).exists():
+            if or_ingredients.objects.filter(in_name=ingredient).exists():
                 print('exists')
-                for or_name in or_ingredients.objects.filter(in_name=ingredient.ingredient):  
-                    thing = user_ingredients.objects.get(ingredient=or_name.or_name, user=request.user)
-                    print(f'CHECKED BEFORE:', thing.ingredient.name, thing.checked)
-                    thing.checked = False
-                    thing.save()
+                for or_name in or_ingredients.objects.filter(in_name=ingredient):  
+                    thing = ingredients3.objects.get(name=or_name.or_name)
+                    thing.checked.remove(request.user)
                     ingredient_list.append(thing)
-                    print(f'CHECKED AFTER:', thing.checked)
 
             for sel_ing in ingredient_list:
-                recipes = recipe_ingredients3.objects.select_related('recipe').filter(ingredient = sel_ing.ingredient)
+                recipes = recipe_ingredients3.objects.select_related('recipe').filter(ingredient = sel_ing)
                 for recipe in recipes:
                     total = recipe.recipe.ingredients.all().count()
                     print(f'NEW RECIPE:', recipe.recipe.name)
                     print(f'Total ingredients:', total)
                     percent = (1 / total) * 100
                     percent = round(percent, 0)
-                    entry = user_recipes.objects.get(recipe = recipe.recipe, user = request.user)
+                    entry, created = user_recipes.objects.get_or_create(recipe = recipe.recipe, user = request.user)
+                    if created:
+                        entry.percent = 0
                     print(f'before percent:', entry.percent)
                     entry.percent = entry.percent - percent
                     entry.save()
@@ -122,10 +118,11 @@ def like(request):
             result = 'unliked'
             recipe.liked.remove(request.user)
         else:
-            recipe.liked.add(request.user)
+            if request.user in recipe.disliked.all():
+                recipe.disliked.remove(request.user)
             result = 'liked'
             print('liked')
-
+            recipe.liked.add(request.user)
         return JsonResponse({'id': recipe.id, 'result': result})
 
 def dislike(request):
@@ -137,6 +134,8 @@ def dislike(request):
             result = 'undisliked'
             recipe.disliked.remove(request.user)
         else:
+            if request.user in recipe.liked.all():
+                recipe.liked.remove(request.user)
             recipe.disliked.add(request.user)
             result = 'disliked'
             print('disliked')
@@ -164,7 +163,7 @@ def allRecipes(response):
     if response.user.is_authenticated:
         if response.method == 'POST':
             print(response.POST)
-            posts = recipes3.objects.all().order_by('name')
+            posts = recipes3.objects.prefetch_related('checked', 'liked', 'disliked').order_by('name')
             if response.POST.get('save'):
                 genres = genres3.objects.all()
                 if response.POST.__contains__('meal_type'):
@@ -202,11 +201,10 @@ def allRecipes(response):
             return render(response, "main/allrecipes.html", {'posts':posts})
         
         else:
-            posts = recipes3.objects.all().order_by('name')
+            posts = recipes3.objects.prefetch_related('checked', 'liked', 'disliked').order_by('name')
             paginator = Paginator(posts, 25)
             page = response.GET.get('page')
             posts = paginator.get_page(page)
-            recipes = recipes3.objects.all()
             
             return render(response, "main/allrecipes.html", {'posts':posts, 'user': response.user})
     else:
@@ -218,16 +216,20 @@ def ingredientPicker(response):
         if response.method == 'POST':
             print(response.POST)
             if response.POST.get('save') == 'select':
-                non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False, checked=True)
-                return render(response, "main/ingredient.html", {'non_ors': non_ors, 'selected': 'no selected'})
+                non_ors = response.user.ing_checked.exclude(or_ing=True)
+                return render(response, "main/ingredient.html", {'non_ors': non_ors, 'selected': 'no selected', 'user': response.user})
             elif response.POST.get('save') == 'no select':
-                non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False)
-                return render(response, "main/ingredient.html", {'non_ors': non_ors, 'selected': 'show selected'})
+                non_ors = ingredients3.objects.prefetch_related('checked').exclude(or_ing=True).order_by('name')
+                return render(response, "main/ingredient.html", {'non_ors': non_ors, 'selected': 'show selected', 'user': response.user})
         else:
-            # user_recipes.objects.all().delete()
-            # user_ingredients.objects.all().delete()
-            non_ors = user_ingredients.objects.select_related('ingredient').filter(user=response.user,or_ingredient=False)
-            return render(response, "main/ingredient.html", {'non_ors': non_ors, 'selected': 'show selected'})
+            # ingredients = ingredients3.objects.all()
+            # for ingredient in ingredients:
+                # if ingredient.or_ingredient.exists():
+                    # ingredient.or_ing = True
+                    # ingredient.save()
+            ingredients = ingredients3.objects.prefetch_related('checked').exclude(or_ing=True).order_by('name')
+            
+            return render(response, "main/ingredient.html", {'non_ors': ingredients, 'selected': 'show selected', 'user': response.user})
     else:
         return redirect('/login')
 
@@ -285,18 +287,16 @@ def myrecipes(response):
 
 def liked_recipes(response):
     if response.user.is_authenticated:
-        # user_recipe0 = user_recipes.objects.filter(percent > 0
-        user_recipes1 = response.user.recipes.select_related('recipe').exclude(liked=False)
-        for recipe in user_recipes1:
-            print(recipe.recipe)
-        return render(response, 'main/liked.html', {'user_recipes1': user_recipes1})
+        recipes = response.user.liked.all()
+        print(recipes)
+        return render(response, 'main/liked.html', {'recipes': recipes, 'user': response.user})
     else:
         return render(response, 'main/home.html')
 
 def groceryList(response):
     # grocery_list.objects.all().delete()
     if response.user.is_authenticated:
-        return render(response, 'main/grocery_list.html', {'ingredients': grocery_list.objects.filter(user=response.user).order_by('name__name'), 'recipes': user_recipes.objects.filter(user=response.user,checked=True)})
+        return render(response, 'main/grocery_list.html', {'ingredients': grocery_list.objects.filter(user=response.user).order_by('name__name'), 'recipes': response.user.checked.all()})
     else:
         return render(response, 'main/grocery_list.html')
 

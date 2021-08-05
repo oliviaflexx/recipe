@@ -55,10 +55,10 @@
         <a href= {{user_recipe.recipe.url}} target="_blank"><h4 class="recipe-title">{{user_recipe.recipe.name}}</h4></a>
         <div class="img-container position-relative start-50 bottom-50">
           <img src={{user_recipe.recipe.image}}> 
-          {% if user_recipe.checked == True%}
-            <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-check-lg"></i></button>
+          {% if user in user_recipe.recipe.checked.all%}
+            <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-check-lg"></i></button>
           {% else %}
-            <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-plus-lg"></i></button>
+            <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-plus-lg"></i></button>
           {% endif %}
           <button type="submit", class = 'showmore-position-fixed', id = 's{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-three-dots"></i></button>
           <div class='info' id="showmore{{user_recipe.recipe.id}}">
@@ -75,15 +75,15 @@
             {% endif %}
           </div>
         </div>
-        {% if user_recipe.liked == True%}
-          <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up-fill"></i></button>
+        {% if user in user_recipe.recipe.liked.all%}
+          <button type='submit', class = 'like', id = 'l{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-hand-thumbs-up-fill"></i></button>
         {% else %}
-          <button type='submit', class = 'like', id = 'l{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-up"></i></button>
+          <button type='submit', class = 'like', id = 'l{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-hand-thumbs-up"></i></button>
         {% endif %}
-        {% if user_recipe.disliked == True%}
-          <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down-fill"></i></button>
+        {% if user in user_recipe.recipe.disliked.all%}
+          <button type="submit", class = 'dislike', id = 'd{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-hand-thumbs-down-fill"></i></button>
         {% else %}
-          <button type="submit", class = 'dislike', id = 'd{{user_recipe.id}}' value='{{user_recipe.id}}'><i class="bi bi-hand-thumbs-down"></i></button>
+          <button type="submit", class = 'dislike', id = 'd{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-hand-thumbs-down"></i></button>
         {% endif %}
       </div>
     </div>

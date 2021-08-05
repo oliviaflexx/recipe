@@ -19,7 +19,8 @@ class recipes3(models.Model):
 
 class ingredients3(models.Model):
     name = models.CharField(max_length=200)
-
+    checked =models.ManyToManyField(User, related_name='ing_checked')
+    or_ing = models.BooleanField(default=False)
     def __str__(self):
         return self.name
         
@@ -41,22 +42,10 @@ class or_ingredients(models.Model):
     or_name = models.ForeignKey('ingredients3', related_name='or_ingredient', on_delete=models.SET_NULL, null=True)
     in_name = models.ForeignKey('ingredients3', related_name='in_ingredient', on_delete=models.SET_NULL, null=True)
 
-class user_ingredients(models.Model):
-    ingredient = models.ForeignKey('ingredients3', related_name='user_ingredients', on_delete=models.SET_NULL, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ingredients", null=True)
-    checked = models.BooleanField(default=False)
-    or_ingredient = models.BooleanField(default=False)
-
-    def __str__(self):
-        return str(self.id)
-
 class user_recipes(models.Model):
     recipe = models.ForeignKey('recipes3', related_name='user_recipe', on_delete=models.SET_NULL, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipes", null=True)
     percent = models.IntegerField(blank=True, null=True)
-    checked = models.BooleanField(default=False)
-    liked = models.BooleanField(default=False)
-    disliked = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.id)

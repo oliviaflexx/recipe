@@ -30,12 +30,12 @@
                 {% for ingredient in non_ors%}
                     <div class="ingredient-container">
                             <div class='ingredient' id= div{{ingredient.id}}>
-                                {% if ingredient.checked == False %}
-                                <button type="submit", class="add_or_remove", id= 'button{{ingredient.id}}' value="{{ingredient.id}}"><i class="bi bi-plus-lg"></i></button>
-                                {{ingredient.ingredient}}
-                            {% else %}
+                                {% if user in ingredient.checked.all %}
                                 <button type="submit", class = "add_or_remove", id= 'button{{ingredient.id}}', value="{{ingredient.id}}"><i class="bi bi-check-lg"></i></button>
-                                {{ingredient.ingredient}}
+                                {{ingredient}}
+                                {% else %}
+                                <button type="submit", class="add_or_remove", id= 'button{{ingredient.id}}' value="{{ingredient.id}}"><i class="bi bi-plus-lg"></i></button>
+                                {{ingredient}}
                             {% endif %}
                             </div>
                     </div>
