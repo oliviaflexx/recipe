@@ -172,7 +172,7 @@ def allRecipes(response):
                     if meal0 =='lunch':
                         breakfast = genres.get(name='breakfast')
                         dessert = genres.get(name='dessert')
-                        posts = posts.exclude(enre=breakfast).exclude(genre=dessert)
+                        posts = posts.exclude(genre=breakfast).exclude(genre=dessert)
                         meal_type = 'lunch'
                     else:
                         # meal = genres3.objects.get(name=meal0)
@@ -249,6 +249,7 @@ def ingredientPicker(response):
 def myrecipes(response):
     
     if response.user.is_authenticated:
+        orderby = meal_type = veggie = vegan = gluten_free = 'none'
         if response.method == 'POST':
             print(response.POST)
             posts = response.user.recipes.select_related('recipe').exclude(percent=0).order_by('-percent')
@@ -260,33 +261,47 @@ def myrecipes(response):
                         breakfast = genres.get(name='breakfast')
                         dessert = genres.get(name='dessert')
                         posts = posts.exclude(recipe__genre=breakfast).exclude(recipe__genre=dessert)
+                        meal_type = 'lunch'
                     else:
                         # meal = genres3.objects.get(name=meal0)
                         meal = genres.get(name=meal0)
                         posts = posts.filter(recipe__genre=meal.id)
+                        meal_type = meal0
 
                 if response.POST.__contains__('restrict'):
                     restricts = response.POST.getlist('restrict')
                     for restrict in restricts:
                         if restrict == 'gluten':
                             restrict = 'gluten free'
+                            gluten_free = restrict
+                            print('GLUTEN')
+                        if restrict == 'vegeterian':
+                            veggie = restrict
+                            print('VEGGIE')
+                            print(veggie)
+                        if restrict == 'vegan':
+                            vegan = restrict
+                            print(vegan)
                         restricter = genres.get(name=restrict)
                         posts = posts.filter(recipe__genre=restricter)
 
                 if response.POST.__contains__('orderby'):
                     order = response.POST.get('orderby')
+                    orderby = order
                     if order == 'calories':
                         posts = posts.exclude(recipe__calories=0).order_by('recipe__calories')
                     else:
                         posts = posts.exclude(recipe__time=0).order_by('recipe__time')
                 else:
-                    posts = posts.order_by('id')
+                    posts = posts.order_by('recipe__name')
+
 
             paginator = Paginator(posts, 25)
             page = response.GET.get('page')
             posts = paginator.get_page(page)
 
-            return render(response, "main/selected_recipes.html", {'posts':posts})
+            return render(response, "main/selected_recipes.html", {'posts':posts, 'user': response.user, 'orderby': orderby, 'meal_type': meal_type, 'veggie':veggie, 'vegan':vegan, 'gluten_free': gluten_free})
+
         else:
         # user_recipe0 = user_recipes.objects.filter(percent > 0)
             posts = response.user.recipes.select_related('recipe').exclude(percent=0).order_by('-percent')
@@ -294,7 +309,7 @@ def myrecipes(response):
             page = response.GET.get('page')
             posts = paginator.get_page(page)
 
-            return render(response, 'main/selected_recipes.html', {'posts': posts})
+            return render(response, 'main/selected_recipes.html', {'posts':posts, 'user': response.user, 'orderby': orderby, 'meal_type': meal_type, 'veggie':veggie, 'vegan':vegan, 'gluten_free': gluten_free})
     else:
         return render(response, 'main/selected_recipes.html')
 
