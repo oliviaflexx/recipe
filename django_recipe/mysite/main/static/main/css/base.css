@@ -1,6 +1,5 @@
 body {
     background-color: white;
-    font-family: 'Lato', sans-serif;
     color: #03071E;
     height: 100%;
     position: relative;
@@ -16,15 +15,17 @@ a.nav-item:hover {
 }
 .navbar {
     background: linear-gradient(45deg, #FF7B00, #FFC300);
+    font-family: 'Montserrat', sans-serif;
 }
 
-.main #content {
+#content.main {
     background-color: white;
     min-height: 100vh; /* will cover the 100% of viewport */
     overflow: hidden;
     display: block;
     position: relative;
     padding-bottom: 56px; /* height of your footer */
+    font-family: 'Montserrat', sans-serif;
 }
 
 footer .footer-copyright {

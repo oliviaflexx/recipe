@@ -1,67 +1,101 @@
-div.col-md-6 {
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 15px;
+#top_orange {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 500px;
 }
-div.container.want{
-    background: linear-gradient(45deg, #FFBA08, #FAA307);
-    background-color: white;
-    padding: 30px;
-    min-height: 100%;
-}
-
-div.container.have {
-    background: linear-gradient(45deg, #E85D04, #F48C06);
-    background-color: #370617;
-    color: black;
-    padding: 30px;
-    min-height: 100%;
-}
-
-a.started1 {
-    background-color: #03071E;
-    padding: .5em;
+#top_orange h1 {
+    padding-top: 200px;
     color: white;
-    position: absolute;
-    bottom: 0px;
-}
-a.started2 {
-    background-color: #03071E;
-    padding: .5em;
-    color: white;
+    text-shadow: 4px 2px 5px black;
+    font-size: 3rem;
+    font-family: 'Montserrat', sans-serif;
 }
 
-div.container.second {
-    background-color: black;
-    min-width: 100%;
-}
-img {
-    height: 100%; 
-    width: 100%; 
-    object-fit: contain;
+.row {
+    justify-content: center;
 }
 
-div.container.more {
-    padding: 15px;
-    color: #DC2F02;
-}
-
-.col-12.veggies {
-    padding: 0px;
+.col-12 img {
     position: relative;
-    background-image: url('/static/main/images/black_veggies.jpg');
+    left: 5%;
+    padding-top: 20px;
 }
 
-.child1 {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    color: white;
+.instructions {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
 }
 
-.child2 {
-    position: absolute;
-    top: 100px;
-    left: 0;
-    color: white;
+.row {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
+
+img {
+    opacity: 0;
+}
+
+.animate-step1 {
+    position: relative;
+    -webkit-animation-name: animatestep1;
+    -webkit-animation-duration: 5s;
+    animation-name: animatestep1;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  @-webkit-keyframes animatestep1 {
+    0% { bottom:-50px; opacity:0; }
+    100% { bottom:0px; opacity:1; }
+  }
+
+  @keyframes animatestep1 { 
+    0% { bottom:-50px; opacity:0; }
+    100% { bottom:0px; opacity:1; }
+  }
+
+  .animate-step2 {
+    position: relative;
+    -webkit-animation-name: animatestep2;
+    -webkit-animation-duration: 5s;
+    animation-name: animatestep2;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  @-webkit-keyframes animatestep2 {
+    0% { bottom:-50px; opacity:0; }
+    100% { bottom:0px; opacity:1; }
+
+  }
+  @keyframes animatestep2 { 
+    0% { bottom:-50px; opacity:0; }
+    100% { bottom:0px; opacity:1; }
+  }
+
+  .animate-step3 {
+    position: relative;
+    -webkit-animation-name: animatestep3;
+    -webkit-animation-duration: 5s;
+    animation-name: animatestep3;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  @-webkit-keyframes animatestep3 {
+    0% { bottom:-50px; opacity:0; }
+    100% { bottom:0px; opacity:1; }
+
+  }
+  @keyframes animatestep3 { 
+    0% { bottom:-50px; opacity:0; }
+    100% { bottom:0px; opacity:1; }
+  }

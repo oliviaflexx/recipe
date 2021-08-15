@@ -102,7 +102,7 @@
       <div class="recipe-container text-center">
         <a href= {{user_recipe.recipe.url}} target="_blank"><h4 class="recipe-title">{{user_recipe.recipe.name}}</h4></a>
         <div class="img-container position-relative start-50 bottom-50">
-          <img src={{user_recipe.recipe.image}}> 
+          <img src={{user_recipe.recipe.image}} alt='photo of {{user_recipe.recipe.name}}'> 
           {% if user in user_recipe.recipe.checked.all%}
             <button type="submit", class = 'add-position-fixed', id = 'c{{user_recipe.recipe.id}}' value='{{user_recipe.recipe.id}}'><i class="bi bi-check-lg"></i></button>
           {% else %}

@@ -4,62 +4,50 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/home.css' %}">
-
-<div class="container first">
-    <div class="row">
-        <div class="col-md-12" style='padding-top: 30px; background-image: url("https://www.freepik.com/free-photo/vegetables-set-left-black-slate_986619.htm#page=1&query=background%20food&position=12");'>
-            <h1 class="text-center">We build your grocery list</h1>
-            <p class="text-center">Whether you have ingredients already or have nothing and want to find something, LOGO will help you!</p>
-            <p class="text-center">Choose your path...</p>
-        </div>
-    </div>
-    <div class="row" style="padding-top: 50px;">
-        <div class="col-lg-6 col-12 left">
-            <div class='container have shadow'>
-                <div class="row" style="padding-bottom: 20px;">
-                    <h2 class="text-center">Based on what you <b>have</b></h2>
-                </div>
-                <div class="row">
-                    <h4><u>Step 1</u>: Tell us the ingredients you already have at home and we find you recipes that match</h3>
-                    <br>
-                    <h4><u>Step 2</u>: Browse your best matched recipes add to your recipe list</h3>
-                </div>
-                <br>
-                <div class="row" style="justify-content: space-around;">
-                    <a class="text-center started1 shadow-sm position-relative bottom" href="/ingredients">Get Started</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-12 right">
-            <div class='container want shadow'>
-                <div class="row">
-                    <h2 class="text-center">Based on what you <b>want</b></h2>
-                </div>
-                <div class="row">
-                    <h4><u>Step 1</u>: Select the recipes you want by filtering with categories like diet or meal type</h3>
-                    <br>
-                    <h4><u>Step 2</u>: Browse our recipes and add them to your grocery list</h4>
-                </div>
-                <br>
-                <div class="row" style="justify-content: space-around;">
-                    <a class="text-center started2 shadown-sm" href="/allrecipes">Get Started</a>
-                </div>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-12 text-center" id="top_orange" style="background-image: url({% static 'main/images/orange.png' %});">
+        <h1>Grocery List Making Made Easy</h1>
     </div>
 </div>
-<div class="container second">
-    <div class="row">
-        <div class="col-12 col-md-6">
-            <div class="container more">
-                <img src="https://jessicainthekitchen.com/wp-content/uploads/2021/06/Vegan-Cheesecake-17-655x985.jpg" style='height: 100%; width: 100%; object-fit: contain'>
-            </div>
+<div class="row">
+    <div class="col-12 col-md-6 text-center">
+        <div class="instructions">
+            <h2>Step 1</h2>
+            <p>Add your ingredients</p>
+            <p>Simply type in your ingredients and click the plus button to add them to your ingredients</p>
         </div>
-        <div class="col-sm-6 col-md-6">
-            <div class="container more">
-                
-            </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <img class="animate-step1" src="{% static 'main/images/2.png' %}">
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-6 text-center">
+        <div class="instructions">
+            <h2>Step 2</h2>
+            <p>Based on what ingredients you have, we find recipes that best match what you have.
+                From there, you can click on the plus button to add a recipe that you want to make to your grocery list.
+                You can also like and dislike recipes so you don't forget how you feel about them when making grocery lists in the future.
+                Click on the three dots if you'd like more information about the recipe like the amount of time it takes and how many calories it is.
+                Narrow the recipes down to exactly what you're looking for using our filters and preferences.
+            </p>
         </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <img class="animate-step2" src="{% static 'main/images/3.png' %}">
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-6 text-center">
+        <div class="instructions">
+            <h2>Step 3</h2>
+            <p>We create a grocery list for the recipes you chose. 
+                We tell you exactly how much of each ingredient you need so no more need to pull out your calculator or forget anything!
+            </p>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <img class="animate-step3" src="{% static 'main/images/4.png' %}">
     </div>
 </div>
 {% endblock %}
