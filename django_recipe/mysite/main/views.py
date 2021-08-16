@@ -335,6 +335,9 @@ def addData(response):
         ingredients3.objects.all().delete()
         recipe_ingredients3.objects.all().delete()
         or_ingredients.objects.all().delete()
+        user_recipes.objects.all().delete()
+        grocery_list.objects.all().delete()
+
         with open('/Users/oliviafelix/recipe-2/django_recipe/mysite/main/names.csv', mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
